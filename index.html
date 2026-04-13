@@ -42,6 +42,33 @@ body::before {
   background-size: 64px 64px;
 }
 
+/* ── NAV ────────────────────────────────── */
+.site-nav {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(8,14,28,.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: .7rem 2rem;
+}
+.nav-logo {
+  font-family: var(--mono); font-size: 1rem; font-weight: 700;
+  letter-spacing: -.03em; text-decoration: none;
+}
+.nav-logo span:first-child { color: var(--accent); }
+.nav-logo span:last-child  { color: var(--text); }
+.nav-links { display: flex; gap: .4rem; }
+.nav-link {
+  font-family: var(--mono); font-size: .68rem; letter-spacing: .08em;
+  text-transform: uppercase; text-decoration: none;
+  color: var(--muted); padding: .45rem 1rem; border-radius: 8px;
+  transition: background .2s, color .2s;
+}
+.nav-link:hover  { background: var(--surface2); color: var(--text); }
+.nav-link.active { background: var(--accent-dim); color: var(--accent); }
+
 /* ── HEADER ─────────────────────────────── */
 header {
   text-align: center;
@@ -345,7 +372,6 @@ footer {
 }
 footer a { color: var(--accent2); text-decoration: none; }
 
-/* Animations */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -353,6 +379,15 @@ footer a { color: var(--accent2); text-decoration: none; }
 </style>
 </head>
 <body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo"><span>Repo</span><span>Scope</span></a>
+  <div class="nav-links">
+    <a href="index.html"    class="nav-link active">🔍 Analyzer</a>
+    <a href="analysis.html" class="nav-link">📊 Top-100 Analyse</a>
+  </div>
+</nav>
 
 <!-- HEADER -->
 <header>
@@ -447,11 +482,6 @@ footer a { color: var(--accent2); text-decoration: none; }
 </footer>
 
 <script>
-/* =========================================================
-   BENCHMARKS
-   Erhoben aus Top-100-Analyse (collect_data.py)
-   Aktualisieren durch erneutes Ausführen des Scripts.
-   ========================================================= */
 const BENCH = {
   overall:       { p25: 54, median: 67, p75: 78 },
   activity:      { p25: 48, median: 69, p75: 87 },
@@ -460,7 +490,6 @@ const BENCH = {
   maintenance:   { p25: 52, median: 69, p75: 84 },
 };
 
-/* ── Helpers ────────────────────────────── */
 function parseUrl(raw) {
   raw = raw.trim().replace(/\/$/, '');
   const m = raw.match(/(?:github\.com\/)?([A-Za-z0-9._-]+)\/([A-Za-z0-9._-]+)/);
@@ -480,26 +509,13 @@ function ago(dateStr) {
   if (d < 365) return `Vor ${Math.round(d/30)} Monaten`;
   return `Vor ${Math.round(d/365)} Jahr(en)`;
 }
-function daysNum(dateStr) {
-  return Math.floor((Date.now() - new Date(dateStr)) / 864e5);
-}
-function scoreColor(s) {
-  return s >= 70 ? '#00e5a0' : s >= 45 ? '#fbbf24' : '#ff4d6d';
-}
+function daysNum(dateStr) { return Math.floor((Date.now() - new Date(dateStr)) / 864e5); }
+function scoreColor(s)    { return s >= 70 ? '#00e5a0' : s >= 45 ? '#fbbf24' : '#ff4d6d'; }
 function grade(s) {
-  if (s >= 90) return 'A+';
-  if (s >= 80) return 'A';
-  if (s >= 70) return 'B+';
-  if (s >= 60) return 'B';
-  if (s >= 50) return 'C';
-  if (s >= 40) return 'D';
-  return 'F';
+  return s>=90?'A+':s>=80?'A':s>=70?'B+':s>=60?'B':s>=50?'C':s>=40?'D':'F';
 }
-function logScale(n, max) {
-  return Math.min(100, Math.log10(n + 1) / Math.log10(max) * 100);
-}
+function logScale(n, max) { return Math.min(100, Math.log10(n+1) / Math.log10(max) * 100); }
 
-/* ── API ────────────────────────────────── */
 async function apiFetch(url, headers) {
   const r = await fetch(url, { headers });
   if (!r.ok) {
@@ -547,347 +563,207 @@ async function fetchAll(owner, repo, token) {
   return { repoData, community, languages, releases, contributors, commitActivity };
 }
 
-/* ── Scoring ─────────────────────────────── */
 function calcScores(data) {
   const { repoData: r, community, releases, contributors, commitActivity } = data;
 
-  /* Aktivität */
   const dsp = daysNum(r.pushed_at);
-  const recency = dsp < 7 ? 100 : dsp < 30 ? 85 : dsp < 90 ? 65 : dsp < 180 ? 45 : dsp < 365 ? 25 : 5;
+  const recency = dsp<7?100:dsp<30?85:dsp<90?65:dsp<180?45:dsp<365?25:5;
   let wkCommits = 0;
   if (Array.isArray(commitActivity) && commitActivity.length >= 4) {
     const slice = commitActivity.slice(-12);
-    wkCommits = slice.reduce((a, b) => a + (b.total || 0), 0) / slice.length;
+    wkCommits = slice.reduce((a,b) => a + (b.total||0), 0) / slice.length;
   }
   const commitScore = Math.min(100, wkCommits * 8);
   const hasRelease  = releases.length > 0 && daysNum(releases[0].published_at) < 365;
-  const activity    = Math.min(100, Math.round(recency * .55 + commitScore * .25 + (hasRelease ? 20 : 0)));
+  const activity    = Math.min(100, Math.round(recency*.55 + commitScore*.25 + (hasRelease?20:0)));
 
-  /* Dokumentation */
   let docScore = 0;
-  const dc = { readme: false, license: !!r.license, contributing: false,
-               coc: false, issueT: false, prT: false };
+  const dc = { readme:false, license:!!r.license, contributing:false, coc:false, issueT:false, prT:false };
   if (community?.files) {
-    dc.readme = !!community.files.readme;
+    dc.readme       = !!community.files.readme;
     dc.license      = !!(community.files.license || r.license);
     dc.contributing = !!community.files.contributing;
     dc.coc          = !!community.files.code_of_conduct;
     dc.issueT       = !!community.files.issue_template;
     dc.prT          = !!community.files.pull_request_template;
-  } else {
-    dc.readme = true; // Assume exists for public repos without community API
-  }
-  if (r.description) docScore += 15;
-  if (r.topics?.length)  docScore += Math.min(10, r.topics.length * 2);
-  if (r.homepage)        docScore += 5;
-  if (dc.readme)         docScore += 20;
-  if (dc.license)        docScore += 15;
-  if (dc.contributing)   docScore += 15;
-  if (dc.coc)            docScore += 10;
-  if (dc.issueT)         docScore += 5;
-  if (dc.prT)            docScore += 5;
+  } else { dc.readme = true; }
+  if (r.description)    docScore += 15;
+  if (r.topics?.length) docScore += Math.min(10, r.topics.length*2);
+  if (r.homepage)       docScore += 5;
+  if (dc.readme)        docScore += 20;
+  if (dc.license)       docScore += 15;
+  if (dc.contributing)  docScore += 15;
+  if (dc.coc)           docScore += 10;
+  if (dc.issueT)        docScore += 5;
+  if (dc.prT)           docScore += 5;
   const documentation = Math.min(100, docScore);
 
-  /* Community */
-  const starsS  = logScale(r.stargazers_count, 180000);
-  const forksS  = logScale(r.forks_count, 40000);
-  const contribS = Math.min(100, contributors.length >= 30
-    ? 100
-    : logScale(contributors.length, 30));
-  const community_score = Math.round(starsS * .4 + forksS * .3 + contribS * .3);
+  const starsS   = logScale(r.stargazers_count, 180000);
+  const forksS   = logScale(r.forks_count, 40000);
+  const contribS = Math.min(100, contributors.length>=30 ? 100 : logScale(contributors.length, 30));
+  const community_score = Math.round(starsS*.4 + forksS*.3 + contribS*.3);
 
-  /* Wartung */
   let maint = 0;
-  if (!r.archived)    maint += 30;
-  if (r.has_issues)   maint += 20;
-  const ir = r.open_issues_count === 0 ? 50
-    : Math.min(50, (r.forks_count / (r.open_issues_count + 1)) * 3);
-  maint = Math.min(100, Math.round(maint + ir));
+  if (!r.archived)  maint += 30;
+  if (r.has_issues) maint += 20;
+  const ir = r.open_issues_count===0 ? 50 : Math.min(50, (r.forks_count/(r.open_issues_count+1))*3);
+  maint = Math.min(100, Math.round(maint+ir));
 
   const overall = Math.round(activity*.30 + documentation*.25 + community_score*.25 + maint*.20);
-
-  return { overall, activity, documentation, community: community_score, maintenance: maint,
-           dc, dsp, wkCommits, hasRelease };
+  return { overall, activity, documentation, community:community_score, maintenance:maint, dc, dsp, wkCommits, hasRelease };
 }
 
-/* ── Render SVG ring ─────────────────────── */
-function ring(score, cls = 'sm') {
-  const big = cls === 'lg';
-  const size = big ? 130 : 90;
-  const sw   = big ? 10 : 8;
-  const r    = size / 2 - sw;
-  const circ = 2 * Math.PI * r;
-  const fill = (score / 100) * circ;
-  const col  = scoreColor(score);
-  return `
-  <div class="ring-wrap ${cls}">
+function ring(score, cls='sm') {
+  const big=cls==='lg', size=big?130:90, sw=big?10:8;
+  const r=size/2-sw, circ=2*Math.PI*r, fill=(score/100)*circ, col=scoreColor(score);
+  return `<div class="ring-wrap ${cls}">
     <svg class="ring-svg" viewBox="0 0 ${size} ${size}">
       <circle class="ring-bg" cx="${size/2}" cy="${size/2}" r="${r}" stroke-width="${sw}"/>
       <circle class="ring-fill" cx="${size/2}" cy="${size/2}" r="${r}" stroke-width="${sw}"
-        stroke="${col}"
-        stroke-dasharray="${circ}"
-        stroke-dashoffset="${circ - fill}"
-        style="filter:drop-shadow(0 0 5px ${col}55)"
-      />
+        stroke="${col}" stroke-dasharray="${circ}" stroke-dashoffset="${circ-fill}"
+        style="filter:drop-shadow(0 0 5px ${col}55)"/>
     </svg>
     <div class="ring-center">
       <span class="ring-num ${cls}" style="color:${col}">${score}</span>
-      ${big ? `<span class="ring-grade" style="color:${col}">${grade(score)}</span>` : ''}
+      ${big?`<span class="ring-grade" style="color:${col}">${grade(score)}</span>`:''}
     </div>
   </div>`;
 }
 
-/* ── Render results ──────────────────────── */
 function renderResults(sc, data) {
-  const { repoData: r, languages, releases, contributors } = data;
-
-  /* — Repo header — */
-  const langTotal = Object.values(languages).reduce((a,b) => a+b, 0);
-  const topLangs  = Object.entries(languages).sort(([,a],[,b]) => b-a).slice(0,4)
-    .map(([l,b]) => ({ l, pct: Math.round(b/langTotal*100) }));
+  const { repoData:r, languages, releases, contributors } = data;
+  const langTotal = Object.values(languages).reduce((a,b)=>a+b,0);
+  const topLangs  = Object.entries(languages).sort(([,a],[,b])=>b-a).slice(0,4)
+    .map(([l,b])=>({l, pct:Math.round(b/langTotal*100)}));
 
   document.getElementById('repoHeader').innerHTML = `
     <img class="repo-avatar" src="${r.owner.avatar_url}&s=104" alt="${r.owner.login}" loading="lazy">
     <div class="repo-info">
       <div class="repo-full-name"><a href="${r.html_url}" target="_blank" rel="noopener">${r.full_name}</a></div>
-      <p class="repo-desc">${r.description || '<em>Keine Beschreibung vorhanden.</em>'}</p>
+      <p class="repo-desc">${r.description||'<em>Keine Beschreibung vorhanden.</em>'}</p>
       <div class="tag-row">
-        ${r.language ? `<span class="tag tag-lang">${r.language}</span>` : ''}
-        ${r.license  ? `<span class="tag tag-lic">${r.license.spdx_id || r.license.name}</span>` : ''}
-        ${(r.topics||[]).slice(0,5).map(t => `<span class="tag">${t}</span>`).join('')}
-        ${r.archived ? `<span class="tag tag-arc">ARCHIVIERT</span>` : ''}
+        ${r.language?`<span class="tag tag-lang">${r.language}</span>`:''}
+        ${r.license ?`<span class="tag tag-lic">${r.license.spdx_id||r.license.name}</span>`:''}
+        ${(r.topics||[]).slice(0,5).map(t=>`<span class="tag">${t}</span>`).join('')}
+        ${r.archived?`<span class="tag tag-arc">ARCHIVIERT</span>`:''}
       </div>
     </div>
     <div class="repo-stats">
       <div class="stat-item"><span class="stat-val">${fmt(r.stargazers_count)}</span><span class="stat-lbl">Stars</span></div>
       <div class="stat-item"><span class="stat-val">${fmt(r.forks_count)}</span><span class="stat-lbl">Forks</span></div>
       <div class="stat-item"><span class="stat-val">${fmt(r.open_issues_count)}</span><span class="stat-lbl">Issues</span></div>
-      <div class="stat-item"><span class="stat-val">${contributors.length >= 30 ? '30+' : contributors.length}</span><span class="stat-lbl">Contrib.</span></div>
-    </div>
-  `;
+      <div class="stat-item"><span class="stat-val">${contributors.length>=30?'30+':contributors.length}</span><span class="stat-lbl">Contrib.</span></div>
+    </div>`;
 
-  /* — Score cards — */
-  const dims = [
-    { label: 'Aktivität',     icon: '⚡', val: sc.activity },
-    { label: 'Dokumentation', icon: '📄', val: sc.documentation },
-    { label: 'Community',     icon: '👥', val: sc.community },
-    { label: 'Wartung',       icon: '🔧', val: sc.maintenance },
-  ];
+  const dims=[{label:'Aktivität',icon:'⚡',val:sc.activity},{label:'Dokumentation',icon:'📄',val:sc.documentation},{label:'Community',icon:'👥',val:sc.community},{label:'Wartung',icon:'🔧',val:sc.maintenance}];
   document.getElementById('scoreOverview').innerHTML = `
-    <div class="score-card score-overall">
-      ${ring(sc.overall, 'lg')}
-      <div class="score-label">Gesamt</div>
-    </div>
-    ${dims.map(d => `
-      <div class="score-card">
-        ${ring(d.val, 'sm')}
-        <div class="score-label">${d.icon} ${d.label}</div>
-      </div>`).join('')}
-  `;
+    <div class="score-card score-overall">${ring(sc.overall,'lg')}<div class="score-label">Gesamt</div></div>
+    ${dims.map(d=>`<div class="score-card">${ring(d.val,'sm')}<div class="score-label">${d.icon} ${d.label}</div></div>`).join('')}`;
 
-  /* — Detail cards — */
-  const dsp = sc.dsp;
-  const dayCol = dsp < 30 ? 'var(--green)' : dsp < 180 ? 'var(--amber)' : 'var(--red)';
-
+  const dsp=sc.dsp, dayCol=dsp<30?'var(--green)':dsp<180?'var(--amber)':'var(--red)';
   document.getElementById('detailsGrid').innerHTML = `
     <div class="detail-card">
       <div class="detail-title">⚡ Aktivitäts-Details</div>
-      <div class="dr"><span class="dr-lbl">Letzter Push</span>
-        <span class="dr-val" style="color:${dayCol}">${ago(r.pushed_at)}</span></div>
-      <div class="dr"><span class="dr-lbl">Ø Commits / Woche (12 W)</span>
-        <span class="dr-val">${sc.wkCommits > 0 ? sc.wkCommits.toFixed(1) : '—'}</span></div>
-      <div class="dr"><span class="dr-lbl">Aktuelles Release (&lt; 1 Jahr)</span>
-        <span class="dr-val" style="color:${sc.hasRelease ? 'var(--green)' : 'var(--red)'}">
-          ${sc.hasRelease ? '✓ Ja' : releases.length > 0 ? '⚠ Veraltet' : '✗ Keine Releases'}</span></div>
-      <div class="dr"><span class="dr-lbl">Repository erstellt</span>
-        <span class="dr-val">${new Date(r.created_at).toLocaleDateString('de-DE')}</span></div>
-      <div class="dr"><span class="dr-lbl">Repo-Größe</span>
-        <span class="dr-val">${r.size > 1024 ? (r.size/1024).toFixed(1)+' MB' : r.size+' KB'}</span></div>
-      <div class="dr"><span class="dr-lbl">Standard-Branch</span>
-        <span class="dr-val" style="font-size:.72rem">${r.default_branch}</span></div>
+      <div class="dr"><span class="dr-lbl">Letzter Push</span><span class="dr-val" style="color:${dayCol}">${ago(r.pushed_at)}</span></div>
+      <div class="dr"><span class="dr-lbl">Ø Commits / Woche (12 W)</span><span class="dr-val">${sc.wkCommits>0?sc.wkCommits.toFixed(1):'—'}</span></div>
+      <div class="dr"><span class="dr-lbl">Aktuelles Release (&lt; 1 Jahr)</span><span class="dr-val" style="color:${sc.hasRelease?'var(--green)':'var(--red)'}">${sc.hasRelease?'✓ Ja':releases.length>0?'⚠ Veraltet':'✗ Keine Releases'}</span></div>
+      <div class="dr"><span class="dr-lbl">Repository erstellt</span><span class="dr-val">${new Date(r.created_at).toLocaleDateString('de-DE')}</span></div>
+      <div class="dr"><span class="dr-lbl">Repo-Größe</span><span class="dr-val">${r.size>1024?(r.size/1024).toFixed(1)+' MB':r.size+' KB'}</span></div>
+      <div class="dr"><span class="dr-lbl">Standard-Branch</span><span class="dr-val" style="font-size:.72rem">${r.default_branch}</span></div>
     </div>
-
     <div class="detail-card">
       <div class="detail-title">📄 Dokumentations-Checkliste</div>
       <ul class="check-list">
-        ${[
-          ['README.md',          sc.dc.readme],
-          ['Lizenz-Datei',       sc.dc.license],
-          ['CONTRIBUTING.md',    sc.dc.contributing],
-          ['Code of Conduct',    sc.dc.coc],
-          ['Issue-Template',     sc.dc.issueT],
-          ['PR-Template',        sc.dc.prT],
-          ['Projektbeschreibung',!!r.description],
-          ['Topics / Tags',      !!(r.topics?.length)],
-          ['Homepage-URL',       !!r.homepage],
-        ].map(([lbl,ok]) => `
-          <li class="check-item">
-            <span>${ok ? '✅' : '❌'}</span>
-            <span style="color:${ok ? 'var(--text)' : 'var(--muted)'}">${lbl}</span>
-          </li>`).join('')}
+        ${[['README.md',sc.dc.readme],['Lizenz-Datei',sc.dc.license],['CONTRIBUTING.md',sc.dc.contributing],['Code of Conduct',sc.dc.coc],['Issue-Template',sc.dc.issueT],['PR-Template',sc.dc.prT],['Projektbeschreibung',!!r.description],['Topics / Tags',!!(r.topics?.length)],['Homepage-URL',!!r.homepage]]
+          .map(([lbl,ok])=>`<li class="check-item"><span>${ok?'✅':'❌'}</span><span style="color:${ok?'var(--text)':'var(--muted)'}">${lbl}</span></li>`).join('')}
       </ul>
     </div>
-
     <div class="detail-card">
       <div class="detail-title">👥 Community-Metriken</div>
-      <div class="dr"><span class="dr-lbl">Stars</span>
-        <span class="dr-val" style="color:var(--accent)">${fmt(r.stargazers_count)}</span></div>
-      <div class="dr"><span class="dr-lbl">Forks</span>
-        <span class="dr-val">${fmt(r.forks_count)}</span></div>
-      <div class="dr"><span class="dr-lbl">Watchers</span>
-        <span class="dr-val">${fmt(r.subscribers_count || r.watchers_count)}</span></div>
-      <div class="dr"><span class="dr-lbl">Contributors (Top-30)</span>
-        <span class="dr-val">${contributors.length >= 30 ? '30+' : contributors.length}</span></div>
-      ${topLangs.length ? `
-      <div class="dr" style="flex-direction:column;align-items:flex-start;gap:.5rem">
-        <span class="dr-lbl">Sprachen</span>
-        <div class="tag-row">
-          ${topLangs.map(l => `<span class="tag tag-lang">${l.l} ${l.pct}%</span>`).join('')}
-        </div>
-      </div>` : ''}
+      <div class="dr"><span class="dr-lbl">Stars</span><span class="dr-val" style="color:var(--accent)">${fmt(r.stargazers_count)}</span></div>
+      <div class="dr"><span class="dr-lbl">Forks</span><span class="dr-val">${fmt(r.forks_count)}</span></div>
+      <div class="dr"><span class="dr-lbl">Watchers</span><span class="dr-val">${fmt(r.subscribers_count||r.watchers_count)}</span></div>
+      <div class="dr"><span class="dr-lbl">Contributors (Top-30)</span><span class="dr-val">${contributors.length>=30?'30+':contributors.length}</span></div>
+      ${topLangs.length?`<div class="dr" style="flex-direction:column;align-items:flex-start;gap:.5rem"><span class="dr-lbl">Sprachen</span><div class="tag-row">${topLangs.map(l=>`<span class="tag tag-lang">${l.l} ${l.pct}%</span>`).join('')}</div></div>`:''}
     </div>
-
     <div class="detail-card">
       <div class="detail-title">🔧 Wartungs-Status</div>
-      <div class="dr"><span class="dr-lbl">Status</span>
-        <span class="dr-val" style="color:${r.archived ? 'var(--red)' : 'var(--green)'}">
-          ${r.archived ? '🔒 Archiviert' : '🟢 Aktiv'}</span></div>
-      <div class="dr"><span class="dr-lbl">Sichtbarkeit</span>
-        <span class="dr-val">${r.visibility === 'public' ? '🌐 Öffentlich' : '🔒 Privat'}</span></div>
-      <div class="dr"><span class="dr-lbl">Issue-Tracker</span>
-        <span class="dr-val" style="color:${r.has_issues ? 'var(--green)' : 'var(--muted)'}">
-          ${r.has_issues ? '✓ Aktiviert' : '✗ Deaktiviert'}</span></div>
-      <div class="dr"><span class="dr-lbl">Wiki</span>
-        <span class="dr-val" style="color:${r.has_wiki ? 'var(--green)' : 'var(--muted)'}">
-          ${r.has_wiki ? '✓' : '✗'}</span></div>
-      <div class="dr"><span class="dr-lbl">Offene Issues</span>
-        <span class="dr-val">${fmt(r.open_issues_count)}</span></div>
-      <div class="dr"><span class="dr-lbl">Forked von anderem Repo</span>
-        <span class="dr-val">${r.fork ? 'Ja (Fork)' : 'Nein (Original)'}</span></div>
-    </div>
-  `;
+      <div class="dr"><span class="dr-lbl">Status</span><span class="dr-val" style="color:${r.archived?'var(--red)':'var(--green)'}">${r.archived?'🔒 Archiviert':'🟢 Aktiv'}</span></div>
+      <div class="dr"><span class="dr-lbl">Sichtbarkeit</span><span class="dr-val">${r.visibility==='public'?'🌐 Öffentlich':'🔒 Privat'}</span></div>
+      <div class="dr"><span class="dr-lbl">Issue-Tracker</span><span class="dr-val" style="color:${r.has_issues?'var(--green)':'var(--muted)'}">${r.has_issues?'✓ Aktiviert':'✗ Deaktiviert'}</span></div>
+      <div class="dr"><span class="dr-lbl">Wiki</span><span class="dr-val" style="color:${r.has_wiki?'var(--green)':'var(--muted)'}">${r.has_wiki?'✓':'✗'}</span></div>
+      <div class="dr"><span class="dr-lbl">Offene Issues</span><span class="dr-val">${fmt(r.open_issues_count)}</span></div>
+      <div class="dr"><span class="dr-lbl">Forked von anderem Repo</span><span class="dr-val">${r.fork?'Ja (Fork)':'Nein (Original)'}</span></div>
+    </div>`;
 
-  /* — Benchmarks — */
-  const bRows = [
-    { k: 'overall',       lbl: 'Gesamt',        val: sc.overall },
-    { k: 'activity',      lbl: 'Aktivität',      val: sc.activity },
-    { k: 'documentation', lbl: 'Dokumentation',  val: sc.documentation },
-    { k: 'community',     lbl: 'Community',      val: sc.community },
-    { k: 'maintenance',   lbl: 'Wartung',        val: sc.maintenance },
-  ];
+  const bRows=[{k:'overall',lbl:'Gesamt',val:sc.overall},{k:'activity',lbl:'Aktivität',val:sc.activity},{k:'documentation',lbl:'Dokumentation',val:sc.documentation},{k:'community',lbl:'Community',val:sc.community},{k:'maintenance',lbl:'Wartung',val:sc.maintenance}];
   document.getElementById('benchCard').innerHTML = `
     <div class="bench-title">📊 Benchmark — Top 100 Open-Source-Projekte</div>
     <p class="bench-subtitle">Wo steht dein Repo im Vergleich zu 100 der meistgenutzten GitHub-Projekten?</p>
-    ${bRows.map(b => {
-      const bm  = BENCH[b.k];
-      const you = b.val;
-      const cmp = you > bm.p75   ? 'var(--green)'  :
-                  you > bm.median ? 'var(--green)' :
-                  you > bm.p25   ? 'var(--amber)'  : 'var(--red)';
-      const lbl = you > bm.p75    ? '▲ Top 25 %'   :
-                  you > bm.median ? '▲ Über Median' :
-                  you > bm.p25   ? '● Unter Median' : '▼ Unteres Quartil';
-      return `
-      <div class="bench-row">
-        <div class="bench-row-head">
-          <span class="bench-row-lbl">${b.lbl}</span>
-          <span class="bench-row-info" style="color:${cmp}">${lbl} &nbsp;·&nbsp; Score: ${you}</span>
-        </div>
-        <div class="bar-bg">
-          <div class="bar-range" style="left:${bm.p25}%;width:${bm.p75 - bm.p25}%"></div>
-          <div class="bar-median" style="left:${bm.median}%"></div>
-          <div class="bar-you" style="left:${you}%"></div>
-        </div>
-      </div>`;
+    ${bRows.map(b=>{const bm=BENCH[b.k],you=b.val,cmp=you>bm.p75?'var(--green)':you>bm.median?'var(--green)':you>bm.p25?'var(--amber)':'var(--red)',lbl=you>bm.p75?'▲ Top 25 %':you>bm.median?'▲ Über Median':you>bm.p25?'● Unter Median':'▼ Unteres Quartil';
+      return `<div class="bench-row"><div class="bench-row-head"><span class="bench-row-lbl">${b.lbl}</span><span class="bench-row-info" style="color:${cmp}">${lbl} · Score: ${you}</span></div><div class="bar-bg"><div class="bar-range" style="left:${bm.p25}%;width:${bm.p75-bm.p25}%"></div><div class="bar-median" style="left:${bm.median}%"></div><div class="bar-you" style="left:${you}%"></div></div></div>`;
     }).join('')}
     <div class="bench-legend">
       <div class="leg"><div class="leg-dot"></div> Dein Repo</div>
       <div class="leg"><div class="leg-line"></div> Median</div>
       <div class="leg"><div class="leg-range"></div> P25–P75</div>
-    </div>
-  `;
+    </div>`;
 
-  /* — Suggestions — */
-  const tips = [];
-  if (!sc.dc.readme)        tips.push({ i:'📄', t:'README hinzufügen',        d:'Das wichtigste Dokument eines Projekts — erklärt Zweck, Installation und Verwendung.' });
-  if (!r.description)       tips.push({ i:'✏️', t:'Beschreibung ergänzen',     d:'Kurze Beschreibung erscheint in GitHub-Suche und gibt Besuchern sofort Kontext.' });
-  if (!sc.dc.contributing)  tips.push({ i:'🤝', t:'CONTRIBUTING.md erstellen', d:'Senkt die Hürde für externe Beiträge erheblich. Template: github.com/nayafia/contributing-template' });
-  if (!sc.dc.license)       tips.push({ i:'⚖️', t:'Lizenz wählen',             d:'Ohne Lizenz darf niemand den Code rechtlich verwenden. MIT oder Apache 2.0 sind üblich.' });
-  if (!sc.dc.coc)           tips.push({ i:'📜', t:'Code of Conduct hinzufügen',d:'Definiert Community-Standards und signalisiert ein einladendes Projekt.' });
-  if (!r.topics?.length)    tips.push({ i:'🏷️', t:'Topics/Tags vergeben',      d:'Verbessert Auffindbarkeit auf GitHub stark. Bis zu 20 Topics möglich.' });
-  if (releases.length === 0) tips.push({ i:'🚀', t:'Releases erstellen',       d:'Regelmäßige Releases zeigen aktive Pflege und erleichtern die Versionsverwaltung.' });
-  if (dsp > 180)            tips.push({ i:'⚡', t:'Aktivität steigern',         d:`Letzter Push vor ${dsp} Tagen. Regelmäßige kleine Commits oder Dependency-Updates helfen.` });
-  if (!sc.dc.issueT)        tips.push({ i:'📋', t:'Issue-Template anlegen',    d:'Führt Bug-Reporter durch relevante Informationen und spart Nachfragen.' });
+  const tips=[];
+  if(!sc.dc.readme)       tips.push({i:'📄',t:'README hinzufügen',       d:'Das wichtigste Dokument eines Projekts — erklärt Zweck, Installation und Verwendung.'});
+  if(!r.description)      tips.push({i:'✏️',t:'Beschreibung ergänzen',    d:'Kurze Beschreibung erscheint in GitHub-Suche und gibt Besuchern sofort Kontext.'});
+  if(!sc.dc.contributing) tips.push({i:'🤝',t:'CONTRIBUTING.md erstellen',d:'Senkt die Hürde für externe Beiträge erheblich.'});
+  if(!sc.dc.license)      tips.push({i:'⚖️',t:'Lizenz wählen',            d:'Ohne Lizenz darf niemand den Code rechtlich verwenden. MIT oder Apache 2.0 sind üblich.'});
+  if(!sc.dc.coc)          tips.push({i:'📜',t:'Code of Conduct',          d:'Definiert Community-Standards und signalisiert ein einladendes Projekt.'});
+  if(!r.topics?.length)   tips.push({i:'🏷️',t:'Topics/Tags vergeben',     d:'Verbessert Auffindbarkeit auf GitHub stark. Bis zu 20 Topics möglich.'});
+  if(releases.length===0) tips.push({i:'🚀',t:'Releases erstellen',       d:'Regelmäßige Releases zeigen aktive Pflege und erleichtern die Versionsverwaltung.'});
+  if(sc.dsp>180)          tips.push({i:'⚡',t:'Aktivität steigern',        d:`Letzter Push vor ${sc.dsp} Tagen. Regelmäßige Commits oder Dependency-Updates helfen.`});
+  if(!sc.dc.issueT)       tips.push({i:'📋',t:'Issue-Template anlegen',   d:'Führt Bug-Reporter durch relevante Informationen und spart Nachfragen.'});
 
   document.getElementById('suggestCard').innerHTML = `
-    <div class="suggest-title">💡 Verbesserungsvorschläge${tips.length ? ` (${tips.length})` : ''}</div>
-    ${tips.length === 0
-      ? `<div style="text-align:center;padding:2rem;color:var(--muted);font-family:var(--mono);font-size:.82rem">
-           ✅ Keine kritischen Lücken gefunden — solides Open-Source-Projekt!
-         </div>`
-      : tips.map(t => `
-        <div class="suggest-item">
-          <span class="suggest-icon">${t.i}</span>
-          <div class="suggest-body"><strong>${t.t}</strong>${t.d}</div>
-        </div>`).join('')
-    }
-  `;
+    <div class="suggest-title">💡 Verbesserungsvorschläge${tips.length?` (${tips.length})`:''}</div>
+    ${tips.length===0
+      ?`<div style="text-align:center;padding:2rem;color:var(--muted);font-family:var(--mono);font-size:.82rem">✅ Keine kritischen Lücken gefunden — solides Open-Source-Projekt!</div>`
+      :tips.map(t=>`<div class="suggest-item"><span class="suggest-icon">${t.i}</span><div class="suggest-body"><strong>${t.t}</strong>${t.d}</div></div>`).join('')}`;
 }
 
-/* ── UI helpers ──────────────────────────── */
-function setLoading(text, sub = '') {
-  const el = document.getElementById('loadingText');
-  const sl = document.getElementById('loadingSub');
-  if (el) el.textContent = text;
-  if (sl) sl.textContent = sub;
+function setLoading(text,sub='') {
+  const el=document.getElementById('loadingText'), sl=document.getElementById('loadingSub');
+  if(el) el.textContent=text; if(sl) sl.textContent=sub;
 }
-
 function resetUI() {
   document.getElementById('resultsSection').classList.add('hidden');
   document.getElementById('errorState').classList.add('hidden');
   document.getElementById('loadingState').classList.add('hidden');
-  document.getElementById('analyzeBtn').disabled = false;
+  document.getElementById('analyzeBtn').disabled=false;
 }
-
 function showError(msg) {
   document.getElementById('loadingState').classList.add('hidden');
-  document.getElementById('errorMsg').textContent = msg;
+  document.getElementById('errorMsg').textContent=msg;
   document.getElementById('errorState').classList.remove('hidden');
-  document.getElementById('analyzeBtn').disabled = false;
+  document.getElementById('analyzeBtn').disabled=false;
 }
 
-/* ── Main ────────────────────────────────── */
 async function analyze() {
-  const raw   = document.getElementById('repoInput').value;
-  const token = document.getElementById('tokenInput').value.trim();
-
-  const parsed = parseUrl(raw);
-  if (!parsed) {
-    showError('Ungültige Eingabe. Beispiele: https://github.com/facebook/react  oder  facebook/react');
-    return;
-  }
-
+  const raw=document.getElementById('repoInput').value;
+  const token=document.getElementById('tokenInput').value.trim();
+  const parsed=parseUrl(raw);
+  if(!parsed) { showError('Ungültige Eingabe. Beispiel: https://github.com/facebook/react'); return; }
   document.getElementById('resultsSection').classList.add('hidden');
   document.getElementById('errorState').classList.add('hidden');
   document.getElementById('loadingState').classList.remove('hidden');
-  document.getElementById('analyzeBtn').disabled = true;
-
+  document.getElementById('analyzeBtn').disabled=true;
   try {
-    const data   = await fetchAll(parsed.owner, parsed.repo, token);
-    const scores = calcScores(data);
+    const data=await fetchAll(parsed.owner,parsed.repo,token);
+    const scores=calcScores(data);
     document.getElementById('loadingState').classList.add('hidden');
-    renderResults(scores, data);
+    renderResults(scores,data);
     document.getElementById('resultsSection').classList.remove('hidden');
-    document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  } catch (err) {
-    showError(err.message);
-  }
+    document.getElementById('resultsSection').scrollIntoView({behavior:'smooth',block:'start'});
+  } catch(err) { showError(err.message); }
 }
 
-/* Enter key */
-document.getElementById('repoInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') analyze();
-});
+document.getElementById('repoInput').addEventListener('keydown', e => { if(e.key==='Enter') analyze(); });
 </script>
 </body>
 </html>
