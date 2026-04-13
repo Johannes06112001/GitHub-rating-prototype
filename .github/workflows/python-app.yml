@@ -16,10 +16,11 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Requests installieren
-        run: pip install requests
+      - name: Abhängigkeiten installieren
+        run: pip install -r requirements.txt
 
       - name: Script ausführen
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python collect_data.py
+        
