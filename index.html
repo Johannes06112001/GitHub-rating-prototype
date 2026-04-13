@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RepoScope — GitHub Repository Analyzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:         #080e1c;
+  --surface:    #0d1526;
+  --surface2:   #121f38;
+  --border:     #1e3050;
+  --accent:     #00e5a0;
+  --accent-dim: rgba(0,229,160,0.08);
+  --accent2:    #4f8cff;
+  --text:       #e2e8f0;
+  --muted:      #64748b;
+  --red:        #ff4d6d;
+  --amber:      #fbbf24;
+  --green:      #00e5a0;
+  --mono:       'Space Mono', monospace;
+  --display:    'Syne', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--display);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,229,160,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,160,.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ── HEADER ─────────────────────────────── */
+header {
+  text-align: center;
+  padding: 4rem 1rem 2.5rem;
+  position: relative; z-index: 1;
+}
+.logo {
+  font-family: var(--mono);
+  font-size: clamp(2.8rem, 9vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  margin-bottom: .6rem;
+}
+.logo-green { color: var(--accent); text-shadow: 0 0 50px rgba(0,229,160,.4); }
+.logo-white { color: var(--text); }
+.tagline {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── INPUT CARD ──────────────────────────── */
+.input-section {
+  max-width: 700px; margin: 0 auto 3.5rem; padding: 0 1rem;
+  position: relative; z-index: 1;
+}
+.input-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2.25rem 2.5rem;
+  box-shadow: 0 0 80px rgba(0,229,160,.04);
+}
+.input-label {
+  display: block;
+  font-family: var(--mono); font-size: .68rem;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: .7rem;
+}
+.input-row { display: flex; gap: .75rem; }
+input[type="text"], input[type="password"] {
+  flex: 1;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 10px; padding: .85rem 1.2rem;
+  color: var(--text); font-family: var(--mono); font-size: .875rem;
+  outline: none; transition: border-color .2s, box-shadow .2s;
+}
+input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,229,160,.1); }
+input::placeholder { color: var(--muted); font-size: .8rem; }
+.btn-analyze {
+  background: var(--accent); color: var(--bg);
+  border: none; border-radius: 10px;
+  padding: .85rem 1.6rem;
+  font-family: var(--mono); font-size: .8rem; font-weight: 700;
+  letter-spacing: .04em; cursor: pointer; white-space: nowrap;
+  transition: all .2s;
+}
+.btn-analyze:hover { background: #00ffb3; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,229,160,.3); }
+.btn-analyze:active { transform: none; }
+.btn-analyze:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+details.token-box { margin-top: 1rem; }
+details.token-box > summary {
+  list-style: none; cursor: pointer;
+  font-family: var(--mono); font-size: .72rem;
+  color: var(--muted); transition: color .2s;
+  padding: .4rem 0;
+}
+details.token-box > summary:hover,
+details.token-box[open] > summary { color: var(--accent); }
+.token-body { margin-top: .75rem; display: flex; flex-direction: column; gap: .5rem; }
+.token-hint {
+  font-family: var(--mono); font-size: .68rem; color: var(--muted); line-height: 1.5;
+}
+.token-hint a { color: var(--accent2); text-decoration: none; }
+.token-hint a:hover { text-decoration: underline; }
+
+/* ── STATES ──────────────────────────────── */
+.hidden { display: none !important; }
+
+#loadingState {
+  text-align: center; padding: 5rem 1rem;
+  position: relative; z-index: 1;
+}
+.spinner {
+  width: 52px; height: 52px;
+  border: 3px solid var(--border); border-top-color: var(--accent);
+  border-radius: 50%; animation: spin .8s linear infinite;
+  margin: 0 auto 1.5rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text { font-family: var(--mono); font-size: .8rem; color: var(--muted); }
+.loading-sub  { font-family: var(--mono); font-size: .68rem; color: var(--border); margin-top: .5rem; }
+
+#errorState {
+  max-width: 480px; margin: 0 auto; padding: 2rem 1rem;
+  position: relative; z-index: 1;
+}
+.error-box {
+  background: rgba(255,77,109,.08); border: 1px solid rgba(255,77,109,.25);
+  border-radius: 14px; padding: 2rem; text-align: center;
+}
+.error-box h3 { color: var(--red); font-family: var(--mono); margin-bottom: .6rem; font-size: 1rem; }
+.error-box p  { color: var(--muted); font-size: .85rem; line-height: 1.5; }
+.btn-retry {
+  margin-top: 1.25rem;
+  background: none; border: 1px solid var(--border); border-radius: 8px;
+  padding: .6rem 1.4rem; color: var(--text); font-family: var(--mono);
+  font-size: .75rem; cursor: pointer; transition: border-color .2s, color .2s;
+}
+.btn-retry:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── RESULTS ─────────────────────────────── */
+#resultsSection {
+  max-width: 920px; margin: 0 auto;
+  padding: 0 1rem 6rem;
+  position: relative; z-index: 1;
+}
+
+/* Repo header */
+.repo-header-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 18px; padding: 1.75rem 2rem;
+  margin-bottom: 1.5rem;
+  display: flex; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap;
+}
+.repo-avatar { width: 52px; height: 52px; border-radius: 10px; flex-shrink: 0; }
+.repo-info { flex: 1; min-width: 200px; }
+.repo-full-name { font-size: 1.35rem; font-weight: 700; margin-bottom: .3rem; }
+.repo-full-name a { color: var(--text); text-decoration: none; transition: color .2s; }
+.repo-full-name a:hover { color: var(--accent); }
+.repo-desc { color: var(--muted); font-size: .875rem; line-height: 1.5; margin-bottom: .75rem; }
+.tag-row { display: flex; flex-wrap: wrap; gap: .4rem; }
+.tag {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 6px; padding: .18rem .55rem;
+  font-family: var(--mono); font-size: .66rem; color: var(--muted);
+}
+.tag-lang   { color: var(--accent2); border-color: rgba(79,140,255,.25); }
+.tag-lic    { color: var(--amber);   border-color: rgba(251,191,36,.25); }
+.tag-arc    { color: var(--red);     border-color: rgba(255,77,109,.25); }
+.repo-stats { display: flex; gap: 2rem; flex-wrap: wrap; }
+.stat-item  { text-align: center; }
+.stat-val   { font-family: var(--mono); font-size: 1.1rem; font-weight: 700; color: var(--accent); display: block; }
+.stat-lbl   { font-family: var(--mono); font-size: .62rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+
+/* Score grid */
+.score-overview {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr 1fr 1fr;
+  gap: 1rem; margin-bottom: 1.5rem;
+}
+@media (max-width: 780px) {
+  .score-overview { grid-template-columns: 1fr 1fr; }
+  .score-overall  { grid-column: 1 / -1; }
+}
+.score-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.5rem 1rem; text-align: center;
+  transition: border-color .3s, box-shadow .3s;
+  opacity: 0; animation: fadeUp .45s ease forwards;
+}
+.score-card:nth-child(1) { animation-delay: .05s; }
+.score-card:nth-child(2) { animation-delay: .1s;  }
+.score-card:nth-child(3) { animation-delay: .15s; }
+.score-card:nth-child(4) { animation-delay: .2s;  }
+.score-card:nth-child(5) { animation-delay: .25s; }
+.score-card:hover { border-color: rgba(0,229,160,.25); box-shadow: 0 0 30px rgba(0,229,160,.05); }
+.score-overall { border-color: rgba(0,229,160,.15); }
+
+.ring-wrap { position: relative; margin: 0 auto 1rem; }
+.ring-wrap.lg { width: 130px; height: 130px; }
+.ring-wrap.sm { width: 90px;  height: 90px;  }
+.ring-svg { width: 100%; height: 100%; transform: rotate(-90deg); display: block; }
+.ring-bg   { fill: none; stroke: var(--border); }
+.ring-fill { fill: none; stroke-linecap: round; transition: stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1); }
+.ring-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.ring-num { font-family: var(--mono); font-weight: 700; line-height: 1; }
+.ring-num.lg { font-size: 2rem; }
+.ring-num.sm { font-size: 1.35rem; }
+.ring-grade { font-family: var(--mono); font-size: .65rem; margin-top: .2rem; }
+.score-label { font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+/* Details grid */
+.details-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1rem; margin-bottom: 1.5rem;
+}
+@media (max-width: 600px) { .details-grid { grid-template-columns: 1fr; } }
+.detail-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.6rem;
+  opacity: 0; animation: fadeUp .45s ease forwards;
+}
+.detail-card:nth-child(1) { animation-delay: .3s; }
+.detail-card:nth-child(2) { animation-delay: .35s; }
+.detail-card:nth-child(3) { animation-delay: .4s; }
+.detail-card:nth-child(4) { animation-delay: .45s; }
+.detail-title {
+  font-family: var(--mono); font-size: .66rem;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.1rem;
+}
+.dr {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .55rem 0; border-bottom: 1px solid var(--border);
+}
+.dr:last-child { border-bottom: none; }
+.dr-lbl { font-family: var(--mono); font-size: .72rem; color: var(--muted); }
+.dr-val { font-family: var(--mono); font-size: .8rem; font-weight: 700; }
+.check-list { list-style: none; }
+.check-item {
+  display: flex; align-items: center; gap: .7rem;
+  padding: .42rem 0; border-bottom: 1px solid var(--border);
+  font-family: var(--mono); font-size: .72rem;
+}
+.check-item:last-child { border-bottom: none; }
+
+/* Benchmarks */
+.bench-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem;
+  margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeUp .45s .5s ease forwards;
+}
+.bench-title    { font-family: var(--mono); font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: .35rem; }
+.bench-subtitle { font-family: var(--mono); font-size: .72rem; color: var(--muted); margin-bottom: 1.75rem; }
+.bench-row      { margin-bottom: 1.3rem; }
+.bench-row-head { display: flex; justify-content: space-between; margin-bottom: .45rem; }
+.bench-row-lbl  { font-size: .82rem; font-weight: 600; }
+.bench-row-info { font-family: var(--mono); font-size: .72rem; }
+.bar-bg { background: var(--border); border-radius: 999px; height: 8px; position: relative; }
+.bar-range { position: absolute; height: 100%; background: rgba(0,229,160,.18); border-radius: 999px; }
+.bar-median {
+  position: absolute; width: 2px; height: 16px;
+  background: var(--muted); top: 50%; transform: translateY(-50%); border-radius: 1px;
+}
+.bar-you {
+  position: absolute; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--accent); top: 50%; transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(0,229,160,.6);
+  transition: left 1.2s cubic-bezier(.4,0,.2,1);
+}
+.bench-legend {
+  display: flex; gap: 1.5rem; margin-top: 1.1rem; flex-wrap: wrap;
+}
+.leg { display: flex; align-items: center; gap: .4rem; font-family: var(--mono); font-size: .65rem; color: var(--muted); }
+.leg-dot  { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+.leg-line { width: 14px; height: 2px; background: var(--muted); border-radius: 1px; }
+.leg-range{ width: 18px; height: 8px; background: rgba(0,229,160,.18); border-radius: 3px; }
+
+/* Suggestions */
+.suggest-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 2rem;
+  opacity: 0; animation: fadeUp .45s .6s ease forwards;
+}
+.suggest-title { font-family: var(--mono); font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+.suggest-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: .9rem 1rem; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 10px; margin-bottom: .75rem;
+}
+.suggest-item:last-child { margin-bottom: 0; }
+.suggest-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: .1rem; }
+.suggest-body { font-size: .84rem; line-height: 1.55; color: var(--muted); }
+.suggest-body strong { color: var(--text); display: block; margin-bottom: .1rem; }
+
+/* Methodology */
+.method-section {
+  max-width: 920px; margin: 0 auto; padding: 0 1rem 5rem;
+  position: relative; z-index: 1;
+}
+.method-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 18px; padding: 2.5rem;
+}
+.method-card h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: .4rem; }
+.method-intro { font-family: var(--mono); font-size: .75rem; color: var(--muted); margin-bottom: 2rem; }
+.method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+@media (max-width: 580px) { .method-grid { grid-template-columns: 1fr; } }
+.mitem { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+.mitem-head { display: flex; align-items: center; gap: .5rem; font-weight: 600; margin-bottom: .5rem; font-size: .9rem; }
+.mweight {
+  font-family: var(--mono); font-size: .65rem;
+  background: var(--accent-dim); color: var(--accent);
+  padding: .1rem .45rem; border-radius: 4px;
+}
+.mitem p { font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+footer {
+  text-align: center; padding: 2rem 1rem 3rem;
+  font-family: var(--mono); font-size: .65rem; color: var(--muted);
+  position: relative; z-index: 1; border-top: 1px solid var(--border);
+}
+footer a { color: var(--accent2); text-decoration: none; }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <span class="logo-green">Repo</span><span class="logo-white">Scope</span>
+  </div>
+  <p class="tagline">Open-Source Quality Analyzer &nbsp;·&nbsp; GitHub API</p>
+</header>
+
+<!-- INPUT -->
+<div class="input-section">
+  <div class="input-card">
+    <label class="input-label" for="repoInput">▸ GitHub Repository URL</label>
+    <div class="input-row">
+      <input type="text" id="repoInput"
+        placeholder="https://github.com/facebook/react  oder  facebook/react" />
+      <button class="btn-analyze" id="analyzeBtn" onclick="analyze()">Analysieren →</button>
+    </div>
+
+    <details class="token-box">
+      <summary>⚡ GitHub Personal Access Token (optional)</summary>
+      <div class="token-body">
+        <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxx" />
+        <p class="token-hint">
+          Ohne Token: 60 Anfragen/Stunde &nbsp;·&nbsp; Mit Token: 5.000/Stunde<br>
+          Erstellen unter <a href="https://github.com/settings/tokens/new?scopes=public_repo" target="_blank">
+          github.com/settings/tokens</a> — nur <code>public_repo</code> Scope nötig. Token wird nicht gespeichert.
+        </p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div id="loadingState" class="hidden">
+  <div class="spinner"></div>
+  <p class="loading-text" id="loadingText">Repository-Daten werden abgerufen...</p>
+  <p class="loading-sub" id="loadingSub">&nbsp;</p>
+</div>
+
+<!-- ERROR -->
+<div id="errorState" class="hidden">
+  <div class="error-box">
+    <h3>⚠ Fehler</h3>
+    <p id="errorMsg"></p>
+    <button class="btn-retry" onclick="resetUI()">← Zurück</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<section id="resultsSection" class="hidden">
+  <div class="repo-header-card" id="repoHeader"></div>
+  <div class="score-overview"  id="scoreOverview"></div>
+  <div class="details-grid"   id="detailsGrid"></div>
+  <div class="bench-card"     id="benchCard"></div>
+  <div class="suggest-card"   id="suggestCard"></div>
+</section>
+
+<!-- METHODOLOGY -->
+<div class="method-section">
+  <div class="method-card">
+    <h2>📐 Scoring-Methodik</h2>
+    <p class="method-intro">Basierend auf der Analyse von 100 der meistgenutzten Open-Source-Projekte auf GitHub
+    (collect_data.py) — Benchmarks aus Sternen, Forks, Contributor-Zahlen und Community-Profilen.</p>
+    <div class="method-grid">
+      <div class="mitem">
+        <div class="mitem-head">⚡ Aktivität <span class="mweight">30 %</span></div>
+        <p>Tage seit dem letzten Push (55 %), durchschnittliche wöchentliche Commits der letzten 12 Wochen (25 %), Vorhandensein eines aktuellen Releases (20 %).</p>
+      </div>
+      <div class="mitem">
+        <div class="mitem-head">📄 Dokumentation <span class="mweight">25 %</span></div>
+        <p>Prüft: README, Lizenz, CONTRIBUTING.md, Code of Conduct, Issue-Template, PR-Template, Projektbeschreibung und Topics/Tags.</p>
+      </div>
+      <div class="mitem">
+        <div class="mitem-head">👥 Community <span class="mweight">25 %</span></div>
+        <p>Stars (log-skaliert, 40 %), Forks (30 %) und Anzahl der Contributors (30 %). Logarithmische Skalierung verhindert Verzerrungen durch Ausreißer.</p>
+      </div>
+      <div class="mitem">
+        <div class="mitem-head">🔧 Wartung <span class="mweight">20 %</span></div>
+        <p>Archivierungsstatus, aktiver Issue-Tracker und das Verhältnis offener Issues zu Forks als Gesundheitsindikator für die Reaktionsfähigkeit.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  RepoScope &nbsp;·&nbsp; Uni-Projekt &nbsp;·&nbsp; Daten via
+  <a href="https://docs.github.com/en/rest" target="_blank">GitHub REST API v3</a>
+  &amp;
+  <a href="https://docs.github.com/en/graphql" target="_blank">GraphQL API v4</a>
+  &nbsp;·&nbsp; Kein Backend, keine Datenspeicherung.
+</footer>
+
+<script>
+/* =========================================================
+   BENCHMARKS
+   Erhoben aus Top-100-Analyse (collect_data.py)
+   Aktualisieren durch erneutes Ausführen des Scripts.
+   ========================================================= */
+const BENCH = {
+  overall:       { p25: 54, median: 67, p75: 78 },
+  activity:      { p25: 48, median: 69, p75: 87 },
+  documentation: { p25: 55, median: 70, p75: 85 },
+  community:     { p25: 58, median: 72, p75: 83 },
+  maintenance:   { p25: 52, median: 69, p75: 84 },
+};
+
+/* ── Helpers ────────────────────────────── */
+function parseUrl(raw) {
+  raw = raw.trim().replace(/\/$/, '');
+  const m = raw.match(/(?:github\.com\/)?([A-Za-z0-9._-]+)\/([A-Za-z0-9._-]+)/);
+  if (!m) return null;
+  return { owner: m[1], repo: m[2].replace(/\.git$/, '') };
+}
+function fmt(n) {
+  if (n >= 1e6) return (n/1e6).toFixed(1)+'M';
+  if (n >= 1e3) return (n/1e3).toFixed(1)+'K';
+  return String(n);
+}
+function ago(dateStr) {
+  const d = Math.floor((Date.now() - new Date(dateStr)) / 864e5);
+  if (d === 0) return 'Heute';
+  if (d === 1) return 'Gestern';
+  if (d < 30)  return `Vor ${d} Tagen`;
+  if (d < 365) return `Vor ${Math.round(d/30)} Monaten`;
+  return `Vor ${Math.round(d/365)} Jahr(en)`;
+}
+function daysNum(dateStr) {
+  return Math.floor((Date.now() - new Date(dateStr)) / 864e5);
+}
+function scoreColor(s) {
+  return s >= 70 ? '#00e5a0' : s >= 45 ? '#fbbf24' : '#ff4d6d';
+}
+function grade(s) {
+  if (s >= 90) return 'A+';
+  if (s >= 80) return 'A';
+  if (s >= 70) return 'B+';
+  if (s >= 60) return 'B';
+  if (s >= 50) return 'C';
+  if (s >= 40) return 'D';
+  return 'F';
+}
+function logScale(n, max) {
+  return Math.min(100, Math.log10(n + 1) / Math.log10(max) * 100);
+}
+
+/* ── API ────────────────────────────────── */
+async function apiFetch(url, headers) {
+  const r = await fetch(url, { headers });
+  if (!r.ok) {
+    if (r.status === 404) throw new Error('Repository nicht gefunden. Ist das Repo öffentlich?');
+    if (r.status === 403) {
+      const rem = r.headers.get('X-RateLimit-Remaining');
+      if (rem === '0') throw new Error('GitHub Rate-Limit erreicht. Bitte einen Personal Access Token eingeben.');
+      throw new Error('Zugriff verweigert (HTTP 403). Token korrekt?');
+    }
+    const err = await r.json().catch(() => ({}));
+    throw new Error(`GitHub API Fehler ${r.status}: ${err.message || 'Unbekannt'}`);
+  }
+  return r.json();
+}
+
+async function fetchAll(owner, repo, token) {
+  const h = { Accept: 'application/vnd.github+json' };
+  if (token) h.Authorization = `Bearer ${token}`;
+  const b = `https://api.github.com/repos/${owner}/${repo}`;
+
+  setLoading('Haupt-Repository-Daten laden...');
+  const repoData = await apiFetch(b, h);
+
+  setLoading('Community-Profil abrufen...', 'Prüft README, Lizenz, CONTRIBUTING, Code of Conduct');
+  let community = null;
+  try { community = await apiFetch(`${b}/community/profile`, h); } catch (_) {}
+
+  setLoading('Sprachen und Releases analysieren...');
+  const [languages, releases] = await Promise.all([
+    apiFetch(`${b}/languages`, h).catch(() => ({})),
+    apiFetch(`${b}/releases?per_page=5`, h).catch(() => []),
+  ]);
+
+  setLoading('Contributors zählen...', 'Top 30 aktive Mitwirkende');
+  let contributors = [];
+  try { contributors = await apiFetch(`${b}/contributors?per_page=30&anon=false`, h); } catch (_) {}
+
+  setLoading('Commit-Aktivität der letzten 12 Wochen...', 'Kann einige Sekunden dauern');
+  let commitActivity = null;
+  try {
+    const ca = await fetch(`${b}/stats/commit_activity`, { headers: h });
+    if (ca.ok && ca.status !== 202) commitActivity = await ca.json();
+  } catch (_) {}
+
+  return { repoData, community, languages, releases, contributors, commitActivity };
+}
+
+/* ── Scoring ─────────────────────────────── */
+function calcScores(data) {
+  const { repoData: r, community, releases, contributors, commitActivity } = data;
+
+  /* Aktivität */
+  const dsp = daysNum(r.pushed_at);
+  const recency = dsp < 7 ? 100 : dsp < 30 ? 85 : dsp < 90 ? 65 : dsp < 180 ? 45 : dsp < 365 ? 25 : 5;
+  let wkCommits = 0;
+  if (Array.isArray(commitActivity) && commitActivity.length >= 4) {
+    const slice = commitActivity.slice(-12);
+    wkCommits = slice.reduce((a, b) => a + (b.total || 0), 0) / slice.length;
+  }
+  const commitScore = Math.min(100, wkCommits * 8);
+  const hasRelease  = releases.length > 0 && daysNum(releases[0].published_at) < 365;
+  const activity    = Math.min(100, Math.round(recency * .55 + commitScore * .25 + (hasRelease ? 20 : 0)));
+
+  /* Dokumentation */
+  let docScore = 0;
+  const dc = { readme: false, license: !!r.license, contributing: false,
+               coc: false, issueT: false, prT: false };
+  if (community?.files) {
+    dc.readme = !!community.files.readme;
+    dc.license      = !!(community.files.license || r.license);
+    dc.contributing = !!community.files.contributing;
+    dc.coc          = !!community.files.code_of_conduct;
+    dc.issueT       = !!community.files.issue_template;
+    dc.prT          = !!community.files.pull_request_template;
+  } else {
+    dc.readme = true; // Assume exists for public repos without community API
+  }
+  if (r.description) docScore += 15;
+  if (r.topics?.length)  docScore += Math.min(10, r.topics.length * 2);
+  if (r.homepage)        docScore += 5;
+  if (dc.readme)         docScore += 20;
+  if (dc.license)        docScore += 15;
+  if (dc.contributing)   docScore += 15;
+  if (dc.coc)            docScore += 10;
+  if (dc.issueT)         docScore += 5;
+  if (dc.prT)            docScore += 5;
+  const documentation = Math.min(100, docScore);
+
+  /* Community */
+  const starsS  = logScale(r.stargazers_count, 180000);
+  const forksS  = logScale(r.forks_count, 40000);
+  const contribS = Math.min(100, contributors.length >= 30
+    ? 100
+    : logScale(contributors.length, 30));
+  const community_score = Math.round(starsS * .4 + forksS * .3 + contribS * .3);
+
+  /* Wartung */
+  let maint = 0;
+  if (!r.archived)    maint += 30;
+  if (r.has_issues)   maint += 20;
+  const ir = r.open_issues_count === 0 ? 50
+    : Math.min(50, (r.forks_count / (r.open_issues_count + 1)) * 3);
+  maint = Math.min(100, Math.round(maint + ir));
+
+  const overall = Math.round(activity*.30 + documentation*.25 + community_score*.25 + maint*.20);
+
+  return { overall, activity, documentation, community: community_score, maintenance: maint,
+           dc, dsp, wkCommits, hasRelease };
+}
+
+/* ── Render SVG ring ─────────────────────── */
+function ring(score, cls = 'sm') {
+  const big = cls === 'lg';
+  const size = big ? 130 : 90;
+  const sw   = big ? 10 : 8;
+  const r    = size / 2 - sw;
+  const circ = 2 * Math.PI * r;
+  const fill = (score / 100) * circ;
+  const col  = scoreColor(score);
+  return `
+  <div class="ring-wrap ${cls}">
+    <svg class="ring-svg" viewBox="0 0 ${size} ${size}">
+      <circle class="ring-bg" cx="${size/2}" cy="${size/2}" r="${r}" stroke-width="${sw}"/>
+      <circle class="ring-fill" cx="${size/2}" cy="${size/2}" r="${r}" stroke-width="${sw}"
+        stroke="${col}"
+        stroke-dasharray="${circ}"
+        stroke-dashoffset="${circ - fill}"
+        style="filter:drop-shadow(0 0 5px ${col}55)"
+      />
+    </svg>
+    <div class="ring-center">
+      <span class="ring-num ${cls}" style="color:${col}">${score}</span>
+      ${big ? `<span class="ring-grade" style="color:${col}">${grade(score)}</span>` : ''}
+    </div>
+  </div>`;
+}
+
+/* ── Render results ──────────────────────── */
+function renderResults(sc, data) {
+  const { repoData: r, languages, releases, contributors } = data;
+
+  /* — Repo header — */
+  const langTotal = Object.values(languages).reduce((a,b) => a+b, 0);
+  const topLangs  = Object.entries(languages).sort(([,a],[,b]) => b-a).slice(0,4)
+    .map(([l,b]) => ({ l, pct: Math.round(b/langTotal*100) }));
+
+  document.getElementById('repoHeader').innerHTML = `
+    <img class="repo-avatar" src="${r.owner.avatar_url}&s=104" alt="${r.owner.login}" loading="lazy">
+    <div class="repo-info">
+      <div class="repo-full-name"><a href="${r.html_url}" target="_blank" rel="noopener">${r.full_name}</a></div>
+      <p class="repo-desc">${r.description || '<em>Keine Beschreibung vorhanden.</em>'}</p>
+      <div class="tag-row">
+        ${r.language ? `<span class="tag tag-lang">${r.language}</span>` : ''}
+        ${r.license  ? `<span class="tag tag-lic">${r.license.spdx_id || r.license.name}</span>` : ''}
+        ${(r.topics||[]).slice(0,5).map(t => `<span class="tag">${t}</span>`).join('')}
+        ${r.archived ? `<span class="tag tag-arc">ARCHIVIERT</span>` : ''}
+      </div>
+    </div>
+    <div class="repo-stats">
+      <div class="stat-item"><span class="stat-val">${fmt(r.stargazers_count)}</span><span class="stat-lbl">Stars</span></div>
+      <div class="stat-item"><span class="stat-val">${fmt(r.forks_count)}</span><span class="stat-lbl">Forks</span></div>
+      <div class="stat-item"><span class="stat-val">${fmt(r.open_issues_count)}</span><span class="stat-lbl">Issues</span></div>
+      <div class="stat-item"><span class="stat-val">${contributors.length >= 30 ? '30+' : contributors.length}</span><span class="stat-lbl">Contrib.</span></div>
+    </div>
+  `;
+
+  /* — Score cards — */
+  const dims = [
+    { label: 'Aktivität',     icon: '⚡', val: sc.activity },
+    { label: 'Dokumentation', icon: '📄', val: sc.documentation },
+    { label: 'Community',     icon: '👥', val: sc.community },
+    { label: 'Wartung',       icon: '🔧', val: sc.maintenance },
+  ];
+  document.getElementById('scoreOverview').innerHTML = `
+    <div class="score-card score-overall">
+      ${ring(sc.overall, 'lg')}
+      <div class="score-label">Gesamt</div>
+    </div>
+    ${dims.map(d => `
+      <div class="score-card">
+        ${ring(d.val, 'sm')}
+        <div class="score-label">${d.icon} ${d.label}</div>
+      </div>`).join('')}
+  `;
+
+  /* — Detail cards — */
+  const dsp = sc.dsp;
+  const dayCol = dsp < 30 ? 'var(--green)' : dsp < 180 ? 'var(--amber)' : 'var(--red)';
+
+  document.getElementById('detailsGrid').innerHTML = `
+    <div class="detail-card">
+      <div class="detail-title">⚡ Aktivitäts-Details</div>
+      <div class="dr"><span class="dr-lbl">Letzter Push</span>
+        <span class="dr-val" style="color:${dayCol}">${ago(r.pushed_at)}</span></div>
+      <div class="dr"><span class="dr-lbl">Ø Commits / Woche (12 W)</span>
+        <span class="dr-val">${sc.wkCommits > 0 ? sc.wkCommits.toFixed(1) : '—'}</span></div>
+      <div class="dr"><span class="dr-lbl">Aktuelles Release (&lt; 1 Jahr)</span>
+        <span class="dr-val" style="color:${sc.hasRelease ? 'var(--green)' : 'var(--red)'}">
+          ${sc.hasRelease ? '✓ Ja' : releases.length > 0 ? '⚠ Veraltet' : '✗ Keine Releases'}</span></div>
+      <div class="dr"><span class="dr-lbl">Repository erstellt</span>
+        <span class="dr-val">${new Date(r.created_at).toLocaleDateString('de-DE')}</span></div>
+      <div class="dr"><span class="dr-lbl">Repo-Größe</span>
+        <span class="dr-val">${r.size > 1024 ? (r.size/1024).toFixed(1)+' MB' : r.size+' KB'}</span></div>
+      <div class="dr"><span class="dr-lbl">Standard-Branch</span>
+        <span class="dr-val" style="font-size:.72rem">${r.default_branch}</span></div>
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-title">📄 Dokumentations-Checkliste</div>
+      <ul class="check-list">
+        ${[
+          ['README.md',          sc.dc.readme],
+          ['Lizenz-Datei',       sc.dc.license],
+          ['CONTRIBUTING.md',    sc.dc.contributing],
+          ['Code of Conduct',    sc.dc.coc],
+          ['Issue-Template',     sc.dc.issueT],
+          ['PR-Template',        sc.dc.prT],
+          ['Projektbeschreibung',!!r.description],
+          ['Topics / Tags',      !!(r.topics?.length)],
+          ['Homepage-URL',       !!r.homepage],
+        ].map(([lbl,ok]) => `
+          <li class="check-item">
+            <span>${ok ? '✅' : '❌'}</span>
+            <span style="color:${ok ? 'var(--text)' : 'var(--muted)'}">${lbl}</span>
+          </li>`).join('')}
+      </ul>
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-title">👥 Community-Metriken</div>
+      <div class="dr"><span class="dr-lbl">Stars</span>
+        <span class="dr-val" style="color:var(--accent)">${fmt(r.stargazers_count)}</span></div>
+      <div class="dr"><span class="dr-lbl">Forks</span>
+        <span class="dr-val">${fmt(r.forks_count)}</span></div>
+      <div class="dr"><span class="dr-lbl">Watchers</span>
+        <span class="dr-val">${fmt(r.subscribers_count || r.watchers_count)}</span></div>
+      <div class="dr"><span class="dr-lbl">Contributors (Top-30)</span>
+        <span class="dr-val">${contributors.length >= 30 ? '30+' : contributors.length}</span></div>
+      ${topLangs.length ? `
+      <div class="dr" style="flex-direction:column;align-items:flex-start;gap:.5rem">
+        <span class="dr-lbl">Sprachen</span>
+        <div class="tag-row">
+          ${topLangs.map(l => `<span class="tag tag-lang">${l.l} ${l.pct}%</span>`).join('')}
+        </div>
+      </div>` : ''}
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-title">🔧 Wartungs-Status</div>
+      <div class="dr"><span class="dr-lbl">Status</span>
+        <span class="dr-val" style="color:${r.archived ? 'var(--red)' : 'var(--green)'}">
+          ${r.archived ? '🔒 Archiviert' : '🟢 Aktiv'}</span></div>
+      <div class="dr"><span class="dr-lbl">Sichtbarkeit</span>
+        <span class="dr-val">${r.visibility === 'public' ? '🌐 Öffentlich' : '🔒 Privat'}</span></div>
+      <div class="dr"><span class="dr-lbl">Issue-Tracker</span>
+        <span class="dr-val" style="color:${r.has_issues ? 'var(--green)' : 'var(--muted)'}">
+          ${r.has_issues ? '✓ Aktiviert' : '✗ Deaktiviert'}</span></div>
+      <div class="dr"><span class="dr-lbl">Wiki</span>
+        <span class="dr-val" style="color:${r.has_wiki ? 'var(--green)' : 'var(--muted)'}">
+          ${r.has_wiki ? '✓' : '✗'}</span></div>
+      <div class="dr"><span class="dr-lbl">Offene Issues</span>
+        <span class="dr-val">${fmt(r.open_issues_count)}</span></div>
+      <div class="dr"><span class="dr-lbl">Forked von anderem Repo</span>
+        <span class="dr-val">${r.fork ? 'Ja (Fork)' : 'Nein (Original)'}</span></div>
+    </div>
+  `;
+
+  /* — Benchmarks — */
+  const bRows = [
+    { k: 'overall',       lbl: 'Gesamt',        val: sc.overall },
+    { k: 'activity',      lbl: 'Aktivität',      val: sc.activity },
+    { k: 'documentation', lbl: 'Dokumentation',  val: sc.documentation },
+    { k: 'community',     lbl: 'Community',      val: sc.community },
+    { k: 'maintenance',   lbl: 'Wartung',        val: sc.maintenance },
+  ];
+  document.getElementById('benchCard').innerHTML = `
+    <div class="bench-title">📊 Benchmark — Top 100 Open-Source-Projekte</div>
+    <p class="bench-subtitle">Wo steht dein Repo im Vergleich zu 100 der meistgenutzten GitHub-Projekten?</p>
+    ${bRows.map(b => {
+      const bm  = BENCH[b.k];
+      const you = b.val;
+      const cmp = you > bm.p75   ? 'var(--green)'  :
+                  you > bm.median ? 'var(--green)' :
+                  you > bm.p25   ? 'var(--amber)'  : 'var(--red)';
+      const lbl = you > bm.p75    ? '▲ Top 25 %'   :
+                  you > bm.median ? '▲ Über Median' :
+                  you > bm.p25   ? '● Unter Median' : '▼ Unteres Quartil';
+      return `
+      <div class="bench-row">
+        <div class="bench-row-head">
+          <span class="bench-row-lbl">${b.lbl}</span>
+          <span class="bench-row-info" style="color:${cmp}">${lbl} &nbsp;·&nbsp; Score: ${you}</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-range" style="left:${bm.p25}%;width:${bm.p75 - bm.p25}%"></div>
+          <div class="bar-median" style="left:${bm.median}%"></div>
+          <div class="bar-you" style="left:${you}%"></div>
+        </div>
+      </div>`;
+    }).join('')}
+    <div class="bench-legend">
+      <div class="leg"><div class="leg-dot"></div> Dein Repo</div>
+      <div class="leg"><div class="leg-line"></div> Median</div>
+      <div class="leg"><div class="leg-range"></div> P25–P75</div>
+    </div>
+  `;
+
+  /* — Suggestions — */
+  const tips = [];
+  if (!sc.dc.readme)        tips.push({ i:'📄', t:'README hinzufügen',        d:'Das wichtigste Dokument eines Projekts — erklärt Zweck, Installation und Verwendung.' });
+  if (!r.description)       tips.push({ i:'✏️', t:'Beschreibung ergänzen',     d:'Kurze Beschreibung erscheint in GitHub-Suche und gibt Besuchern sofort Kontext.' });
+  if (!sc.dc.contributing)  tips.push({ i:'🤝', t:'CONTRIBUTING.md erstellen', d:'Senkt die Hürde für externe Beiträge erheblich. Template: github.com/nayafia/contributing-template' });
+  if (!sc.dc.license)       tips.push({ i:'⚖️', t:'Lizenz wählen',             d:'Ohne Lizenz darf niemand den Code rechtlich verwenden. MIT oder Apache 2.0 sind üblich.' });
+  if (!sc.dc.coc)           tips.push({ i:'📜', t:'Code of Conduct hinzufügen',d:'Definiert Community-Standards und signalisiert ein einladendes Projekt.' });
+  if (!r.topics?.length)    tips.push({ i:'🏷️', t:'Topics/Tags vergeben',      d:'Verbessert Auffindbarkeit auf GitHub stark. Bis zu 20 Topics möglich.' });
+  if (releases.length === 0) tips.push({ i:'🚀', t:'Releases erstellen',       d:'Regelmäßige Releases zeigen aktive Pflege und erleichtern die Versionsverwaltung.' });
+  if (dsp > 180)            tips.push({ i:'⚡', t:'Aktivität steigern',         d:`Letzter Push vor ${dsp} Tagen. Regelmäßige kleine Commits oder Dependency-Updates helfen.` });
+  if (!sc.dc.issueT)        tips.push({ i:'📋', t:'Issue-Template anlegen',    d:'Führt Bug-Reporter durch relevante Informationen und spart Nachfragen.' });
+
+  document.getElementById('suggestCard').innerHTML = `
+    <div class="suggest-title">💡 Verbesserungsvorschläge${tips.length ? ` (${tips.length})` : ''}</div>
+    ${tips.length === 0
+      ? `<div style="text-align:center;padding:2rem;color:var(--muted);font-family:var(--mono);font-size:.82rem">
+           ✅ Keine kritischen Lücken gefunden — solides Open-Source-Projekt!
+         </div>`
+      : tips.map(t => `
+        <div class="suggest-item">
+          <span class="suggest-icon">${t.i}</span>
+          <div class="suggest-body"><strong>${t.t}</strong>${t.d}</div>
+        </div>`).join('')
+    }
+  `;
+}
+
+/* ── UI helpers ──────────────────────────── */
+function setLoading(text, sub = '') {
+  const el = document.getElementById('loadingText');
+  const sl = document.getElementById('loadingSub');
+  if (el) el.textContent = text;
+  if (sl) sl.textContent = sub;
+}
+
+function resetUI() {
+  document.getElementById('resultsSection').classList.add('hidden');
+  document.getElementById('errorState').classList.add('hidden');
+  document.getElementById('loadingState').classList.add('hidden');
+  document.getElementById('analyzeBtn').disabled = false;
+}
+
+function showError(msg) {
+  document.getElementById('loadingState').classList.add('hidden');
+  document.getElementById('errorMsg').textContent = msg;
+  document.getElementById('errorState').classList.remove('hidden');
+  document.getElementById('analyzeBtn').disabled = false;
+}
+
+/* ── Main ────────────────────────────────── */
+async function analyze() {
+  const raw   = document.getElementById('repoInput').value;
+  const token = document.getElementById('tokenInput').value.trim();
+
+  const parsed = parseUrl(raw);
+  if (!parsed) {
+    showError('Ungültige Eingabe. Beispiele: https://github.com/facebook/react  oder  facebook/react');
+    return;
+  }
+
+  document.getElementById('resultsSection').classList.add('hidden');
+  document.getElementById('errorState').classList.add('hidden');
+  document.getElementById('loadingState').classList.remove('hidden');
+  document.getElementById('analyzeBtn').disabled = true;
+
+  try {
+    const data   = await fetchAll(parsed.owner, parsed.repo, token);
+    const scores = calcScores(data);
+    document.getElementById('loadingState').classList.add('hidden');
+    renderResults(scores, data);
+    document.getElementById('resultsSection').classList.remove('hidden');
+    document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (err) {
+    showError(err.message);
+  }
+}
+
+/* Enter key */
+document.getElementById('repoInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') analyze();
+});
+</script>
+</body>
+</html>
