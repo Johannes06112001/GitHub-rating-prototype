@@ -1,0 +1,101 @@
+{
+  "overall": {
+    "mean": 76,
+    "median": 78,
+    "stdev": 10.5,
+    "p10": 60,
+    "p25": 69,
+    "p75": 83,
+    "p90": 88,
+    "min": 47,
+    "max": 97
+  },
+  "activity": {
+    "mean": 58,
+    "median": 62,
+    "stdev": 25.0,
+    "p10": 3,
+    "p25": 47,
+    "p75": 75,
+    "p90": 75,
+    "min": 3,
+    "max": 100
+  },
+  "documentation": {
+    "mean": 79,
+    "median": 85,
+    "stdev": 17.0,
+    "p10": 50,
+    "p25": 65,
+    "p75": 95,
+    "p90": 95,
+    "min": 35,
+    "max": 100
+  },
+  "community": {
+    "mean": 86,
+    "median": 87,
+    "stdev": 5.3,
+    "p10": 78,
+    "p25": 84,
+    "p75": 89,
+    "p90": 91,
+    "min": 66,
+    "max": 92
+  },
+  "maintenance": {
+    "mean": 88,
+    "median": 100,
+    "stdev": 17.3,
+    "p10": 58,
+    "p25": 80,
+    "p75": 100,
+    "p90": 100,
+    "min": 34,
+    "max": 100
+  },
+  "top_languages": [
+    [
+      "Python",
+      19
+    ],
+    [
+      "TypeScript",
+      17
+    ],
+    [
+      "Other",
+      13
+    ],
+    [
+      "JavaScript",
+      10
+    ],
+    [
+      "C++",
+      6
+    ],
+    [
+      "Shell",
+      5
+    ],
+    [
+      "Rust",
+      5
+    ],
+    [
+      "Go",
+      5
+    ],
+    [
+      "HTML",
+      4
+    ],
+    [
+      "Java",
+      3
+    ]
+  ],
+  "sample_size": 100,
+  "generated_at": "2026-04-16T11:29:03.474311"
+}

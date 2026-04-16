@@ -1,0 +1,5789 @@
+[
+  {
+    "rank": 1,
+    "full_name": "codecrafters-io/build-your-own-x",
+    "html_url": "https://github.com/codecrafters-io/build-your-own-x",
+    "description": "Master programming by recreating your favorite technologies from scratch.",
+    "language": "Markdown",
+    "stars": 490741,
+    "forks": 46341,
+    "open_issues": 465,
+    "watchers": 0,
+    "size_kb": 1201,
+    "created_at": "2018-05-09T12:03:18Z",
+    "pushed_at": "2026-02-21T09:34:54Z",
+    "license": "",
+    "topics": [
+      "awesome-list",
+      "free",
+      "programming",
+      "tutorial-code",
+      "tutorial-exercises",
+      "tutorials"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 129,
+    "community_health": 25,
+    "top_languages": [
+      {
+        "lang": "Markdown",
+        "pct": 100
+      }
+    ],
+    "scores": {
+      "overall": 66,
+      "activity": 36,
+      "documentation": 55,
+      "community": 87,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": false,
+        "contributing": false,
+        "coc": false,
+        "issue_template": true,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 2,
+    "full_name": "sindresorhus/awesome",
+    "html_url": "https://github.com/sindresorhus/awesome",
+    "description": "😎 Awesome lists about all kinds of interesting topics",
+    "language": null,
+    "stars": 455871,
+    "forks": 34271,
+    "open_issues": 63,
+    "watchers": 0,
+    "size_kb": 1535,
+    "created_at": "2014-07-11T13:42:37Z",
+    "pushed_at": "2026-04-02T16:30:33Z",
+    "license": "CC0-1.0",
+    "topics": [
+      "awesome",
+      "awesome-list",
+      "lists",
+      "resources",
+      "unicorns"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 435,
+    "community_health": 85,
+    "top_languages": [],
+    "scores": {
+      "overall": 79,
+      "activity": 47,
+      "documentation": 90,
+      "community": 91,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 3,
+    "full_name": "freeCodeCamp/freeCodeCamp",
+    "html_url": "https://github.com/freeCodeCamp/freeCodeCamp",
+    "description": "freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.",
+    "language": "TypeScript",
+    "stars": 443009,
+    "forks": 44311,
+    "open_issues": 202,
+    "watchers": 0,
+    "size_kb": 560832,
+    "created_at": "2014-12-24T17:49:19Z",
+    "pushed_at": "2026-04-16T07:26:04Z",
+    "license": "BSD-3-Clause",
+    "topics": [
+      "careers",
+      "certification",
+      "community",
+      "curriculum",
+      "d3",
+      "education",
+      "freecodecamp",
+      "javascript",
+      "learn-to-code",
+      "math",
+      "nodejs",
+      "nonprofits",
+      "programming",
+      "react",
+      "teachers"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 384,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 77
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 18
+      },
+      {
+        "lang": "CSS",
+        "pct": 5
+      }
+    ],
+    "scores": {
+      "overall": 83,
+      "activity": 55,
+      "documentation": 95,
+      "community": 91,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 4,
+    "full_name": "public-apis/public-apis",
+    "html_url": "https://github.com/public-apis/public-apis",
+    "description": "A collective list of free APIs",
+    "language": "Python",
+    "stars": 423968,
+    "forks": 46141,
+    "open_issues": 1254,
+    "watchers": 0,
+    "size_kb": 4962,
+    "created_at": "2016-03-20T23:49:42Z",
+    "pushed_at": "2026-03-18T16:28:22Z",
+    "license": "MIT",
+    "topics": [
+      "api",
+      "apis",
+      "dataset",
+      "development",
+      "free",
+      "list",
+      "lists",
+      "open-source",
+      "public",
+      "public-api",
+      "public-apis",
+      "resources",
+      "software"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 425,
+    "community_health": 62,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 97
+      },
+      {
+        "lang": "Shell",
+        "pct": 3
+      }
+    ],
+    "scores": {
+      "overall": 79,
+      "activity": 47,
+      "documentation": 90,
+      "community": 91,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": true,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 5,
+    "full_name": "EbookFoundation/free-programming-books",
+    "html_url": "https://github.com/EbookFoundation/free-programming-books",
+    "description": ":books: Freely available programming books",
+    "language": "Python",
+    "stars": 385591,
+    "forks": 66110,
+    "open_issues": 77,
+    "watchers": 0,
+    "size_kb": 21138,
+    "created_at": "2013-10-11T06:50:37Z",
+    "pushed_at": "2026-04-15T18:54:46Z",
+    "license": "CC-BY-4.0",
+    "topics": [
+      "books",
+      "education",
+      "hacktoberfest",
+      "list",
+      "resource"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 431,
+    "community_health": 75,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 99
+      },
+      {
+        "lang": "HTML",
+        "pct": 1
+      }
+    ],
+    "scores": {
+      "overall": 83,
+      "activity": 55,
+      "documentation": 95,
+      "community": 91,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 6,
+    "full_name": "openclaw/openclaw",
+    "html_url": "https://github.com/openclaw/openclaw",
+    "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 ",
+    "language": "TypeScript",
+    "stars": 358540,
+    "forks": 72892,
+    "open_issues": 18886,
+    "watchers": 0,
+    "size_kb": 483545,
+    "created_at": "2025-11-24T10:16:47Z",
+    "pushed_at": "2026-04-16T11:07:19Z",
+    "license": "MIT",
+    "topics": [
+      "ai",
+      "assistant",
+      "crustacean",
+      "molty",
+      "openclaw",
+      "own-your-data",
+      "personal"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 360,
+    "community_health": 75,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 90
+      },
+      {
+        "lang": "Swift",
+        "pct": 5
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 86,
+      "activity": 100,
+      "documentation": 85,
+      "community": 91,
+      "maintenance": 62,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 7,
+    "full_name": "kamranahmedse/developer-roadmap",
+    "html_url": "https://github.com/kamranahmedse/developer-roadmap",
+    "description": "Interactive roadmaps, guides and other educational content to help developers grow in their careers.",
+    "language": "TypeScript",
+    "stars": 353044,
+    "forks": 43938,
+    "open_issues": 12,
+    "watchers": 0,
+    "size_kb": 360039,
+    "created_at": "2017-03-15T13:45:52Z",
+    "pushed_at": "2026-04-16T10:24:42Z",
+    "license": "NOASSERTION",
+    "topics": [
+      "angular-roadmap",
+      "backend-roadmap",
+      "blockchain-roadmap",
+      "computer-science",
+      "dba-roadmap",
+      "developer-roadmap",
+      "devops-roadmap",
+      "frontend-roadmap",
+      "go-roadmap",
+      "java-roadmap",
+      "javascript-roadmap",
+      "nodejs-roadmap",
+      "python-roadmap",
+      "qa-roadmap",
+      "react-roadmap",
+      "roadmap",
+      "software-architect-roadmap",
+      "vue-roadmap"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 469,
+    "community_health": 71,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 85
+      },
+      {
+        "lang": "Astro",
+        "pct": 11
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 3
+      }
+    ],
+    "scores": {
+      "overall": 82,
+      "activity": 55,
+      "documentation": 90,
+      "community": 92,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 8,
+    "full_name": "donnemartin/system-design-primer",
+    "html_url": "https://github.com/donnemartin/system-design-primer",
+    "description": "Learn how to design large-scale systems. Prep for the system design interview.  Includes Anki flashcards.",
+    "language": "Python",
+    "stars": 342988,
+    "forks": 55417,
+    "open_issues": 531,
+    "watchers": 0,
+    "size_kb": 11277,
+    "created_at": "2017-02-26T16:15:28Z",
+    "pushed_at": "2026-03-20T01:52:19Z",
+    "license": "NOASSERTION",
+    "topics": [
+      "design",
+      "design-patterns",
+      "design-system",
+      "development",
+      "interview",
+      "interview-practice",
+      "interview-questions",
+      "programming",
+      "python",
+      "system",
+      "web",
+      "web-application",
+      "webapp"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 122,
+    "community_health": 71,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 98
+      },
+      {
+        "lang": "Shell",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 76,
+      "activity": 47,
+      "documentation": 80,
+      "community": 87,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 9,
+    "full_name": "jwasham/coding-interview-university",
+    "html_url": "https://github.com/jwasham/coding-interview-university",
+    "description": "A complete computer science study plan to become a software engineer.",
+    "language": null,
+    "stars": 341007,
+    "forks": 81919,
+    "open_issues": 103,
+    "watchers": 0,
+    "size_kb": 22700,
+    "created_at": "2016-06-06T02:34:12Z",
+    "pushed_at": "2025-08-28T14:42:47Z",
+    "license": "CC-BY-SA-4.0",
+    "topics": [
+      "algorithm",
+      "algorithms",
+      "coding-interview",
+      "coding-interviews",
+      "computer-science",
+      "data-structures",
+      "interview",
+      "interview-prep",
+      "interview-preparation",
+      "programming-interviews",
+      "software-engineering",
+      "study-plan"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 308,
+    "community_health": 42,
+    "top_languages": [],
+    "scores": {
+      "overall": 62,
+      "activity": 14,
+      "documentation": 60,
+      "community": 90,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 10,
+    "full_name": "vinta/awesome-python",
+    "html_url": "https://github.com/vinta/awesome-python",
+    "description": "An opinionated list of Python frameworks, libraries, tools, and resources",
+    "language": "Python",
+    "stars": 292637,
+    "forks": 27692,
+    "open_issues": 20,
+    "watchers": 0,
+    "size_kb": 5282,
+    "created_at": "2014-06-27T21:00:06Z",
+    "pushed_at": "2026-04-15T04:33:40Z",
+    "license": "NOASSERTION",
+    "topics": [
+      "awesome",
+      "collections",
+      "python",
+      "python-frameworks",
+      "python-libraries",
+      "python-tools"
+    ],
+    "has_wiki": false,
+    "has_issues": false,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 408,
+    "community_health": 71,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 60
+      },
+      {
+        "lang": "CSS",
+        "pct": 19
+      },
+      {
+        "lang": "HTML",
+        "pct": 11
+      }
+    ],
+    "scores": {
+      "overall": 76,
+      "activity": 55,
+      "documentation": 85,
+      "community": 90,
+      "maintenance": 80,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 11,
+    "full_name": "awesome-selfhosted/awesome-selfhosted",
+    "html_url": "https://github.com/awesome-selfhosted/awesome-selfhosted",
+    "description": "A list of Free Software network services and web applications which can be hosted on your own servers",
+    "language": null,
+    "stars": 286293,
+    "forks": 13181,
+    "open_issues": 0,
+    "watchers": 0,
+    "size_kb": 16896,
+    "created_at": "2015-06-01T02:33:17Z",
+    "pushed_at": "2026-04-15T17:26:35Z",
+    "license": "NOASSERTION",
+    "topics": [
+      "awesome",
+      "awesome-list",
+      "cloud",
+      "free-software",
+      "hosting",
+      "privacy",
+      "self-hosted",
+      "selfhosted"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 401,
+    "community_health": 50,
+    "top_languages": [],
+    "scores": {
+      "overall": 76,
+      "activity": 55,
+      "documentation": 70,
+      "community": 88,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 12,
+    "full_name": "996icu/996.ICU",
+    "html_url": "https://github.com/996icu/996.ICU",
+    "description": "Repo for counting stars and contributing. Press F to pay respect to glorious developers.",
+    "language": null,
+    "stars": 275888,
+    "forks": 20901,
+    "open_issues": 16698,
+    "watchers": 0,
+    "size_kb": 189351,
+    "created_at": "2019-03-26T07:31:14Z",
+    "pushed_at": "2025-08-22T06:01:29Z",
+    "license": "NOASSERTION",
+    "topics": [],
+    "has_wiki": false,
+    "has_issues": false,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 396,
+    "community_health": 42,
+    "top_languages": [],
+    "scores": {
+      "overall": 47,
+      "activity": 14,
+      "documentation": 55,
+      "community": 89,
+      "maintenance": 34,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 13,
+    "full_name": "practical-tutorials/project-based-learning",
+    "html_url": "https://github.com/practical-tutorials/project-based-learning",
+    "description": "Curated list of project-based tutorials",
+    "language": null,
+    "stars": 263358,
+    "forks": 34250,
+    "open_issues": 292,
+    "watchers": 0,
+    "size_kb": 438,
+    "created_at": "2017-04-12T05:07:46Z",
+    "pushed_at": "2024-08-15T05:33:54Z",
+    "license": "MIT",
+    "topics": [
+      "beginner-project",
+      "cpp",
+      "golang",
+      "javascript",
+      "project",
+      "python",
+      "tutorial",
+      "webdevelopment"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 100,
+    "community_health": 62,
+    "top_languages": [],
+    "scores": {
+      "overall": 62,
+      "activity": 3,
+      "documentation": 80,
+      "community": 86,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 14,
+    "full_name": "facebook/react",
+    "html_url": "https://github.com/facebook/react",
+    "description": "The library for web and native user interfaces.",
+    "language": "JavaScript",
+    "stars": 244560,
+    "forks": 50945,
+    "open_issues": 1222,
+    "watchers": 0,
+    "size_kb": 959507,
+    "created_at": "2013-05-24T16:15:54Z",
+    "pushed_at": "2026-04-15T16:16:55Z",
+    "license": "MIT",
+    "topics": [
+      "declarative",
+      "frontend",
+      "javascript",
+      "library",
+      "react",
+      "ui"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 411,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "JavaScript",
+        "pct": 68
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 29
+      },
+      {
+        "lang": "HTML",
+        "pct": 1
+      }
+    ],
+    "scores": {
+      "overall": 89,
+      "activity": 75,
+      "documentation": 95,
+      "community": 91,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 15,
+    "full_name": "torvalds/linux",
+    "html_url": "https://github.com/torvalds/linux",
+    "description": "Linux kernel source tree",
+    "language": "C",
+    "stars": 229250,
+    "forks": 61641,
+    "open_issues": 3,
+    "watchers": 0,
+    "size_kb": 6123240,
+    "created_at": "2011-09-04T22:48:12Z",
+    "pushed_at": "2026-04-16T02:52:20Z",
+    "license": "NOASSERTION",
+    "topics": [],
+    "has_wiki": false,
+    "has_issues": false,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 0,
+    "community_health": 42,
+    "top_languages": [
+      {
+        "lang": "C",
+        "pct": 98
+      },
+      {
+        "lang": "Assembly",
+        "pct": 1
+      },
+      {
+        "lang": "Shell",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 62,
+      "activity": 55,
+      "documentation": 50,
+      "community": 70,
+      "maintenance": 80,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 16,
+    "full_name": "TheAlgorithms/Python",
+    "html_url": "https://github.com/TheAlgorithms/Python",
+    "description": "All Algorithms implemented in Python",
+    "language": "Python",
+    "stars": 219645,
+    "forks": 50333,
+    "open_issues": 927,
+    "watchers": 0,
+    "size_kb": 16595,
+    "created_at": "2016-07-16T09:44:01Z",
+    "pushed_at": "2026-04-13T22:10:46Z",
+    "license": "MIT",
+    "topics": [
+      "algorithm",
+      "algorithm-competitions",
+      "algorithms-implemented",
+      "algos",
+      "community-driven",
+      "education",
+      "hacktoberfest",
+      "interview",
+      "learn",
+      "practice",
+      "python",
+      "searches",
+      "sorting-algorithms",
+      "sorts"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 452,
+    "community_health": 75,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 100
+      },
+      {
+        "lang": "Shell",
+        "pct": 0
+      },
+      {
+        "lang": "Dockerfile",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 83,
+      "activity": 55,
+      "documentation": 95,
+      "community": 92,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 17,
+    "full_name": "trimstray/the-book-of-secret-knowledge",
+    "html_url": "https://github.com/trimstray/the-book-of-secret-knowledge",
+    "description": "A collection of inspiring lists, manuals, cheatsheets, blogs, hacks, one-liners, cli/web tools and more.",
+    "language": null,
+    "stars": 215209,
+    "forks": 12893,
+    "open_issues": 135,
+    "watchers": 0,
+    "size_kb": 1748,
+    "created_at": "2018-06-23T10:43:14Z",
+    "pushed_at": "2024-11-19T14:00:38Z",
+    "license": "MIT",
+    "topics": [
+      "awesome",
+      "awesome-list",
+      "bsd",
+      "cheatsheets",
+      "devops",
+      "guidelines",
+      "hacking",
+      "hacks",
+      "howtos",
+      "linux",
+      "lists",
+      "manuals",
+      "one-liners",
+      "pentesters",
+      "resources",
+      "search-engines",
+      "security",
+      "security-researchers",
+      "sysops"
+    ],
+    "has_wiki": false,
+    "has_issues": false,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 98,
+    "community_health": 71,
+    "top_languages": [],
+    "scores": {
+      "overall": 59,
+      "activity": 3,
+      "documentation": 85,
+      "community": 83,
+      "maintenance": 80,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 18,
+    "full_name": "vuejs/vue",
+    "html_url": "https://github.com/vuejs/vue",
+    "description": "This is the repo for Vue 2. For Vue 3, go to https://github.com/vuejs/core",
+    "language": "TypeScript",
+    "stars": 209827,
+    "forks": 33839,
+    "open_issues": 622,
+    "watchers": 0,
+    "size_kb": 32152,
+    "created_at": "2013-07-29T03:24:51Z",
+    "pushed_at": "2024-10-10T07:24:15Z",
+    "license": "MIT",
+    "topics": [
+      "framework",
+      "frontend",
+      "javascript",
+      "vue"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 355,
+    "community_health": 75,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 97
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 2
+      },
+      {
+        "lang": "HTML",
+        "pct": 1
+      }
+    ],
+    "scores": {
+      "overall": 67,
+      "activity": 3,
+      "documentation": 93,
+      "community": 90,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 19,
+    "full_name": "ossu/computer-science",
+    "html_url": "https://github.com/ossu/computer-science",
+    "description": "🎓 Path to a free self-taught education in Computer Science!",
+    "language": "HTML",
+    "stars": 203073,
+    "forks": 25273,
+    "open_issues": 21,
+    "watchers": 0,
+    "size_kb": 1791,
+    "created_at": "2014-05-04T00:18:39Z",
+    "pushed_at": "2026-04-15T07:33:58Z",
+    "license": "MIT",
+    "topics": [
+      "awesome-list",
+      "computer-science",
+      "courses",
+      "curriculum"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 154,
+    "community_health": 62,
+    "top_languages": [
+      {
+        "lang": "HTML",
+        "pct": 100
+      }
+    ],
+    "scores": {
+      "overall": 78,
+      "activity": 55,
+      "documentation": 78,
+      "community": 86,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 20,
+    "full_name": "trekhleb/javascript-algorithms",
+    "html_url": "https://github.com/trekhleb/javascript-algorithms",
+    "description": "📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings",
+    "language": "JavaScript",
+    "stars": 195853,
+    "forks": 31089,
+    "open_issues": 400,
+    "watchers": 0,
+    "size_kb": 14903,
+    "created_at": "2018-03-24T07:47:04Z",
+    "pushed_at": "2026-02-18T09:20:06Z",
+    "license": "MIT",
+    "topics": [
+      "algorithm",
+      "algorithms",
+      "computer-science",
+      "data-structures",
+      "interview",
+      "interview-preparation",
+      "javascript",
+      "javascript-algorithms"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 207,
+    "community_health": 71,
+    "top_languages": [
+      {
+        "lang": "JavaScript",
+        "pct": 100
+      }
+    ],
+    "scores": {
+      "overall": 74,
+      "activity": 36,
+      "documentation": 85,
+      "community": 88,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 21,
+    "full_name": "tensorflow/tensorflow",
+    "html_url": "https://github.com/tensorflow/tensorflow",
+    "description": "An Open Source Machine Learning Framework for Everyone",
+    "language": "C++",
+    "stars": 194759,
+    "forks": 75282,
+    "open_issues": 4457,
+    "watchers": 0,
+    "size_kb": 1306367,
+    "created_at": "2015-11-07T01:19:20Z",
+    "pushed_at": "2026-04-16T11:20:47Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "deep-learning",
+      "deep-neural-networks",
+      "distributed",
+      "machine-learning",
+      "ml",
+      "neural-network",
+      "python",
+      "tensorflow"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 412,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "C++",
+        "pct": 56
+      },
+      {
+        "lang": "Python",
+        "pct": 25
+      },
+      {
+        "lang": "MLIR",
+        "pct": 6
+      }
+    ],
+    "scores": {
+      "overall": 95,
+      "activity": 100,
+      "documentation": 90,
+      "community": 91,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 22,
+    "full_name": "ohmyzsh/ohmyzsh",
+    "html_url": "https://github.com/ohmyzsh/ohmyzsh",
+    "description": "🙃   A delightful community-driven (with 2,400+ contributors) framework for managing your zsh configuration. Includes 300+ optional plugins (rails, git, macOS, hub, docker, homebrew, node, php, python, etc), 140+ themes to spice up your morning, and an auto-update tool that makes it easy to keep up with the latest updates from the community.",
+    "language": "Shell",
+    "stars": 186227,
+    "forks": 26382,
+    "open_issues": 541,
+    "watchers": 0,
+    "size_kb": 13489,
+    "created_at": "2009-08-28T18:15:37Z",
+    "pushed_at": "2026-04-13T09:31:03Z",
+    "license": "MIT",
+    "topics": [
+      "cli",
+      "cli-app",
+      "oh-my-zsh",
+      "oh-my-zsh-plugin",
+      "oh-my-zsh-theme",
+      "ohmyzsh",
+      "plugin-framework",
+      "plugins",
+      "productivity",
+      "shell",
+      "terminal",
+      "theme",
+      "themes",
+      "zsh",
+      "zsh-configuration"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 397,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "Shell",
+        "pct": 99
+      },
+      {
+        "lang": "Python",
+        "pct": 1
+      },
+      {
+        "lang": "Makefile",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 83,
+      "activity": 55,
+      "documentation": 95,
+      "community": 90,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 23,
+    "full_name": "ultraworkers/claw-code",
+    "html_url": "https://github.com/ultraworkers/claw-code",
+    "description": "The repo is finally unlocked. enjoy the party! The fastest repo in history to surpass 100K stars ⭐. Join Discord: https://discord.gg/5TUQKqFWd Built in Rust using oh-my-codex.",
+    "language": "Rust",
+    "stars": 185087,
+    "forks": 108393,
+    "open_issues": 1413,
+    "watchers": 0,
+    "size_kb": 9032,
+    "created_at": "2026-03-31T08:58:08Z",
+    "pushed_at": "2026-04-16T10:12:37Z",
+    "license": "",
+    "topics": [],
+    "has_wiki": false,
+    "has_issues": false,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 2,
+    "community_health": 25,
+    "top_languages": [
+      {
+        "lang": "Rust",
+        "pct": 96
+      },
+      {
+        "lang": "Python",
+        "pct": 3
+      },
+      {
+        "lang": "Shell",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 60,
+      "activity": 55,
+      "documentation": 35,
+      "community": 74,
+      "maintenance": 80,
+      "doc_checks": {
+        "readme": true,
+        "license": false,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 24,
+    "full_name": "getify/You-Dont-Know-JS",
+    "html_url": "https://github.com/getify/You-Dont-Know-JS",
+    "description": "A book series (2 published editions) on the JS language.",
+    "language": null,
+    "stars": 184439,
+    "forks": 33593,
+    "open_issues": 2,
+    "watchers": 0,
+    "size_kb": 15241,
+    "created_at": "2013-11-16T02:37:24Z",
+    "pushed_at": "2026-02-15T04:36:44Z",
+    "license": "NOASSERTION",
+    "topics": [
+      "async",
+      "book",
+      "book-series",
+      "closures",
+      "education",
+      "es2015",
+      "es6",
+      "javascript",
+      "learn-to-code",
+      "programming",
+      "prototypes",
+      "training-materials",
+      "training-providers"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 178,
+    "community_health": 71,
+    "top_languages": [],
+    "scores": {
+      "overall": 74,
+      "activity": 36,
+      "documentation": 85,
+      "community": 88,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 25,
+    "full_name": "n8n-io/n8n",
+    "html_url": "https://github.com/n8n-io/n8n",
+    "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+    "language": "TypeScript",
+    "stars": 184295,
+    "forks": 56856,
+    "open_issues": 1489,
+    "watchers": 0,
+    "size_kb": 463678,
+    "created_at": "2019-06-22T09:24:21Z",
+    "pushed_at": "2026-04-16T11:12:46Z",
+    "license": "NOASSERTION",
+    "topics": [
+      "ai",
+      "apis",
+      "automation",
+      "cli",
+      "data-flow",
+      "development",
+      "integration-framework",
+      "integrations",
+      "ipaas",
+      "low-code",
+      "low-code-platform",
+      "mcp",
+      "mcp-client",
+      "mcp-server",
+      "n8n",
+      "no-code",
+      "self-hosted",
+      "typescript",
+      "workflow",
+      "workflow-automation"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 425,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 91
+      },
+      {
+        "lang": "Vue",
+        "pct": 7
+      },
+      {
+        "lang": "SCSS",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 89,
+      "activity": 75,
+      "documentation": 95,
+      "community": 91,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 26,
+    "full_name": "CyC2018/CS-Notes",
+    "html_url": "https://github.com/CyC2018/CS-Notes",
+    "description": ":books: 技术面试必备基础知识、Leetcode、计算机操作系统、计算机网络、系统设计",
+    "language": null,
+    "stars": 184176,
+    "forks": 51066,
+    "open_issues": 194,
+    "watchers": 0,
+    "size_kb": 116179,
+    "created_at": "2018-02-13T14:56:24Z",
+    "pushed_at": "2024-08-21T09:40:10Z",
+    "license": "",
+    "topics": [
+      "algorithm",
+      "computer-science",
+      "cpp",
+      "interview",
+      "java",
+      "leetcode",
+      "python",
+      "system-design"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 215,
+    "community_health": 28,
+    "top_languages": [],
+    "scores": {
+      "overall": 56,
+      "activity": 3,
+      "documentation": 50,
+      "community": 89,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": false,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 27,
+    "full_name": "microsoft/vscode",
+    "html_url": "https://github.com/microsoft/vscode",
+    "description": "Visual Studio Code",
+    "language": "TypeScript",
+    "stars": 183921,
+    "forks": 39233,
+    "open_issues": 16349,
+    "watchers": 0,
+    "size_kb": 1215853,
+    "created_at": "2015-09-03T20:23:38Z",
+    "pushed_at": "2026-04-16T11:20:23Z",
+    "license": "MIT",
+    "topics": [
+      "editor",
+      "electron",
+      "microsoft",
+      "typescript",
+      "visual-studio-code"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 322,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 96
+      },
+      {
+        "lang": "CSS",
+        "pct": 1
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 1
+      }
+    ],
+    "scores": {
+      "overall": 80,
+      "activity": 75,
+      "documentation": 95,
+      "community": 90,
+      "maintenance": 57,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 28,
+    "full_name": "Significant-Gravitas/AutoGPT",
+    "html_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
+    "language": "Python",
+    "stars": 183478,
+    "forks": 46223,
+    "open_issues": 377,
+    "watchers": 0,
+    "size_kb": 509012,
+    "created_at": "2023-03-16T09:21:07Z",
+    "pushed_at": "2026-04-16T11:12:59Z",
+    "license": "NOASSERTION",
+    "topics": [
+      "agentic-ai",
+      "agents",
+      "ai",
+      "artificial-intelligence",
+      "autonomous-agents",
+      "claude",
+      "gpt",
+      "llama-api",
+      "llm",
+      "openai",
+      "python"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 430,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 70
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 28
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 1
+      }
+    ],
+    "scores": {
+      "overall": 89,
+      "activity": 75,
+      "documentation": 95,
+      "community": 91,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 29,
+    "full_name": "jackfrued/Python-100-Days",
+    "html_url": "https://github.com/jackfrued/Python-100-Days",
+    "description": "Python - 100天从新手到大师",
+    "language": "Jupyter Notebook",
+    "stars": 181465,
+    "forks": 55631,
+    "open_issues": 694,
+    "watchers": 0,
+    "size_kb": 401142,
+    "created_at": "2018-03-01T16:05:52Z",
+    "pushed_at": "2026-04-13T02:42:42Z",
+    "license": "",
+    "topics": [],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 12,
+    "community_health": 28,
+    "top_languages": [
+      {
+        "lang": "Jupyter Notebook",
+        "pct": 99
+      },
+      {
+        "lang": "Python",
+        "pct": 1
+      },
+      {
+        "lang": "HTML",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 65,
+      "activity": 55,
+      "documentation": 35,
+      "community": 79,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": false,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 30,
+    "full_name": "flutter/flutter",
+    "html_url": "https://github.com/flutter/flutter",
+    "description": "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
+    "language": "Dart",
+    "stars": 175988,
+    "forks": 30250,
+    "open_issues": 12555,
+    "watchers": 0,
+    "size_kb": 439031,
+    "created_at": "2015-03-06T22:54:58Z",
+    "pushed_at": "2026-04-16T09:02:13Z",
+    "license": "BSD-3-Clause",
+    "topics": [
+      "android",
+      "app-framework",
+      "cross-platform",
+      "dart",
+      "dart-platform",
+      "desktop",
+      "flutter",
+      "flutter-package",
+      "fuchsia",
+      "ios",
+      "linux-desktop",
+      "macos",
+      "material-design",
+      "mobile",
+      "mobile-development",
+      "skia",
+      "web",
+      "web-framework",
+      "windows"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 378,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "Dart",
+        "pct": 75
+      },
+      {
+        "lang": "C++",
+        "pct": 16
+      },
+      {
+        "lang": "Objective-C++",
+        "pct": 3
+      }
+    ],
+    "scores": {
+      "overall": 74,
+      "activity": 55,
+      "documentation": 95,
+      "community": 90,
+      "maintenance": 57,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 31,
+    "full_name": "twbs/bootstrap",
+    "html_url": "https://github.com/twbs/bootstrap",
+    "description": "The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web.",
+    "language": "MDX",
+    "stars": 174168,
+    "forks": 78982,
+    "open_issues": 433,
+    "watchers": 0,
+    "size_kb": 292213,
+    "created_at": "2011-07-29T21:19:00Z",
+    "pushed_at": "2026-04-15T21:43:06Z",
+    "license": "MIT",
+    "topics": [
+      "bootstrap",
+      "css",
+      "css-framework",
+      "html",
+      "javascript",
+      "sass",
+      "scss"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 357,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "MDX",
+        "pct": 29
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 26
+      },
+      {
+        "lang": "Astro",
+        "pct": 19
+      }
+    ],
+    "scores": {
+      "overall": 91,
+      "activity": 83,
+      "documentation": 95,
+      "community": 91,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 32,
+    "full_name": "github/gitignore",
+    "html_url": "https://github.com/github/gitignore",
+    "description": "A collection of useful .gitignore templates",
+    "language": null,
+    "stars": 173410,
+    "forks": 82637,
+    "open_issues": 113,
+    "watchers": 0,
+    "size_kb": 3018,
+    "created_at": "2010-11-08T20:17:14Z",
+    "pushed_at": "2026-04-08T03:04:22Z",
+    "license": "CC0-1.0",
+    "topics": [
+      "git",
+      "gitignore"
+    ],
+    "has_wiki": false,
+    "has_issues": false,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 414,
+    "community_health": 87,
+    "top_languages": [],
+    "scores": {
+      "overall": 74,
+      "activity": 47,
+      "documentation": 84,
+      "community": 91,
+      "maintenance": 80,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 33,
+    "full_name": "massgravel/Microsoft-Activation-Scripts",
+    "html_url": "https://github.com/massgravel/Microsoft-Activation-Scripts",
+    "description": "Open-source Windows and Office activator featuring HWID, Ohook, TSforge, and Online KMS activation methods, along with advanced troubleshooting.",
+    "language": "Batchfile",
+    "stars": 172163,
+    "forks": 16545,
+    "open_issues": 6,
+    "watchers": 0,
+    "size_kb": 12790,
+    "created_at": "2020-01-12T23:03:34Z",
+    "pushed_at": "2026-03-09T07:34:17Z",
+    "license": "GPL-3.0",
+    "topics": [
+      "activator",
+      "hwid",
+      "kms",
+      "kms38",
+      "massgrave",
+      "massgravel",
+      "microsoft",
+      "microsoft365",
+      "office",
+      "office365",
+      "ohook",
+      "powershell",
+      "tsforge",
+      "windows",
+      "windows-10",
+      "windows-11"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 8,
+    "community_health": 37,
+    "top_languages": [
+      {
+        "lang": "Batchfile",
+        "pct": 100
+      },
+      {
+        "lang": "HTML",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 72,
+      "activity": 56,
+      "documentation": 65,
+      "community": 75,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 34,
+    "full_name": "avelino/awesome-go",
+    "html_url": "https://github.com/avelino/awesome-go",
+    "description": "A curated list of awesome Go frameworks, libraries and software",
+    "language": "Go",
+    "stars": 170103,
+    "forks": 13148,
+    "open_issues": 178,
+    "watchers": 0,
+    "size_kb": 11311,
+    "created_at": "2014-07-06T13:42:15Z",
+    "pushed_at": "2026-04-15T06:13:12Z",
+    "license": "MIT",
+    "topics": [
+      "awesome",
+      "awesome-list",
+      "go",
+      "golang",
+      "golang-library",
+      "hacktoberfest"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 432,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "Go",
+        "pct": 100
+      }
+    ],
+    "scores": {
+      "overall": 82,
+      "activity": 55,
+      "documentation": 95,
+      "community": 88,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 35,
+    "full_name": "ollama/ollama",
+    "html_url": "https://github.com/ollama/ollama",
+    "description": "Get up and running with Kimi-K2.5, GLM-5, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
+    "language": "Go",
+    "stars": 169149,
+    "forks": 15622,
+    "open_issues": 2950,
+    "watchers": 0,
+    "size_kb": 78915,
+    "created_at": "2023-06-26T19:39:32Z",
+    "pushed_at": "2026-04-16T00:22:53Z",
+    "license": "MIT",
+    "topics": [
+      "deepseek",
+      "gemma",
+      "gemma3",
+      "glm",
+      "go",
+      "golang",
+      "gpt-oss",
+      "llama",
+      "llama3",
+      "llm",
+      "llms",
+      "minimax",
+      "mistral",
+      "ollama",
+      "qwen"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 455,
+    "community_health": 62,
+    "top_languages": [
+      {
+        "lang": "Go",
+        "pct": 65
+      },
+      {
+        "lang": "C",
+        "pct": 29
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 3
+      }
+    ],
+    "scores": {
+      "overall": 78,
+      "activity": 75,
+      "documentation": 80,
+      "community": 89,
+      "maintenance": 66,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 36,
+    "full_name": "AUTOMATIC1111/stable-diffusion-webui",
+    "html_url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
+    "description": "Stable Diffusion web UI",
+    "language": "Python",
+    "stars": 162392,
+    "forks": 30277,
+    "open_issues": 2480,
+    "watchers": 0,
+    "size_kb": 36552,
+    "created_at": "2022-08-22T14:05:26Z",
+    "pushed_at": "2026-03-02T07:00:53Z",
+    "license": "AGPL-3.0",
+    "topics": [
+      "ai",
+      "ai-art",
+      "deep-learning",
+      "diffusion",
+      "gradio",
+      "image-generation",
+      "image2image",
+      "img2img",
+      "pytorch",
+      "stable-diffusion",
+      "text2image",
+      "torch",
+      "txt2img",
+      "unstable",
+      "upscaling",
+      "web"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 427,
+    "community_health": 57,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 87
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 8
+      },
+      {
+        "lang": "CSS",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 67,
+      "activity": 36,
+      "documentation": 65,
+      "community": 90,
+      "maintenance": 87,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 37,
+    "full_name": "jlevy/the-art-of-command-line",
+    "html_url": "https://github.com/jlevy/the-art-of-command-line",
+    "description": "Master the command line, in one page",
+    "language": null,
+    "stars": 160570,
+    "forks": 14800,
+    "open_issues": 254,
+    "watchers": 0,
+    "size_kb": 2772,
+    "created_at": "2015-05-20T15:11:03Z",
+    "pushed_at": "2024-06-25T18:13:44Z",
+    "license": "",
+    "topics": [
+      "bash",
+      "documentation",
+      "linux",
+      "macos",
+      "unix",
+      "windows"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 149,
+    "community_health": 42,
+    "top_languages": [],
+    "scores": {
+      "overall": 57,
+      "activity": 3,
+      "documentation": 60,
+      "community": 84,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": false,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 38,
+    "full_name": "f/prompts.chat",
+    "html_url": "https://github.com/f/prompts.chat",
+    "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
+    "language": "HTML",
+    "stars": 159867,
+    "forks": 20932,
+    "open_issues": 45,
+    "watchers": 0,
+    "size_kb": 314244,
+    "created_at": "2022-12-05T13:54:13Z",
+    "pushed_at": "2026-04-16T04:06:47Z",
+    "license": "NOASSERTION",
+    "topics": [
+      "ai",
+      "artificial-intelligence",
+      "awesome-list",
+      "chatgpt",
+      "chatgpt-prompts",
+      "claude",
+      "gemini",
+      "gpt",
+      "gpt-4",
+      "llm",
+      "machine-learning",
+      "nextjs",
+      "open-source",
+      "openai",
+      "prompt-engineering",
+      "prompts",
+      "prompts-chat",
+      "typescript"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 255,
+    "community_health": 85,
+    "top_languages": [
+      {
+        "lang": "HTML",
+        "pct": 48
+      },
+      {
+        "lang": "MDX",
+        "pct": 36
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 15
+      }
+    ],
+    "scores": {
+      "overall": 80,
+      "activity": 55,
+      "documentation": 85,
+      "community": 87,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 39,
+    "full_name": "huggingface/transformers",
+    "html_url": "https://github.com/huggingface/transformers",
+    "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
+    "language": "Python",
+    "stars": 159475,
+    "forks": 32884,
+    "open_issues": 2349,
+    "watchers": 0,
+    "size_kb": 466501,
+    "created_at": "2018-10-29T13:56:00Z",
+    "pushed_at": "2026-04-16T11:09:53Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "audio",
+      "deep-learning",
+      "deepseek",
+      "gemma",
+      "glm",
+      "hacktoberfest",
+      "llm",
+      "machine-learning",
+      "model-hub",
+      "natural-language-processing",
+      "nlp",
+      "pretrained-models",
+      "python",
+      "pytorch",
+      "pytorch-transformers",
+      "qwen",
+      "speech-recognition",
+      "transformer",
+      "vlm"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 438,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 100
+      },
+      {
+        "lang": "Dockerfile",
+        "pct": 0
+      },
+      {
+        "lang": "Makefile",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 87,
+      "activity": 75,
+      "documentation": 95,
+      "community": 90,
+      "maintenance": 92,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 40,
+    "full_name": "affaan-m/everything-claude-code",
+    "html_url": "https://github.com/affaan-m/everything-claude-code",
+    "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+    "language": "JavaScript",
+    "stars": 158070,
+    "forks": 24569,
+    "open_issues": 108,
+    "watchers": 0,
+    "size_kb": 30146,
+    "created_at": "2026-01-18T00:51:51Z",
+    "pushed_at": "2026-04-16T03:07:05Z",
+    "license": "MIT",
+    "topics": [
+      "ai-agents",
+      "anthropic",
+      "claude",
+      "claude-code",
+      "developer-tools",
+      "llm",
+      "mcp",
+      "productivity"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 152,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "JavaScript",
+        "pct": 52
+      },
+      {
+        "lang": "Rust",
+        "pct": 38
+      },
+      {
+        "lang": "Python",
+        "pct": 5
+      }
+    ],
+    "scores": {
+      "overall": 88,
+      "activity": 75,
+      "documentation": 95,
+      "community": 86,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 41,
+    "full_name": "DigitalPlatDev/FreeDomain",
+    "html_url": "https://github.com/DigitalPlatDev/FreeDomain",
+    "description": "DigitalPlat FreeDomain: Free Domain For Everyone",
+    "language": "HTML",
+    "stars": 157393,
+    "forks": 2683,
+    "open_issues": 30,
+    "watchers": 0,
+    "size_kb": 971,
+    "created_at": "2024-05-30T13:23:00Z",
+    "pushed_at": "2026-03-26T05:54:09Z",
+    "license": "AGPL-3.0",
+    "topics": [
+      "digitalplat",
+      "domain",
+      "domain-platform",
+      "domainname",
+      "domains",
+      "free",
+      "freedomain"
+    ],
+    "has_wiki": true,
+    "has_issues": false,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 2,
+    "community_health": 50,
+    "top_languages": [
+      {
+        "lang": "HTML",
+        "pct": 94
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 3
+      },
+      {
+        "lang": "Python",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 63,
+      "activity": 47,
+      "documentation": 65,
+      "community": 66,
+      "maintenance": 80,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 42,
+    "full_name": "yt-dlp/yt-dlp",
+    "html_url": "https://github.com/yt-dlp/yt-dlp",
+    "description": "A feature-rich command-line audio/video downloader",
+    "language": "Python",
+    "stars": 157145,
+    "forks": 12949,
+    "open_issues": 2471,
+    "watchers": 0,
+    "size_kb": 60438,
+    "created_at": "2020-10-26T04:22:55Z",
+    "pushed_at": "2026-04-10T23:48:52Z",
+    "license": "Unlicense",
+    "topics": [
+      "cli",
+      "downloader",
+      "python",
+      "sponsorblock",
+      "youtube-dl",
+      "youtube-downloader",
+      "yt-dlp"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 380,
+    "community_health": 75,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 100
+      },
+      {
+        "lang": "Makefile",
+        "pct": 0
+      },
+      {
+        "lang": "Shell",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 79,
+      "activity": 75,
+      "documentation": 85,
+      "community": 87,
+      "maintenance": 66,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 43,
+    "full_name": "obra/superpowers",
+    "html_url": "https://github.com/obra/superpowers",
+    "description": "An agentic skills framework & software development methodology that works.",
+    "language": "Shell",
+    "stars": 155412,
+    "forks": 13491,
+    "open_issues": 294,
+    "watchers": 0,
+    "size_kb": 2412,
+    "created_at": "2025-10-09T19:45:18Z",
+    "pushed_at": "2026-04-16T02:01:40Z",
+    "license": "MIT",
+    "topics": [],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 27,
+    "community_health": 71,
+    "top_languages": [
+      {
+        "lang": "Shell",
+        "pct": 62
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 27
+      },
+      {
+        "lang": "HTML",
+        "pct": 4
+      }
+    ],
+    "scores": {
+      "overall": 78,
+      "activity": 75,
+      "documentation": 65,
+      "community": 78,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 44,
+    "full_name": "Snailclimb/JavaGuide",
+    "html_url": "https://github.com/Snailclimb/JavaGuide",
+    "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
+    "language": "Java",
+    "stars": 155005,
+    "forks": 46153,
+    "open_issues": 62,
+    "watchers": 0,
+    "size_kb": 179403,
+    "created_at": "2018-05-07T13:27:00Z",
+    "pushed_at": "2026-04-16T08:34:13Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "agent",
+      "context-engineering",
+      "interview",
+      "java",
+      "jvm",
+      "mcp",
+      "mysql",
+      "redis",
+      "redisson",
+      "skills",
+      "spring",
+      "system",
+      "system-design"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 416,
+    "community_health": 42,
+    "top_languages": [
+      {
+        "lang": "Java",
+        "pct": 94
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 6
+      }
+    ],
+    "scores": {
+      "overall": 76,
+      "activity": 55,
+      "documentation": 65,
+      "community": 91,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 45,
+    "full_name": "521xueweihan/HelloGitHub",
+    "html_url": "https://github.com/521xueweihan/HelloGitHub",
+    "description": ":octocat: 分享 GitHub 上有趣、入门级的开源项目。Share interesting, entry-level open source projects on GitHub.",
+    "language": "Python",
+    "stars": 151434,
+    "forks": 11525,
+    "open_issues": 326,
+    "watchers": 0,
+    "size_kb": 9730,
+    "created_at": "2016-05-04T06:24:11Z",
+    "pushed_at": "2026-04-01T16:16:13Z",
+    "license": "",
+    "topics": [
+      "awesome",
+      "github",
+      "hellogithub",
+      "python"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 10,
+    "community_health": 28,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 100
+      }
+    ],
+    "scores": {
+      "overall": 71,
+      "activity": 67,
+      "documentation": 48,
+      "community": 74,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": false,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 46,
+    "full_name": "airbnb/javascript",
+    "html_url": "https://github.com/airbnb/javascript",
+    "description": "JavaScript Style Guide",
+    "language": "JavaScript",
+    "stars": 148119,
+    "forks": 26725,
+    "open_issues": 163,
+    "watchers": 0,
+    "size_kb": 3735,
+    "created_at": "2012-11-01T23:13:50Z",
+    "pushed_at": "2026-04-16T06:06:26Z",
+    "license": "MIT",
+    "topics": [
+      "arrow-functions",
+      "es2015",
+      "es2016",
+      "es2017",
+      "es2018",
+      "es6",
+      "eslint",
+      "javascript",
+      "linting",
+      "naming-conventions",
+      "style-guide",
+      "style-linter",
+      "styleguide",
+      "tc39"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 401,
+    "community_health": 62,
+    "top_languages": [
+      {
+        "lang": "JavaScript",
+        "pct": 100
+      }
+    ],
+    "scores": {
+      "overall": 76,
+      "activity": 55,
+      "documentation": 70,
+      "community": 89,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 47,
+    "full_name": "langflow-ai/langflow",
+    "html_url": "https://github.com/langflow-ai/langflow",
+    "description": "Langflow is a powerful tool for building and deploying AI-powered agents and workflows.",
+    "language": "Python",
+    "stars": 147003,
+    "forks": 8781,
+    "open_issues": 936,
+    "watchers": 0,
+    "size_kb": 1232956,
+    "created_at": "2023-02-08T22:28:03Z",
+    "pushed_at": "2026-04-16T06:03:14Z",
+    "license": "MIT",
+    "topics": [
+      "agents",
+      "chatgpt",
+      "generative-ai",
+      "large-language-models",
+      "multiagent",
+      "react-flow"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 323,
+    "community_health": 75,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 58
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 26
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 15
+      }
+    ],
+    "scores": {
+      "overall": 82,
+      "activity": 75,
+      "documentation": 90,
+      "community": 85,
+      "maintenance": 78,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 48,
+    "full_name": "anomalyco/opencode",
+    "html_url": "https://github.com/anomalyco/opencode",
+    "description": "The open source coding agent.",
+    "language": "TypeScript",
+    "stars": 144194,
+    "forks": 16292,
+    "open_issues": 6061,
+    "watchers": 0,
+    "size_kb": 239761,
+    "created_at": "2025-04-30T20:08:00Z",
+    "pushed_at": "2026-04-16T10:55:45Z",
+    "license": "MIT",
+    "topics": [],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 456,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 58
+      },
+      {
+        "lang": "MDX",
+        "pct": 38
+      },
+      {
+        "lang": "CSS",
+        "pct": 3
+      }
+    ],
+    "scores": {
+      "overall": 75,
+      "activity": 75,
+      "documentation": 75,
+      "community": 88,
+      "maintenance": 58,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 49,
+    "full_name": "ytdl-org/youtube-dl",
+    "html_url": "https://github.com/ytdl-org/youtube-dl",
+    "description": "Command-line program to download videos from YouTube.com and other video sites",
+    "language": "Python",
+    "stars": 140080,
+    "forks": 10615,
+    "open_issues": 4125,
+    "watchers": 0,
+    "size_kb": 65510,
+    "created_at": "2010-10-31T14:35:07Z",
+    "pushed_at": "2026-02-19T16:45:25Z",
+    "license": "Unlicense",
+    "topics": [],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 387,
+    "community_health": 62,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 100
+      },
+      {
+        "lang": "Shell",
+        "pct": 0
+      },
+      {
+        "lang": "Makefile",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 63,
+      "activity": 36,
+      "documentation": 75,
+      "community": 86,
+      "maintenance": 58,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 50,
+    "full_name": "vercel/next.js",
+    "html_url": "https://github.com/vercel/next.js",
+    "description": "The React Framework",
+    "language": "JavaScript",
+    "stars": 138964,
+    "forks": 30908,
+    "open_issues": 3739,
+    "watchers": 0,
+    "size_kb": 2546077,
+    "created_at": "2016-10-05T23:32:51Z",
+    "pushed_at": "2026-04-16T11:19:26Z",
+    "license": "MIT",
+    "topics": [
+      "blog",
+      "browser",
+      "compiler",
+      "components",
+      "hybrid",
+      "nextjs",
+      "node",
+      "react",
+      "server-rendering",
+      "ssg",
+      "static",
+      "static-site-generator",
+      "universal",
+      "vercel"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 428,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "JavaScript",
+        "pct": 55
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 31
+      },
+      {
+        "lang": "Rust",
+        "pct": 13
+      }
+    ],
+    "scores": {
+      "overall": 84,
+      "activity": 75,
+      "documentation": 95,
+      "community": 90,
+      "maintenance": 75,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 51,
+    "full_name": "yangshun/tech-interview-handbook",
+    "html_url": "https://github.com/yangshun/tech-interview-handbook",
+    "description": "Curated coding interview preparation materials for busy software engineers",
+    "language": "TypeScript",
+    "stars": 138777,
+    "forks": 16498,
+    "open_issues": 44,
+    "watchers": 0,
+    "size_kb": 33749,
+    "created_at": "2016-07-05T05:00:48Z",
+    "pushed_at": "2026-04-05T23:58:25Z",
+    "license": "MIT",
+    "topics": [
+      "algorithm",
+      "algorithm-interview",
+      "algorithm-interview-questions",
+      "algorithms",
+      "behavioral-interviews",
+      "coding-interviews",
+      "interview-practice",
+      "interview-preparation",
+      "interview-questions",
+      "system-design"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 175,
+    "community_health": 71,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 91
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 6
+      },
+      {
+        "lang": "Python",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 78,
+      "activity": 47,
+      "documentation": 90,
+      "community": 85,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 52,
+    "full_name": "Genymobile/scrcpy",
+    "html_url": "https://github.com/Genymobile/scrcpy",
+    "description": "Display and control your Android device",
+    "language": "C",
+    "stars": 138553,
+    "forks": 12891,
+    "open_issues": 2779,
+    "watchers": 0,
+    "size_kb": 8256,
+    "created_at": "2017-11-21T18:00:27Z",
+    "pushed_at": "2026-04-15T08:45:21Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "android",
+      "c",
+      "ffmpeg",
+      "libav",
+      "mirroring",
+      "recording",
+      "screen",
+      "sdl2"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 149,
+    "community_health": 50,
+    "top_languages": [
+      {
+        "lang": "C",
+        "pct": 64
+      },
+      {
+        "lang": "Java",
+        "pct": 32
+      },
+      {
+        "lang": "Roff",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 71,
+      "activity": 75,
+      "documentation": 60,
+      "community": 84,
+      "maintenance": 64,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 53,
+    "full_name": "langgenius/dify",
+    "html_url": "https://github.com/langgenius/dify",
+    "description": "Production-ready platform for agentic workflow development.",
+    "language": "TypeScript",
+    "stars": 137991,
+    "forks": 21623,
+    "open_issues": 939,
+    "watchers": 0,
+    "size_kb": 348674,
+    "created_at": "2023-04-12T07:40:24Z",
+    "pushed_at": "2026-04-16T10:41:07Z",
+    "license": "NOASSERTION",
+    "topics": [
+      "agent",
+      "agentic-ai",
+      "agentic-framework",
+      "agentic-workflow",
+      "ai",
+      "automation",
+      "gemini",
+      "genai",
+      "gpt",
+      "gpt-4",
+      "llm",
+      "low-code",
+      "mcp",
+      "nextjs",
+      "no-code",
+      "openai",
+      "orchestration",
+      "python",
+      "rag",
+      "workflow"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 462,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 52
+      },
+      {
+        "lang": "Python",
+        "pct": 43
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 3
+      }
+    ],
+    "scores": {
+      "overall": 88,
+      "activity": 75,
+      "documentation": 95,
+      "community": 89,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 54,
+    "full_name": "x1xhlol/system-prompts-and-models-of-ai-tools",
+    "html_url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools",
+    "description": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
+    "language": null,
+    "stars": 135285,
+    "forks": 33987,
+    "open_issues": 147,
+    "watchers": 0,
+    "size_kb": 1396,
+    "created_at": "2025-03-05T16:38:29Z",
+    "pushed_at": "2026-03-28T16:58:37Z",
+    "license": "GPL-3.0",
+    "topics": [
+      "ai",
+      "bolt",
+      "cluely",
+      "copilot",
+      "cursor",
+      "cursorai",
+      "devin",
+      "github-copilot",
+      "lovable",
+      "open-source",
+      "perplexity",
+      "replit",
+      "system-prompts",
+      "trae",
+      "trae-ai",
+      "trae-ide",
+      "v0",
+      "vscode",
+      "windsurf",
+      "windsurf-ai"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 28,
+    "community_health": 42,
+    "top_languages": [],
+    "scores": {
+      "overall": 69,
+      "activity": 47,
+      "documentation": 60,
+      "community": 80,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 55,
+    "full_name": "langchain-ai/langchain",
+    "html_url": "https://github.com/langchain-ai/langchain",
+    "description": "The agent engineering platform",
+    "language": "Python",
+    "stars": 133759,
+    "forks": 22104,
+    "open_issues": 531,
+    "watchers": 0,
+    "size_kb": 535973,
+    "created_at": "2022-10-17T02:58:36Z",
+    "pushed_at": "2026-04-16T05:11:23Z",
+    "license": "MIT",
+    "topics": [
+      "agents",
+      "ai",
+      "ai-agents",
+      "anthropic",
+      "chatgpt",
+      "deepagents",
+      "enterprise",
+      "framework",
+      "gemini",
+      "generative-ai",
+      "langchain",
+      "langgraph",
+      "llm",
+      "multiagent",
+      "open-source",
+      "openai",
+      "pydantic",
+      "python",
+      "rag"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 469,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 99
+      },
+      {
+        "lang": "Makefile",
+        "pct": 1
+      },
+      {
+        "lang": "Shell",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 88,
+      "activity": 75,
+      "documentation": 95,
+      "community": 89,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 56,
+    "full_name": "golang/go",
+    "html_url": "https://github.com/golang/go",
+    "description": "The Go programming language",
+    "language": "Go",
+    "stars": 133493,
+    "forks": 18922,
+    "open_issues": 9957,
+    "watchers": 0,
+    "size_kb": 432513,
+    "created_at": "2014-08-19T04:33:40Z",
+    "pushed_at": "2026-04-16T01:34:26Z",
+    "license": "BSD-3-Clause",
+    "topics": [
+      "go",
+      "golang",
+      "language",
+      "programming-language"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 381,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "Go",
+        "pct": 90
+      },
+      {
+        "lang": "Assembly",
+        "pct": 5
+      },
+      {
+        "lang": "HTML",
+        "pct": 4
+      }
+    ],
+    "scores": {
+      "overall": 80,
+      "activity": 80,
+      "documentation": 93,
+      "community": 88,
+      "maintenance": 56,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 57,
+    "full_name": "labuladong/fucking-algorithm",
+    "html_url": "https://github.com/labuladong/fucking-algorithm",
+    "description": "Crack LeetCode, not only how, but also why. ",
+    "language": "Markdown",
+    "stars": 133281,
+    "forks": 23657,
+    "open_issues": 0,
+    "watchers": 0,
+    "size_kb": 126234,
+    "created_at": "2020-02-19T09:01:23Z",
+    "pushed_at": "2026-02-28T10:07:31Z",
+    "license": "",
+    "topics": [
+      "algorithms",
+      "computer-science",
+      "data-structures",
+      "dynamic-programming",
+      "dynamic-programming-algorithm",
+      "interview-questions",
+      "kmp",
+      "leetcode"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 86,
+    "community_health": 42,
+    "top_languages": [
+      {
+        "lang": "Markdown",
+        "pct": 100
+      }
+    ],
+    "scores": {
+      "overall": 64,
+      "activity": 36,
+      "documentation": 50,
+      "community": 83,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": false,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 58,
+    "full_name": "open-webui/open-webui",
+    "html_url": "https://github.com/open-webui/open-webui",
+    "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+    "language": "Python",
+    "stars": 132157,
+    "forks": 18757,
+    "open_issues": 252,
+    "watchers": 0,
+    "size_kb": 353199,
+    "created_at": "2023-10-06T22:08:27Z",
+    "pushed_at": "2026-04-16T04:50:22Z",
+    "license": "NOASSERTION",
+    "topics": [
+      "ai",
+      "llm",
+      "llm-ui",
+      "llm-webui",
+      "llms",
+      "mcp",
+      "ollama",
+      "ollama-webui",
+      "open-webui",
+      "openai",
+      "openapi",
+      "rag",
+      "self-hosted",
+      "ui",
+      "webui"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 389,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 34
+      },
+      {
+        "lang": "Svelte",
+        "pct": 33
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 26
+      }
+    ],
+    "scores": {
+      "overall": 88,
+      "activity": 75,
+      "documentation": 95,
+      "community": 88,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 59,
+    "full_name": "microsoft/PowerToys",
+    "html_url": "https://github.com/microsoft/PowerToys",
+    "description": "Microsoft PowerToys is a collection of utilities that supercharge productivity and customization on Windows",
+    "language": "C#",
+    "stars": 131727,
+    "forks": 7883,
+    "open_issues": 8393,
+    "watchers": 0,
+    "size_kb": 493441,
+    "created_at": "2019-05-01T17:44:02Z",
+    "pushed_at": "2026-04-16T10:30:51Z",
+    "license": "MIT",
+    "topics": [
+      "advanced-paste",
+      "color-picker",
+      "command-palette",
+      "desktop",
+      "fancyzones",
+      "keyboard-manager",
+      "microsoft-powertoys",
+      "powerrename",
+      "powertoys",
+      "windows",
+      "windows-10",
+      "windows-11"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 411,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "C#",
+        "pct": 59
+      },
+      {
+        "lang": "C++",
+        "pct": 38
+      },
+      {
+        "lang": "PowerShell",
+        "pct": 1
+      }
+    ],
+    "scores": {
+      "overall": 77,
+      "activity": 75,
+      "documentation": 90,
+      "community": 86,
+      "maintenance": 53,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 60,
+    "full_name": "Chalarangelo/30-seconds-of-code",
+    "html_url": "https://github.com/Chalarangelo/30-seconds-of-code",
+    "description": "Coding articles to level up your development skills",
+    "language": "JavaScript",
+    "stars": 127494,
+    "forks": 12482,
+    "open_issues": 1,
+    "watchers": 0,
+    "size_kb": 742544,
+    "created_at": "2017-11-29T17:35:03Z",
+    "pushed_at": "2026-04-14T10:06:26Z",
+    "license": "CC-BY-4.0",
+    "topics": [
+      "astro",
+      "awesome-list",
+      "css",
+      "education",
+      "es6-javascript",
+      "git",
+      "html",
+      "javascript",
+      "learn-to-code",
+      "learning-resources",
+      "nodejs",
+      "programming",
+      "snippets"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 380,
+    "community_health": 85,
+    "top_languages": [
+      {
+        "lang": "JavaScript",
+        "pct": 65
+      },
+      {
+        "lang": "SCSS",
+        "pct": 26
+      },
+      {
+        "lang": "Astro",
+        "pct": 8
+      }
+    ],
+    "scores": {
+      "overall": 86,
+      "activity": 75,
+      "documentation": 90,
+      "community": 86,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 61,
+    "full_name": "facebook/react-native",
+    "html_url": "https://github.com/facebook/react-native",
+    "description": "A framework for building native applications using React",
+    "language": "C++",
+    "stars": 125702,
+    "forks": 25146,
+    "open_issues": 1293,
+    "watchers": 0,
+    "size_kb": 964535,
+    "created_at": "2015-01-09T18:10:16Z",
+    "pushed_at": "2026-04-15T21:46:16Z",
+    "license": "MIT",
+    "topics": [
+      "android",
+      "app-framework",
+      "cross-platform",
+      "ios",
+      "mobile",
+      "mobile-development",
+      "react",
+      "react-native"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 304,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "C++",
+        "pct": 34
+      },
+      {
+        "lang": "Kotlin",
+        "pct": 19
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 19
+      }
+    ],
+    "scores": {
+      "overall": 97,
+      "activity": 100,
+      "documentation": 100,
+      "community": 88,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": true,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 62,
+    "full_name": "krahets/hello-algo",
+    "html_url": "https://github.com/krahets/hello-algo",
+    "description": "《Hello 算法》：动画图解、一键运行的数据结构与算法教程。支持简中、繁中、English、日本語，提供 Python, Java, C++, C, C#, JS, Go, Swift, Rust, Ruby, Kotlin, TS, Dart 等代码实现",
+    "language": "Java",
+    "stars": 125328,
+    "forks": 15049,
+    "open_issues": 30,
+    "watchers": 0,
+    "size_kb": 466123,
+    "created_at": "2022-11-04T11:08:34Z",
+    "pushed_at": "2026-04-14T10:10:14Z",
+    "license": "NOASSERTION",
+    "topics": [
+      "algo",
+      "algorithm",
+      "algorithms",
+      "book",
+      "data-structure",
+      "data-structures",
+      "data-structures-and-algorithms",
+      "dsa",
+      "education",
+      "leetcode",
+      "programming"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 206,
+    "community_health": 57,
+    "top_languages": [
+      {
+        "lang": "Java",
+        "pct": 16
+      },
+      {
+        "lang": "Swift",
+        "pct": 16
+      },
+      {
+        "lang": "C++",
+        "pct": 15
+      }
+    ],
+    "scores": {
+      "overall": 81,
+      "activity": 75,
+      "documentation": 70,
+      "community": 85,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 63,
+    "full_name": "kubernetes/kubernetes",
+    "html_url": "https://github.com/kubernetes/kubernetes",
+    "description": "Production-Grade Container Scheduling and Management",
+    "language": "Go",
+    "stars": 121736,
+    "forks": 42872,
+    "open_issues": 2754,
+    "watchers": 0,
+    "size_kb": 1462313,
+    "created_at": "2014-06-06T22:56:04Z",
+    "pushed_at": "2026-04-16T02:24:48Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "cncf",
+      "containers",
+      "go",
+      "kubernetes"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 346,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "Go",
+        "pct": 98
+      },
+      {
+        "lang": "Shell",
+        "pct": 2
+      },
+      {
+        "lang": "PowerShell",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 87,
+      "activity": 75,
+      "documentation": 93,
+      "community": 89,
+      "maintenance": 97,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 64,
+    "full_name": "excalidraw/excalidraw",
+    "html_url": "https://github.com/excalidraw/excalidraw",
+    "description": "Virtual whiteboard for sketching hand-drawn like diagrams",
+    "language": "TypeScript",
+    "stars": 121189,
+    "forks": 13293,
+    "open_issues": 2971,
+    "watchers": 0,
+    "size_kb": 100420,
+    "created_at": "2020-01-02T01:04:43Z",
+    "pushed_at": "2026-04-15T18:59:35Z",
+    "license": "MIT",
+    "topics": [
+      "canvas",
+      "collaboration",
+      "diagrams",
+      "drawing",
+      "hacktoberfest",
+      "productivity",
+      "whiteboard"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 342,
+    "community_health": 62,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 94
+      },
+      {
+        "lang": "SCSS",
+        "pct": 3
+      },
+      {
+        "lang": "MDX",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 71,
+      "activity": 55,
+      "documentation": 80,
+      "community": 86,
+      "maintenance": 63,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 65,
+    "full_name": "electron/electron",
+    "html_url": "https://github.com/electron/electron",
+    "description": ":electron: Build cross-platform desktop apps with JavaScript, HTML, and CSS",
+    "language": "C++",
+    "stars": 120916,
+    "forks": 17137,
+    "open_issues": 863,
+    "watchers": 0,
+    "size_kb": 198296,
+    "created_at": "2013-04-12T01:47:36Z",
+    "pushed_at": "2026-04-16T10:40:17Z",
+    "license": "MIT",
+    "topics": [
+      "c-plus-plus",
+      "chrome",
+      "css",
+      "electron",
+      "html",
+      "javascript",
+      "nodejs",
+      "v8",
+      "works-with-codespaces"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 372,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "C++",
+        "pct": 56
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 34
+      },
+      {
+        "lang": "Objective-C++",
+        "pct": 5
+      }
+    ],
+    "scores": {
+      "overall": 88,
+      "activity": 75,
+      "documentation": 95,
+      "community": 87,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 66,
+    "full_name": "ripienaar/free-for-dev",
+    "html_url": "https://github.com/ripienaar/free-for-dev",
+    "description": "A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev",
+    "language": "HTML",
+    "stars": 120733,
+    "forks": 12587,
+    "open_issues": 19,
+    "watchers": 0,
+    "size_kb": 9866,
+    "created_at": "2015-03-18T21:06:26Z",
+    "pushed_at": "2026-04-15T04:59:14Z",
+    "license": "",
+    "topics": [
+      "awesome-list",
+      "free-for-developers"
+    ],
+    "has_wiki": false,
+    "has_issues": false,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 439,
+    "community_health": 71,
+    "top_languages": [
+      {
+        "lang": "HTML",
+        "pct": 100
+      }
+    ],
+    "scores": {
+      "overall": 73,
+      "activity": 55,
+      "documentation": 74,
+      "community": 87,
+      "maintenance": 80,
+      "doc_checks": {
+        "readme": true,
+        "license": false,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 67,
+    "full_name": "anthropics/skills",
+    "html_url": "https://github.com/anthropics/skills",
+    "description": "Public repository for Agent Skills",
+    "language": "Python",
+    "stars": 118580,
+    "forks": 13694,
+    "open_issues": 709,
+    "watchers": 0,
+    "size_kb": 3498,
+    "created_at": "2025-09-22T15:53:31Z",
+    "pushed_at": "2026-04-13T20:37:42Z",
+    "license": "",
+    "topics": [
+      "agent-skills"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 12,
+    "community_health": 25,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 84
+      },
+      {
+        "lang": "HTML",
+        "pct": 12
+      },
+      {
+        "lang": "Shell",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 64,
+      "activity": 55,
+      "documentation": 37,
+      "community": 75,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": false,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 68,
+    "full_name": "nodejs/node",
+    "html_url": "https://github.com/nodejs/node",
+    "description": "Node.js JavaScript runtime ✨🐢🚀✨",
+    "language": "JavaScript",
+    "stars": 116768,
+    "forks": 35357,
+    "open_issues": 2624,
+    "watchers": 0,
+    "size_kb": 1458652,
+    "created_at": "2014-11-26T19:57:11Z",
+    "pushed_at": "2026-04-16T06:31:35Z",
+    "license": "NOASSERTION",
+    "topics": [
+      "javascript",
+      "js",
+      "linux",
+      "macos",
+      "mit",
+      "node",
+      "nodejs",
+      "runtime",
+      "windows"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 427,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "JavaScript",
+        "pct": 63
+      },
+      {
+        "lang": "C++",
+        "pct": 23
+      },
+      {
+        "lang": "Python",
+        "pct": 10
+      }
+    ],
+    "scores": {
+      "overall": 87,
+      "activity": 75,
+      "documentation": 95,
+      "community": 90,
+      "maintenance": 90,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 69,
+    "full_name": "justjavac/free-programming-books-zh_CN",
+    "html_url": "https://github.com/justjavac/free-programming-books-zh_CN",
+    "description": ":books: 免费的计算机编程类中文书籍，欢迎投稿",
+    "language": null,
+    "stars": 116612,
+    "forks": 28304,
+    "open_issues": 33,
+    "watchers": 0,
+    "size_kb": 1059,
+    "created_at": "2013-11-04T01:59:19Z",
+    "pushed_at": "2024-07-15T08:55:20Z",
+    "license": "GPL-3.0",
+    "topics": [
+      "android",
+      "angular",
+      "books",
+      "free",
+      "ios",
+      "javascript",
+      "kotlin",
+      "pdf",
+      "programming",
+      "python",
+      "react",
+      "react-native",
+      "swift",
+      "vue"
+    ],
+    "has_wiki": false,
+    "has_issues": false,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 118,
+    "community_health": 71,
+    "top_languages": [],
+    "scores": {
+      "overall": 60,
+      "activity": 3,
+      "documentation": 90,
+      "community": 84,
+      "maintenance": 80,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 70,
+    "full_name": "anthropics/claude-code",
+    "html_url": "https://github.com/anthropics/claude-code",
+    "description": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
+    "language": "Shell",
+    "stars": 114671,
+    "forks": 19152,
+    "open_issues": 10041,
+    "watchers": 0,
+    "size_kb": 27619,
+    "created_at": "2025-02-22T17:41:21Z",
+    "pushed_at": "2026-04-16T01:24:07Z",
+    "license": "",
+    "topics": [],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 47,
+    "community_health": 50,
+    "top_languages": [
+      {
+        "lang": "Shell",
+        "pct": 47
+      },
+      {
+        "lang": "Python",
+        "pct": 29
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 18
+      }
+    ],
+    "scores": {
+      "overall": 64,
+      "activity": 75,
+      "documentation": 40,
+      "community": 80,
+      "maintenance": 56,
+      "doc_checks": {
+        "readme": true,
+        "license": false,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 71,
+    "full_name": "iptv-org/iptv",
+    "html_url": "https://github.com/iptv-org/iptv",
+    "description": "Collection of publicly available IPTV channels from all over the world",
+    "language": "TypeScript",
+    "stars": 114661,
+    "forks": 5916,
+    "open_issues": 19,
+    "watchers": 0,
+    "size_kb": 1209423,
+    "created_at": "2018-11-14T22:00:57Z",
+    "pushed_at": "2026-04-16T00:26:50Z",
+    "license": "Unlicense",
+    "topics": [
+      "iptv",
+      "m3u",
+      "playlist",
+      "streams",
+      "tv"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 349,
+    "community_health": 75,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 54
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 46
+      }
+    ],
+    "scores": {
+      "overall": 88,
+      "activity": 80,
+      "documentation": 90,
+      "community": 84,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 72,
+    "full_name": "d3/d3",
+    "html_url": "https://github.com/d3/d3",
+    "description": "Bring data to life with SVG, Canvas and HTML. :bar_chart::chart_with_upwards_trend::tada:",
+    "language": "Shell",
+    "stars": 112735,
+    "forks": 22763,
+    "open_issues": 30,
+    "watchers": 0,
+    "size_kb": 59349,
+    "created_at": "2010-09-27T17:22:42Z",
+    "pushed_at": "2025-12-02T17:48:19Z",
+    "license": "ISC",
+    "topics": [
+      "chart",
+      "charts",
+      "d3",
+      "data-visualization",
+      "svg",
+      "visualization"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 135,
+    "community_health": 37,
+    "top_languages": [
+      {
+        "lang": "Shell",
+        "pct": 92
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 8
+      }
+    ],
+    "scores": {
+      "overall": 65,
+      "activity": 25,
+      "documentation": 65,
+      "community": 84,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 73,
+    "full_name": "shadcn-ui/ui",
+    "html_url": "https://github.com/shadcn-ui/ui",
+    "description": "A set of beautifully-designed, accessible components and a code distribution platform. Works with your favorite frameworks. Open Source. Open Code.",
+    "language": "TypeScript",
+    "stars": 112453,
+    "forks": 8547,
+    "open_issues": 1820,
+    "watchers": 0,
+    "size_kb": 57537,
+    "created_at": "2023-01-04T12:43:27Z",
+    "pushed_at": "2026-04-14T17:03:02Z",
+    "license": "MIT",
+    "topics": [
+      "base-ui",
+      "components",
+      "laravel",
+      "nextjs",
+      "radix-ui",
+      "react",
+      "shadcn",
+      "tailwindcss",
+      "tanstack",
+      "ui",
+      "vite"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 463,
+    "community_health": 62,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 91
+      },
+      {
+        "lang": "MDX",
+        "pct": 7
+      },
+      {
+        "lang": "CSS",
+        "pct": 3
+      }
+    ],
+    "scores": {
+      "overall": 77,
+      "activity": 75,
+      "documentation": 80,
+      "community": 86,
+      "maintenance": 64,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 74,
+    "full_name": "rust-lang/rust",
+    "html_url": "https://github.com/rust-lang/rust",
+    "description": "Empowering everyone to build reliable and efficient software.",
+    "language": "Rust",
+    "stars": 112054,
+    "forks": 14763,
+    "open_issues": 12349,
+    "watchers": 0,
+    "size_kb": 878872,
+    "created_at": "2010-06-16T20:39:03Z",
+    "pushed_at": "2026-04-16T09:42:26Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "compiler",
+      "language",
+      "rust"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 446,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "Rust",
+        "pct": 90
+      },
+      {
+        "lang": "HTML",
+        "pct": 7
+      },
+      {
+        "lang": "Shell",
+        "pct": 1
+      }
+    ],
+    "scores": {
+      "overall": 78,
+      "activity": 75,
+      "documentation": 91,
+      "community": 87,
+      "maintenance": 54,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 75,
+    "full_name": "mrdoob/three.js",
+    "html_url": "https://github.com/mrdoob/three.js",
+    "description": "JavaScript 3D Library.",
+    "language": "JavaScript",
+    "stars": 111970,
+    "forks": 36326,
+    "open_issues": 535,
+    "watchers": 0,
+    "size_kb": 1591417,
+    "created_at": "2010-03-23T18:58:01Z",
+    "pushed_at": "2026-04-16T09:12:43Z",
+    "license": "MIT",
+    "topics": [
+      "3d",
+      "augmented-reality",
+      "canvas",
+      "html5",
+      "javascript",
+      "svg",
+      "virtual-reality",
+      "webaudio",
+      "webgl",
+      "webgl2",
+      "webgpu",
+      "webxr"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 361,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "JavaScript",
+        "pct": 67
+      },
+      {
+        "lang": "HTML",
+        "pct": 30
+      },
+      {
+        "lang": "Roff",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 88,
+      "activity": 75,
+      "documentation": 95,
+      "community": 89,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 76,
+    "full_name": "rustdesk/rustdesk",
+    "html_url": "https://github.com/rustdesk/rustdesk",
+    "description": "An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.",
+    "language": "Rust",
+    "stars": 111346,
+    "forks": 16675,
+    "open_issues": 131,
+    "watchers": 0,
+    "size_kb": 69522,
+    "created_at": "2020-09-28T15:36:08Z",
+    "pushed_at": "2026-04-15T13:40:03Z",
+    "license": "AGPL-3.0",
+    "topics": [
+      "android",
+      "anydesk",
+      "dart",
+      "flatpak",
+      "flutter",
+      "flutter-apps",
+      "ios",
+      "linux",
+      "macos",
+      "p2p",
+      "rdp",
+      "remote-control",
+      "remote-desktop",
+      "rust",
+      "rust-lang",
+      "teamviewer",
+      "vnc",
+      "wayland",
+      "windows"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 380,
+    "community_health": 85,
+    "top_languages": [
+      {
+        "lang": "Rust",
+        "pct": 65
+      },
+      {
+        "lang": "Dart",
+        "pct": 26
+      },
+      {
+        "lang": "C++",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 93,
+      "activity": 97,
+      "documentation": 90,
+      "community": 87,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 77,
+    "full_name": "clash-verge-rev/clash-verge-rev",
+    "html_url": "https://github.com/clash-verge-rev/clash-verge-rev",
+    "description": "A modern GUI client based on Tauri, designed to run in Windows, macOS and Linux for tailored proxy experience",
+    "language": "TypeScript",
+    "stars": 111086,
+    "forks": 8068,
+    "open_issues": 262,
+    "watchers": 0,
+    "size_kb": 74757,
+    "created_at": "2023-11-21T18:24:03Z",
+    "pushed_at": "2026-04-16T05:39:44Z",
+    "license": "GPL-3.0",
+    "topics": [
+      "clash",
+      "clash-meta",
+      "clash-verge",
+      "linux",
+      "mac",
+      "mihomo",
+      "tauri-app",
+      "windows"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 136,
+    "community_health": 50,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 59
+      },
+      {
+        "lang": "Rust",
+        "pct": 33
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 5
+      }
+    ],
+    "scores": {
+      "overall": 83,
+      "activity": 75,
+      "documentation": 80,
+      "community": 81,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 78,
+    "full_name": "Hack-with-Github/Awesome-Hacking",
+    "html_url": "https://github.com/Hack-with-Github/Awesome-Hacking",
+    "description": "A collection of various awesome lists for hackers, pentesters and security researchers",
+    "language": null,
+    "stars": 110351,
+    "forks": 10164,
+    "open_issues": 44,
+    "watchers": 0,
+    "size_kb": 160,
+    "created_at": "2016-03-30T15:47:10Z",
+    "pushed_at": "2025-01-18T01:48:02Z",
+    "license": "CC0-1.0",
+    "topics": [
+      "android",
+      "awesome",
+      "bug-bounty",
+      "fuzzing",
+      "hacking",
+      "penetration-testing",
+      "pentesting-windows",
+      "reverse-engineering",
+      "security"
+    ],
+    "has_wiki": false,
+    "has_issues": false,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 25,
+    "community_health": 50,
+    "top_languages": [],
+    "scores": {
+      "overall": 55,
+      "activity": 3,
+      "documentation": 75,
+      "community": 76,
+      "maintenance": 80,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 79,
+    "full_name": "microsoft/markitdown",
+    "html_url": "https://github.com/microsoft/markitdown",
+    "description": "Python tool for converting files and office documents to Markdown.",
+    "language": "Python",
+    "stars": 109947,
+    "forks": 7021,
+    "open_issues": 601,
+    "watchers": 0,
+    "size_kb": 4254,
+    "created_at": "2024-11-13T19:56:40Z",
+    "pushed_at": "2026-04-15T22:26:44Z",
+    "license": "MIT",
+    "topics": [
+      "autogen",
+      "autogen-extension",
+      "langchain",
+      "markdown",
+      "microsoft-office",
+      "openai",
+      "pdf"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 77,
+    "community_health": 62,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 100
+      },
+      {
+        "lang": "Dockerfile",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 77,
+      "activity": 75,
+      "documentation": 70,
+      "community": 79,
+      "maintenance": 85,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 80,
+    "full_name": "firecrawl/firecrawl",
+    "html_url": "https://github.com/firecrawl/firecrawl",
+    "description": "🔥 The API to search, scrape, and interact with the web for AI",
+    "language": "TypeScript",
+    "stars": 109844,
+    "forks": 7022,
+    "open_issues": 280,
+    "watchers": 0,
+    "size_kb": 86237,
+    "created_at": "2024-04-15T21:02:29Z",
+    "pushed_at": "2026-04-16T08:46:49Z",
+    "license": "AGPL-3.0",
+    "topics": [
+      "ai",
+      "ai-agents",
+      "ai-crawler",
+      "ai-scraping",
+      "ai-search",
+      "crawler",
+      "data-extraction",
+      "html-to-markdown",
+      "llm",
+      "markdown",
+      "scraper",
+      "scraping",
+      "web-crawler",
+      "web-data",
+      "web-data-extraction",
+      "web-scraper",
+      "web-scraping",
+      "web-search",
+      "webscraping"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 141,
+    "community_health": 62,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 67
+      },
+      {
+        "lang": "Python",
+        "pct": 18
+      },
+      {
+        "lang": "Rust",
+        "pct": 7
+      }
+    ],
+    "scores": {
+      "overall": 83,
+      "activity": 75,
+      "documentation": 80,
+      "community": 81,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 81,
+    "full_name": "godotengine/godot",
+    "html_url": "https://github.com/godotengine/godot",
+    "description": "Godot Engine – Multi-platform 2D and 3D game engine",
+    "language": "C++",
+    "stars": 109530,
+    "forks": 25002,
+    "open_issues": 18028,
+    "watchers": 0,
+    "size_kb": 1799185,
+    "created_at": "2014-01-04T16:05:36Z",
+    "pushed_at": "2026-04-15T19:08:36Z",
+    "license": "MIT",
+    "topics": [
+      "game-development",
+      "game-engine",
+      "gamedev",
+      "godot",
+      "godotengine",
+      "multi-platform",
+      "open-source"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 457,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "C++",
+        "pct": 87
+      },
+      {
+        "lang": "C#",
+        "pct": 3
+      },
+      {
+        "lang": "Java",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 87,
+      "activity": 100,
+      "documentation": 95,
+      "community": 89,
+      "maintenance": 54,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 82,
+    "full_name": "microsoft/generative-ai-for-beginners",
+    "html_url": "https://github.com/microsoft/generative-ai-for-beginners",
+    "description": "21 Lessons, Get Started Building with Generative AI ",
+    "language": "Jupyter Notebook",
+    "stars": 109395,
+    "forks": 58694,
+    "open_issues": 24,
+    "watchers": 0,
+    "size_kb": 6595212,
+    "created_at": "2023-06-19T16:28:59Z",
+    "pushed_at": "2026-04-16T03:44:12Z",
+    "license": "MIT",
+    "topics": [
+      "ai",
+      "azure",
+      "chatgpt",
+      "dall-e",
+      "generative-ai",
+      "generativeai",
+      "gpt",
+      "language-model",
+      "llms",
+      "microsoft-for-beginners",
+      "openai",
+      "prompt-engineering",
+      "semantic-search",
+      "transformers"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 148,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "Jupyter Notebook",
+        "pct": 100
+      },
+      {
+        "lang": "Python",
+        "pct": 0
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 79,
+      "activity": 55,
+      "documentation": 85,
+      "community": 86,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 83,
+    "full_name": "axios/axios",
+    "html_url": "https://github.com/axios/axios",
+    "description": "Promise based HTTP client for the browser and node.js",
+    "language": "JavaScript",
+    "stars": 109031,
+    "forks": 11640,
+    "open_issues": 268,
+    "watchers": 0,
+    "size_kb": 26087,
+    "created_at": "2014-08-18T22:30:27Z",
+    "pushed_at": "2026-04-16T01:32:20Z",
+    "license": "MIT",
+    "topics": [
+      "hacktoberfest",
+      "http-client",
+      "javascript",
+      "nodejs",
+      "promise"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 441,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "JavaScript",
+        "pct": 87
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 12
+      },
+      {
+        "lang": "HTML",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 89,
+      "activity": 75,
+      "documentation": 100,
+      "community": 86,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": true,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 84,
+    "full_name": "Comfy-Org/ComfyUI",
+    "html_url": "https://github.com/Comfy-Org/ComfyUI",
+    "description": "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.",
+    "language": "Python",
+    "stars": 108971,
+    "forks": 12657,
+    "open_issues": 3984,
+    "watchers": 0,
+    "size_kb": 87066,
+    "created_at": "2023-01-17T03:15:56Z",
+    "pushed_at": "2026-04-16T05:49:01Z",
+    "license": "GPL-3.0",
+    "topics": [
+      "ai",
+      "comfy",
+      "comfyui",
+      "python",
+      "pytorch",
+      "stable-diffusion"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 287,
+    "community_health": 50,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 99
+      },
+      {
+        "lang": "GLSL",
+        "pct": 0
+      },
+      {
+        "lang": "Batchfile",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 76,
+      "activity": 75,
+      "documentation": 80,
+      "community": 85,
+      "maintenance": 60,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 85,
+    "full_name": "microsoft/TypeScript",
+    "html_url": "https://github.com/microsoft/TypeScript",
+    "description": "TypeScript is a superset of JavaScript that compiles to clean JavaScript output.",
+    "language": "TypeScript",
+    "stars": 108568,
+    "forks": 13358,
+    "open_issues": 5025,
+    "watchers": 0,
+    "size_kb": 2958570,
+    "created_at": "2014-06-17T15:28:39Z",
+    "pushed_at": "2026-04-15T22:34:49Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "javascript",
+      "language",
+      "typechecker",
+      "typescript"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 345,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 100
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 0
+      },
+      {
+        "lang": "Shell",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 79,
+      "activity": 75,
+      "documentation": 93,
+      "community": 86,
+      "maintenance": 58,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 86,
+    "full_name": "GrowingGit/GitHub-Chinese-Top-Charts",
+    "html_url": "https://github.com/GrowingGit/GitHub-Chinese-Top-Charts",
+    "description": ":cn: GitHub中文排行榜，各语言分设「软件 | 资料」榜单，精准定位中文好项目。各取所需，高效学习。",
+    "language": "Java",
+    "stars": 107558,
+    "forks": 13541,
+    "open_issues": 190,
+    "watchers": 0,
+    "size_kb": 123199,
+    "created_at": "2019-09-05T03:01:56Z",
+    "pushed_at": "2024-10-12T06:51:36Z",
+    "license": "NOASSERTION",
+    "topics": [],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 1,
+    "community_health": 42,
+    "top_languages": [
+      {
+        "lang": "Java",
+        "pct": 100
+      }
+    ],
+    "scores": {
+      "overall": 50,
+      "activity": 3,
+      "documentation": 50,
+      "community": 68,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 87,
+    "full_name": "denoland/deno",
+    "html_url": "https://github.com/denoland/deno",
+    "description": "A modern runtime for JavaScript and TypeScript.",
+    "language": "Rust",
+    "stars": 106492,
+    "forks": 6012,
+    "open_issues": 2343,
+    "watchers": 0,
+    "size_kb": 214020,
+    "created_at": "2018-05-15T01:34:26Z",
+    "pushed_at": "2026-04-16T09:07:12Z",
+    "license": "MIT",
+    "topics": [
+      "deno",
+      "javascript",
+      "rust",
+      "typescript"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 432,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "Rust",
+        "pct": 59
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 28
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 11
+      }
+    ],
+    "scores": {
+      "overall": 78,
+      "activity": 75,
+      "documentation": 93,
+      "community": 84,
+      "maintenance": 58,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 88,
+    "full_name": "fatedier/frp",
+    "html_url": "https://github.com/fatedier/frp",
+    "description": "A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet.",
+    "language": "Go",
+    "stars": 105952,
+    "forks": 15002,
+    "open_issues": 44,
+    "watchers": 0,
+    "size_kb": 31754,
+    "created_at": "2015-12-21T15:24:59Z",
+    "pushed_at": "2026-04-13T17:29:15Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "expose",
+      "firewall",
+      "frp",
+      "go",
+      "http-proxy",
+      "nat",
+      "p2p",
+      "proxy",
+      "reverse-proxy",
+      "tunnel"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 125,
+    "community_health": 57,
+    "top_languages": [
+      {
+        "lang": "Go",
+        "pct": 80
+      },
+      {
+        "lang": "Vue",
+        "pct": 15
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 3
+      }
+    ],
+    "scores": {
+      "overall": 80,
+      "activity": 75,
+      "documentation": 65,
+      "community": 83,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 89,
+    "full_name": "Shubhamsaboo/awesome-llm-apps",
+    "html_url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+    "description": "Collection of awesome LLM apps with AI Agents and RAG using OpenAI, Anthropic, Gemini and opensource models.",
+    "language": "Python",
+    "stars": 105827,
+    "forks": 15475,
+    "open_issues": 1,
+    "watchers": 0,
+    "size_kb": 201415,
+    "created_at": "2024-04-29T05:30:25Z",
+    "pushed_at": "2026-04-16T05:50:40Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "agents",
+      "llms",
+      "python",
+      "rag"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 76,
+    "community_health": 42,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 69
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 22
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 8
+      }
+    ],
+    "scores": {
+      "overall": 72,
+      "activity": 55,
+      "documentation": 63,
+      "community": 81,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 90,
+    "full_name": "tauri-apps/tauri",
+    "html_url": "https://github.com/tauri-apps/tauri",
+    "description": "Build smaller, faster, and more secure desktop and mobile applications with a web frontend.",
+    "language": "Rust",
+    "stars": 105521,
+    "forks": 3532,
+    "open_issues": 1409,
+    "watchers": 0,
+    "size_kb": 102716,
+    "created_at": "2019-07-13T09:09:37Z",
+    "pushed_at": "2026-04-16T09:35:57Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "desktop-app",
+      "high-performance",
+      "mobile-app",
+      "native-app",
+      "rust",
+      "web-frontend",
+      "webview"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 447,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "Rust",
+        "pct": 83
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 7
+      },
+      {
+        "lang": "NSIS",
+        "pct": 3
+      }
+    ],
+    "scores": {
+      "overall": 79,
+      "activity": 75,
+      "documentation": 95,
+      "community": 83,
+      "maintenance": 58,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 91,
+    "full_name": "papers-we-love/papers-we-love",
+    "html_url": "https://github.com/papers-we-love/papers-we-love",
+    "description": "Papers from the computer science community to read and discuss.",
+    "language": "Shell",
+    "stars": 105292,
+    "forks": 6325,
+    "open_issues": 2,
+    "watchers": 0,
+    "size_kb": 230841,
+    "created_at": "2013-12-15T14:31:41Z",
+    "pushed_at": "2026-03-26T09:31:12Z",
+    "license": "",
+    "topics": [
+      "awesome",
+      "computer-science",
+      "meetup",
+      "papers",
+      "programming",
+      "read-papers",
+      "theory"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 260,
+    "community_health": 62,
+    "top_languages": [
+      {
+        "lang": "Shell",
+        "pct": 100
+      }
+    ],
+    "scores": {
+      "overall": 75,
+      "activity": 47,
+      "documentation": 80,
+      "community": 83,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": false,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 92,
+    "full_name": "goldbergyoni/nodebestpractices",
+    "html_url": "https://github.com/goldbergyoni/nodebestpractices",
+    "description": ":white_check_mark:  The Node.js best practices list (July 2024)",
+    "language": "Dockerfile",
+    "stars": 105197,
+    "forks": 10718,
+    "open_issues": 98,
+    "watchers": 0,
+    "size_kb": 69535,
+    "created_at": "2017-09-15T08:33:19Z",
+    "pushed_at": "2025-04-15T21:52:42Z",
+    "license": "CC-BY-SA-4.0",
+    "topics": [
+      "best-practices",
+      "es6",
+      "eslint",
+      "express",
+      "expressjs",
+      "javascript",
+      "jest",
+      "microservices",
+      "mocha",
+      "node-js",
+      "nodejs",
+      "nodejs-development",
+      "npm",
+      "rest",
+      "style-guide",
+      "styleguide",
+      "testing",
+      "types"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 227,
+    "community_health": 42,
+    "top_languages": [
+      {
+        "lang": "Dockerfile",
+        "pct": 88
+      },
+      {
+        "lang": "TypeScript",
+        "pct": 12
+      }
+    ],
+    "scores": {
+      "overall": 58,
+      "activity": 3,
+      "documentation": 65,
+      "community": 84,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 93,
+    "full_name": "ggml-org/llama.cpp",
+    "html_url": "https://github.com/ggml-org/llama.cpp",
+    "description": "LLM inference in C/C++",
+    "language": "C++",
+    "stars": 103990,
+    "forks": 16896,
+    "open_issues": 1498,
+    "watchers": 0,
+    "size_kb": 381386,
+    "created_at": "2023-03-10T18:58:00Z",
+    "pushed_at": "2026-04-16T10:14:16Z",
+    "license": "MIT",
+    "topics": [
+      "ggml"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 444,
+    "community_health": 75,
+    "top_languages": [
+      {
+        "lang": "C++",
+        "pct": 58
+      },
+      {
+        "lang": "C",
+        "pct": 13
+      },
+      {
+        "lang": "Python",
+        "pct": 8
+      }
+    ],
+    "scores": {
+      "overall": 79,
+      "activity": 75,
+      "documentation": 72,
+      "community": 87,
+      "maintenance": 84,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 94,
+    "full_name": "facebook/create-react-app",
+    "html_url": "https://github.com/facebook/create-react-app",
+    "description": "Set up a modern web app by running one command.",
+    "language": "JavaScript",
+    "stars": 103537,
+    "forks": 27097,
+    "open_issues": 2377,
+    "watchers": 0,
+    "size_kb": 25186,
+    "created_at": "2016-07-17T14:55:11Z",
+    "pushed_at": "2025-02-15T01:32:11Z",
+    "license": "MIT",
+    "topics": [
+      "build-tools",
+      "react",
+      "zero-configuration"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 449,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "JavaScript",
+        "pct": 98
+      },
+      {
+        "lang": "Shell",
+        "pct": 1
+      },
+      {
+        "lang": "CSS",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 63,
+      "activity": 3,
+      "documentation": 91,
+      "community": 89,
+      "maintenance": 84,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 95,
+    "full_name": "microsoft/terminal",
+    "html_url": "https://github.com/microsoft/terminal",
+    "description": "The new Windows Terminal and the original Windows console host, all in the same place!",
+    "language": "C++",
+    "stars": 102743,
+    "forks": 9224,
+    "open_issues": 1720,
+    "watchers": 0,
+    "size_kb": 164317,
+    "created_at": "2017-08-11T18:38:22Z",
+    "pushed_at": "2026-04-16T01:31:57Z",
+    "license": "MIT",
+    "topics": [
+      "cmd",
+      "command-line",
+      "console",
+      "contributions-welcome",
+      "good-first-issue",
+      "hacktoberfest",
+      "terminal",
+      "windows",
+      "windows-console",
+      "windows-terminal",
+      "wsl"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 436,
+    "community_health": 100,
+    "top_languages": [
+      {
+        "lang": "C++",
+        "pct": 92
+      },
+      {
+        "lang": "C#",
+        "pct": 4
+      },
+      {
+        "lang": "C",
+        "pct": 2
+      }
+    ],
+    "scores": {
+      "overall": 79,
+      "activity": 75,
+      "documentation": 90,
+      "community": 85,
+      "maintenance": 66,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 96,
+    "full_name": "deepseek-ai/DeepSeek-V3",
+    "html_url": "https://github.com/deepseek-ai/DeepSeek-V3",
+    "description": null,
+    "language": "Python",
+    "stars": 102637,
+    "forks": 16650,
+    "open_issues": 149,
+    "watchers": 0,
+    "size_kb": 1768,
+    "created_at": "2024-12-26T09:52:40Z",
+    "pushed_at": "2025-08-28T03:24:37Z",
+    "license": "MIT",
+    "topics": [],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 23,
+    "community_health": 37,
+    "top_languages": [
+      {
+        "lang": "Python",
+        "pct": 100
+      }
+    ],
+    "scores": {
+      "overall": 58,
+      "activity": 34,
+      "documentation": 35,
+      "community": 77,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 97,
+    "full_name": "2dust/v2rayN",
+    "html_url": "https://github.com/2dust/v2rayN",
+    "description": "A GUI client for Windows, Linux and macOS, support Xray and sing-box and others",
+    "language": "C#",
+    "stars": 102242,
+    "forks": 14614,
+    "open_issues": 10,
+    "watchers": 0,
+    "size_kb": 46626,
+    "created_at": "2019-07-30T03:47:24Z",
+    "pushed_at": "2026-04-16T11:17:44Z",
+    "license": "GPL-3.0",
+    "topics": [
+      "proxy",
+      "shadowsocks",
+      "socks5",
+      "trojan",
+      "v2fly",
+      "v2ray",
+      "vless",
+      "vmess",
+      "windows",
+      "xray",
+      "xtls"
+    ],
+    "has_wiki": true,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 99,
+    "community_health": 42,
+    "top_languages": [
+      {
+        "lang": "C#",
+        "pct": 94
+      },
+      {
+        "lang": "Shell",
+        "pct": 6
+      }
+    ],
+    "scores": {
+      "overall": 79,
+      "activity": 75,
+      "documentation": 65,
+      "community": 82,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": false,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": false
+      }
+    }
+  },
+  {
+    "rank": 98,
+    "full_name": "jaywcjlove/awesome-mac",
+    "html_url": "https://github.com/jaywcjlove/awesome-mac",
+    "description": " This project is dedicated to collecting high-quality macOS software and organizing them systematically by different categories for easy search and use.",
+    "language": "Swift",
+    "stars": 102080,
+    "forks": 7629,
+    "open_issues": 250,
+    "watchers": 0,
+    "size_kb": 35107,
+    "created_at": "2016-07-17T15:33:47Z",
+    "pushed_at": "2026-04-16T02:33:36Z",
+    "license": "CC0-1.0",
+    "topics": [
+      "app",
+      "apple",
+      "application",
+      "apps",
+      "awesome",
+      "awesome-list",
+      "awesome-lists",
+      "awesome-mac",
+      "desktop-app",
+      "desktop-application",
+      "desktop-apps",
+      "list",
+      "mac",
+      "mac-osx",
+      "macos",
+      "macos-app",
+      "macos-apps",
+      "macosx",
+      "software"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 453,
+    "community_health": 85,
+    "top_languages": [
+      {
+        "lang": "Swift",
+        "pct": 99
+      },
+      {
+        "lang": "Dockerfile",
+        "pct": 1
+      }
+    ],
+    "scores": {
+      "overall": 89,
+      "activity": 75,
+      "documentation": 100,
+      "community": 85,
+      "maintenance": 100,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": true,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 99,
+    "full_name": "google-gemini/gemini-cli",
+    "html_url": "https://github.com/google-gemini/gemini-cli",
+    "description": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
+    "language": "TypeScript",
+    "stars": 101430,
+    "forks": 13147,
+    "open_issues": 2945,
+    "watchers": 0,
+    "size_kb": 90317,
+    "created_at": "2025-04-17T17:04:31Z",
+    "pushed_at": "2026-04-16T07:28:53Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "ai",
+      "ai-agents",
+      "cli",
+      "gemini",
+      "gemini-api",
+      "mcp-client",
+      "mcp-server"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 444,
+    "community_health": 75,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 98
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 2
+      },
+      {
+        "lang": "Shell",
+        "pct": 0
+      }
+    ],
+    "scores": {
+      "overall": 78,
+      "activity": 75,
+      "documentation": 85,
+      "community": 86,
+      "maintenance": 63,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": false,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  },
+  {
+    "rank": 100,
+    "full_name": "supabase/supabase",
+    "html_url": "https://github.com/supabase/supabase",
+    "description": "The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications.",
+    "language": "TypeScript",
+    "stars": 100939,
+    "forks": 12091,
+    "open_issues": 963,
+    "watchers": 0,
+    "size_kb": 2335114,
+    "created_at": "2019-10-12T05:56:49Z",
+    "pushed_at": "2026-04-16T10:47:47Z",
+    "license": "Apache-2.0",
+    "topics": [
+      "ai",
+      "alternative",
+      "auth",
+      "database",
+      "deno",
+      "embeddings",
+      "example",
+      "firebase",
+      "nextjs",
+      "oauth2",
+      "pgvector",
+      "postgis",
+      "postgres",
+      "postgresql",
+      "postgrest",
+      "realtime",
+      "supabase",
+      "vectors",
+      "websockets"
+    ],
+    "has_wiki": false,
+    "has_issues": true,
+    "archived": false,
+    "fork": false,
+    "contributor_count": 392,
+    "community_health": 87,
+    "top_languages": [
+      {
+        "lang": "TypeScript",
+        "pct": 69
+      },
+      {
+        "lang": "MDX",
+        "pct": 27
+      },
+      {
+        "lang": "JavaScript",
+        "pct": 3
+      }
+    ],
+    "scores": {
+      "overall": 85,
+      "activity": 75,
+      "documentation": 95,
+      "community": 86,
+      "maintenance": 88,
+      "doc_checks": {
+        "readme": true,
+        "license": true,
+        "contributing": true,
+        "coc": true,
+        "issue_template": false,
+        "pr_template": true
+      }
+    }
+  }
+]
