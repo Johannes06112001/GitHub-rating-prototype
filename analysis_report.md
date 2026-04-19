@@ -1,13 +1,13 @@
 # RepoScope — Analyse Top-100 Open-Source-Projekte
 
-*Generiert am 2026-04-16 11:29 — 100 Repositories analysiert*
+*Generiert am 2026-04-19 05:42 — 100 Repositories analysiert*
 
 ## Benchmark-Übersicht
 
 | Dimension | Ø Mean | Median | Std. | P25 | P75 |
 |-----------|-------:|-------:|-----:|----:|----:|
-| Overall       |     76 |     78 | 10.5 |  69 |  83 |
-| Activity      |     58 |     62 | 25.0 |  47 |  75 |
+| Overall       |     76 |     78 | 10.5 |  71 |  84 |
+| Activity      |     58 |     67 | 25.2 |  47 |  75 |
 | Documentation |     79 |     85 | 17.0 |  65 |  95 |
 | Community     |     86 |     87 |  5.3 |  84 |  89 |
 | Maintenance   |     88 |    100 | 17.3 |  80 | 100 |
@@ -16,16 +16,16 @@
 
 | Rang | Repository | Score | Stars | Sprache |
 |-----:|-----------|------:|------:|---------|
-|  1 | [facebook/react-native](https://github.com/facebook/react-native) | 97 | 125.702 | C++ |
-|  2 | [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow) | 95 | 194.759 | C++ |
-|  3 | [rustdesk/rustdesk](https://github.com/rustdesk/rustdesk) | 93 | 111.346 | Rust |
-|  4 | [twbs/bootstrap](https://github.com/twbs/bootstrap) | 91 | 174.168 | MDX |
-|  5 | [facebook/react](https://github.com/facebook/react) | 89 | 244.560 | JavaScript |
-|  6 | [n8n-io/n8n](https://github.com/n8n-io/n8n) | 89 | 184.295 | TypeScript |
-|  7 | [Significant-Gravitas/AutoGPT](https://github.com/Significant-Gravitas/AutoGPT) | 89 | 183.478 | Python |
-|  8 | [axios/axios](https://github.com/axios/axios) | 89 | 109.031 | JavaScript |
-|  9 | [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac) | 89 | 102.080 | Swift |
-| 10 | [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 88 | 158.070 | JavaScript |
+|  1 | [facebook/react-native](https://github.com/facebook/react-native) | 97 | 125.722 | C++ |
+|  2 | [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow) | 95 | 194.780 | C++ |
+|  3 | [twbs/bootstrap](https://github.com/twbs/bootstrap) | 91 | 174.183 | MDX |
+|  4 | [facebook/react](https://github.com/facebook/react) | 89 | 244.577 | JavaScript |
+|  5 | [n8n-io/n8n](https://github.com/n8n-io/n8n) | 89 | 184.631 | TypeScript |
+|  6 | [Significant-Gravitas/AutoGPT](https://github.com/Significant-Gravitas/AutoGPT) | 89 | 183.546 | Python |
+|  7 | [axios/axios](https://github.com/axios/axios) | 89 | 109.040 | JavaScript |
+|  8 | [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac) | 89 | 102.244 | Swift |
+|  9 | [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) | 88 | 160.578 | JavaScript |
+| 10 | [langgenius/dify](https://github.com/langgenius/dify) | 88 | 138.273 | TypeScript |
 
 ## Häufigste Programmiersprachen
 
