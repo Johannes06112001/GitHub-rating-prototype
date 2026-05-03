@@ -1,39 +1,39 @@
 # RepoScope — Analyse Top-100 Open-Source-Projekte
 
-*Generiert am 2026-04-26 05:52 — 100 Repositories analysiert*
+*Generiert am 2026-05-03 06:16 — 100 Repositories analysiert*
 
 ## Benchmark-Übersicht
 
 | Dimension | Ø Mean | Median | Std. | P25 | P75 |
 |-----------|-------:|-------:|-----:|----:|----:|
-| Overall       |     76 |     78 | 10.7 |  70 |  83 |
-| Activity      |     59 |     61 | 25.9 |  47 |  75 |
-| Documentation |     79 |     85 | 16.9 |  65 |  93 |
-| Community     |     86 |     87 |  5.3 |  84 |  89 |
-| Maintenance   |     87 |    100 | 17.4 |  78 | 100 |
+| Overall       |     76 |     78 | 10.5 |  68 |  83 |
+| Activity      |     58 |     61 | 25.3 |  47 |  75 |
+| Documentation |     79 |     85 | 17.5 |  65 |  93 |
+| Community     |     86 |     87 |  5.4 |  84 |  89 |
+| Maintenance   |     88 |    100 | 17.3 |  80 | 100 |
 
 ## Top 10 nach Gesamt-Score
 
 | Rang | Repository | Score | Stars | Sprache |
 |-----:|-----------|------:|------:|---------|
-|  1 | [facebook/react-native](https://github.com/facebook/react-native) | 97 | 125.729 | C++ |
-|  2 | [electron/electron](https://github.com/electron/electron) | 96 | 121.039 | C++ |
-|  3 | [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow) | 95 | 194.883 | C++ |
-|  4 | [huggingface/transformers](https://github.com/huggingface/transformers) | 95 | 159.926 | Python |
-|  5 | [nodejs/node](https://github.com/nodejs/node) | 94 | 116.904 | JavaScript |
-|  6 | [rustdesk/rustdesk](https://github.com/rustdesk/rustdesk) | 93 | 112.910 | Rust |
-|  7 | [open-webui/open-webui](https://github.com/open-webui/open-webui) | 92 | 134.136 | Python |
-|  8 | [twbs/bootstrap](https://github.com/twbs/bootstrap) | 91 | 174.205 | MDX |
-|  9 | [vercel/next.js](https://github.com/vercel/next.js) | 91 | 139.165 | JavaScript |
-| 10 | [openclaw/openclaw](https://github.com/openclaw/openclaw) | 89 | 364.008 | TypeScript |
+|  1 | [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow) | 95 | 194.975 | C++ |
+|  2 | [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes) | 95 | 122.032 | Go |
+|  3 | [nodejs/node](https://github.com/nodejs/node) | 94 | 117.017 | JavaScript |
+|  4 | [open-webui/open-webui](https://github.com/open-webui/open-webui) | 92 | 135.259 | Python |
+|  5 | [openclaw/openclaw](https://github.com/openclaw/openclaw) | 91 | 367.641 | TypeScript |
+|  6 | [facebook/react-native](https://github.com/facebook/react-native) | 90 | 125.745 | C++ |
+|  7 | [facebook/react](https://github.com/facebook/react) | 89 | 244.805 | JavaScript |
+|  8 | [n8n-io/n8n](https://github.com/n8n-io/n8n) | 89 | 186.508 | TypeScript |
+|  9 | [Significant-Gravitas/AutoGPT](https://github.com/Significant-Gravitas/AutoGPT) | 89 | 183.949 | Python |
+| 10 | [twbs/bootstrap](https://github.com/twbs/bootstrap) | 89 | 174.217 | MDX |
 
 ## Häufigste Programmiersprachen
 
 | Sprache | Anzahl Repos |
 |---------|:------------:|
 | Python | 20 |
-| TypeScript | 16 |
-| Other | 13 |
+| TypeScript | 15 |
+| Other | 14 |
 | JavaScript | 10 |
 | C++ | 6 |
 | Rust | 5 |
