@@ -5,999 +5,586 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RepoScope — Top-100 Analyse</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:         #080e1c;
-  --surface:    #0d1526;
-  --surface2:   #121f38;
-  --border:     #1e3050;
-  --accent:     #00e5a0;
-  --accent-dim: rgba(0,229,160,0.08);
-  --accent2:    #4f8cff;
-  --text:       #e2e8f0;
-  --muted:      #64748b;
-  --red:        #ff4d6d;
-  --amber:      #fbbf24;
-  --green:      #00e5a0;
-  --mono:       'Space Mono', monospace;
-  --display:    'Syne', sans-serif;
+  --bg:#06080f; --surface:#0c1018; --surface2:#111722; --border:#1c2535;
+  --border2:#253045; --accent:#3dffa0; --accent-d:rgba(61,255,160,.08);
+  --accent2:#5b9cf6; --amber:#f5c842; --red:#f75f6c;
+  --text:#dce6f5; --muted:#566880;
+  --p1:#3dffa0; --p2:#5b9cf6; --p3:#f5c842;
+  --mono:'IBM Plex Mono',monospace; --sans:'DM Sans',sans-serif;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(61,255,160,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(61,255,160,.018) 1px,transparent 1px);
+  background-size:48px 48px;}
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--display);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-body::before {
-  content: '';
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(0,229,160,.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,229,160,.025) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
+nav{position:sticky;top:0;z-index:200;background:rgba(6,8,15,.9);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.65rem 2rem;}
+.nav-logo{font-family:var(--mono);font-size:.95rem;font-weight:700;text-decoration:none;letter-spacing:-.02em;}
+.nav-logo b{color:var(--accent);} .nav-logo span{color:var(--text);}
+.nav-links{display:flex;gap:.25rem;}
+.nav-link{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+  color:var(--muted);padding:.4rem .9rem;border-radius:6px;transition:background .2s,color .2s;}
+.nav-link:hover{background:var(--surface2);color:var(--text);}
+.nav-link.active{background:var(--accent-d);color:var(--accent);}
 
-/* ── NAV ────────────────────────────────── */
-.site-nav {
-  position: sticky; top: 0; z-index: 200;
-  background: rgba(8,14,28,.92);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center;
-  justify-content: space-between;
-  padding: .7rem 2rem;
-}
-.nav-logo {
-  font-family: var(--mono); font-size: 1rem; font-weight: 700;
-  letter-spacing: -.03em; text-decoration: none;
-}
-.nav-logo span:first-child { color: var(--accent); }
-.nav-logo span:last-child  { color: var(--text); }
-.nav-links { display: flex; gap: .4rem; }
-.nav-link {
-  font-family: var(--mono); font-size: .68rem; letter-spacing: .08em;
-  text-transform: uppercase; text-decoration: none;
-  color: var(--muted); padding: .45rem 1rem; border-radius: 8px;
-  transition: background .2s, color .2s;
-}
-.nav-link:hover  { background: var(--surface2); color: var(--text); }
-.nav-link.active { background: var(--accent-dim); color: var(--accent); }
+.page-hdr{max-width:1400px;margin:0 auto;padding:2.25rem 2rem 1.25rem;position:relative;z-index:1;}
+.page-title{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:800;margin-bottom:.3rem;}
+.page-title span{color:var(--accent);}
+.page-sub{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.06em;}
 
-/* ── PAGE HEADER ─────────────────────────── */
-.page-header {
-  padding: 2.5rem 2rem 1.5rem;
-  position: relative; z-index: 1;
-  max-width: 1400px; margin: 0 auto;
-}
-.page-title { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; margin-bottom: .35rem; }
-.page-title span { color: var(--accent); }
-.page-sub {
-  font-family: var(--mono); font-size: .75rem;
-  color: var(--muted); letter-spacing: .05em;
-}
+.demo-banner{max-width:1400px;margin:0 auto .75rem;padding:0 2rem;position:relative;z-index:1;}
+.demo-inner{background:rgba(245,200,66,.07);border:1px solid rgba(245,200,66,.2);border-radius:9px;
+  padding:.65rem 1.1rem;font-family:var(--mono);font-size:.7rem;color:var(--amber);}
+.demo-inner code{background:rgba(245,200,66,.12);padding:.1rem .4rem;border-radius:3px;font-size:.65rem;}
 
-/* ── DEMO BANNER ─────────────────────────── */
-.demo-banner {
-  max-width: 1400px; margin: 0 auto 1rem;
-  padding: 0 2rem;
-  position: relative; z-index: 1;
-}
-.demo-banner-inner {
-  background: rgba(251,191,36,.08); border: 1px solid rgba(251,191,36,.25);
-  border-radius: 10px; padding: .75rem 1.25rem;
-  font-family: var(--mono); font-size: .72rem; color: var(--amber);
-  display: flex; align-items: center; gap: .75rem;
-}
-.demo-banner-inner code {
-  background: rgba(251,191,36,.12); padding: .1rem .45rem;
-  border-radius: 4px; font-size: .68rem;
-}
+.stats-row{max-width:1400px;margin:0 auto 1.25rem;padding:0 2rem;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;position:relative;z-index:1;}
+@media(max-width:900px){.stats-row{grid-template-columns:repeat(2,1fr);}}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:1.1rem 1.3rem;display:flex;align-items:center;gap:.85rem;}
+.sc-icon{font-size:1.4rem;flex-shrink:0;}
+.sc-val{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--accent);line-height:1;}
+.sc-lbl{font-family:var(--mono);font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.15rem;}
 
-/* ── STAT CARDS ──────────────────────────── */
-.stats-row {
-  max-width: 1400px; margin: 0 auto 1.5rem;
-  padding: 0 2rem;
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1rem; position: relative; z-index: 1;
-}
-@media (max-width: 900px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 500px) { .stats-row { grid-template-columns: 1fr; } }
-.stat-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 14px; padding: 1.25rem 1.5rem;
-  display: flex; align-items: center; gap: 1rem;
-}
-.stat-card-icon { font-size: 1.5rem; flex-shrink: 0; }
-.stat-card-val {
-  font-family: var(--mono); font-size: 1.4rem; font-weight: 700;
-  color: var(--accent); line-height: 1;
-}
-.stat-card-lbl {
-  font-family: var(--mono); font-size: .65rem;
-  color: var(--muted); text-transform: uppercase; letter-spacing: .1em;
-  margin-top: .2rem;
-}
+.ctrl-row{max-width:1400px;margin:0 auto 1rem;padding:0 2rem;
+  display:flex;gap:.65rem;flex-wrap:wrap;position:relative;z-index:1;align-items:center;}
+.ctrl-in{flex:1;min-width:200px;background:var(--surface);border:1px solid var(--border);
+  border-radius:9px;padding:.6rem 1rem;color:var(--text);font-family:var(--mono);font-size:.78rem;outline:none;transition:border-color .2s;}
+.ctrl-in:focus{border-color:var(--accent);}
+.ctrl-in::placeholder{color:var(--muted);}
+.ctrl-sel{background:var(--surface);border:1px solid var(--border);border-radius:9px;
+  padding:.6rem .9rem;color:var(--text);font-family:var(--mono);font-size:.75rem;outline:none;cursor:pointer;}
+.ctrl-sel option{background:var(--surface2);}
+.ctrl-sel:focus{border-color:var(--accent);}
+.btn-reset{background:none;border:1px solid var(--border);border-radius:9px;
+  padding:.6rem 1rem;color:var(--muted);font-family:var(--mono);font-size:.72rem;cursor:pointer;transition:all .2s;}
+.btn-reset:hover{border-color:var(--accent);color:var(--accent);}
+.ctrl-count{font-family:var(--mono);font-size:.7rem;color:var(--muted);white-space:nowrap;margin-left:auto;}
 
-/* ── CONTROLS ────────────────────────────── */
-.controls-row {
-  max-width: 1400px; margin: 0 auto 1.25rem;
-  padding: 0 2rem;
-  display: flex; gap: .75rem; flex-wrap: wrap;
-  position: relative; z-index: 1;
-  align-items: center;
-}
-.ctrl-input {
-  flex: 1; min-width: 200px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 10px; padding: .65rem 1.1rem;
-  color: var(--text); font-family: var(--mono); font-size: .8rem;
-  outline: none; transition: border-color .2s;
-}
-.ctrl-input:focus { border-color: var(--accent); }
-.ctrl-input::placeholder { color: var(--muted); }
-.ctrl-select {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 10px; padding: .65rem 1rem;
-  color: var(--text); font-family: var(--mono); font-size: .78rem;
-  outline: none; cursor: pointer; transition: border-color .2s;
-  min-width: 150px;
-}
-.ctrl-select:focus { border-color: var(--accent); }
-.ctrl-select option { background: var(--surface2); }
-.btn-reset {
-  background: none; border: 1px solid var(--border); border-radius: 10px;
-  padding: .65rem 1.1rem; color: var(--muted);
-  font-family: var(--mono); font-size: .75rem; cursor: pointer;
-  transition: border-color .2s, color .2s;
-}
-.btn-reset:hover { border-color: var(--accent); color: var(--accent); }
-.ctrl-count {
-  font-family: var(--mono); font-size: .72rem; color: var(--muted);
-  white-space: nowrap; margin-left: auto;
-}
-
-/* ── TABLE WRAPPER ───────────────────────── */
-.table-wrapper {
-  max-width: 1400px; margin: 0 auto 6rem;
-  padding: 0 2rem;
-  position: relative; z-index: 1;
-}
-.table-scroll {
-  overflow-x: auto;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-}
-table {
-  width: 100%; border-collapse: collapse;
-  font-size: .82rem; min-width: 1100px;
-}
-thead tr {
-  background: var(--surface2);
-  border-bottom: 1px solid var(--border);
-}
-th {
-  padding: .75rem 1rem; text-align: left;
-  font-family: var(--mono); font-size: .65rem;
-  letter-spacing: .12em; text-transform: uppercase;
-  color: var(--muted); white-space: nowrap;
-  user-select: none; cursor: pointer;
-  transition: color .2s;
-}
-th:first-child  { width: 36px; cursor: default; padding: .75rem .75rem .75rem 1.25rem; }
-th:nth-child(2) { width: 48px; }
-th.sort-asc  { color: var(--accent); }
-th.sort-desc { color: var(--accent); }
-th.sort-asc  span.sort-icon::after { content: ' ↑'; }
-th.sort-desc span.sort-icon::after { content: ' ↓'; }
-th:not(:first-child):not(:nth-child(2)):hover { color: var(--text); }
-
-tbody tr {
-  border-bottom: 1px solid var(--border);
-  transition: background .15s;
-  cursor: pointer;
-}
-tbody tr:last-child { border-bottom: none; }
-tbody tr:hover    { background: rgba(0,229,160,.03); }
-tbody tr.selected { background: rgba(0,229,160,.06); }
-
-td {
-  padding: .7rem 1rem; vertical-align: middle;
-}
-td:first-child { padding-left: 1.25rem; }
-
-/* Cells */
-.td-rank {
-  font-family: var(--mono); font-size: .72rem;
-  color: var(--muted); text-align: center;
-}
-.td-repo { min-width: 200px; max-width: 280px; }
-.repo-name {
-  font-weight: 700; font-size: .84rem;
-  color: var(--text); text-decoration: none;
-  transition: color .2s; display: block;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.repo-name:hover { color: var(--accent); }
-.repo-tiny {
-  font-size: .7rem; color: var(--muted); margin-top: .1rem;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  max-width: 260px; display: block;
-  font-family: var(--mono);
-}
-.lang-badge {
-  display: inline-block;
-  font-family: var(--mono); font-size: .65rem;
-  padding: .2rem .55rem; border-radius: 5px;
-  white-space: nowrap;
-}
-.td-num {
-  font-family: var(--mono); font-size: .78rem;
-  text-align: right; white-space: nowrap;
-}
-.td-date {
-  font-family: var(--mono); font-size: .72rem;
-  color: var(--muted); white-space: nowrap;
-}
-.td-license {
-  font-family: var(--mono); font-size: .68rem;
-  color: var(--muted); white-space: nowrap;
-}
+.tbl-wrap{max-width:1400px;margin:0 auto 6rem;padding:0 2rem;position:relative;z-index:1;}
+.tbl-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:14px;}
+table{width:100%;border-collapse:collapse;font-size:.8rem;min-width:1150px;}
+thead tr{background:var(--surface2);border-bottom:1px solid var(--border);}
+th{padding:.7rem .9rem;text-align:left;font-family:var(--mono);font-size:.62rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap;user-select:none;cursor:pointer;}
+th:first-child{cursor:default;padding:.7rem .7rem .7rem 1.1rem;}
+th.s-asc,th.s-desc{color:var(--accent);}
+th.s-asc .si::after{content:' ↑';}th.s-desc .si::after{content:' ↓';}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s;cursor:pointer;}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:hover{background:rgba(61,255,160,.025);}
+tbody tr.sel{background:rgba(61,255,160,.05);}
+td{padding:.65rem .9rem;vertical-align:middle;}
+td:first-child{padding-left:1.1rem;}
+.td-rank{font-family:var(--mono);font-size:.7rem;color:var(--muted);text-align:center;}
+.rn{font-weight:700;font-size:.82rem;color:var(--text);text-decoration:none;display:block;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px;transition:color .2s;}
+.rn:hover{color:var(--accent);}
+.rd{font-family:var(--mono);font-size:.66rem;color:var(--muted);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;max-width:210px;display:block;margin-top:.1rem;}
+.lang-b{display:inline-block;font-family:var(--mono);font-size:.63rem;
+  padding:.18rem .5rem;border-radius:5px;white-space:nowrap;}
+.tn{font-family:var(--mono);font-size:.76rem;text-align:right;white-space:nowrap;}
+.td-date{font-family:var(--mono);font-size:.7rem;color:var(--muted);white-space:nowrap;}
 
 /* Score bar cell */
-.score-cell { min-width: 90px; }
-.mini-bar-wrap {
-  display: flex; align-items: center; gap: .45rem;
-}
-.mini-bar-bg {
-  flex: 1; height: 5px; background: var(--border);
-  border-radius: 999px; overflow: hidden; min-width: 40px;
-}
-.mini-bar-fill {
-  height: 100%; border-radius: 999px;
-  transition: width .8s ease;
-}
-.mini-bar-num {
-  font-family: var(--mono); font-size: .72rem;
-  font-weight: 700; width: 24px; text-align: right;
-}
+.sbar{min-width:85px;}
+.sbar-w{display:flex;align-items:center;gap:.4rem;}
+.sbar-bg{flex:1;height:4px;background:var(--border);border-radius:999px;overflow:hidden;min-width:36px;}
+.sbar-fill{height:100%;border-radius:999px;transition:width .8s ease;}
+.sbar-n{font-family:var(--mono);font-size:.7rem;font-weight:700;width:22px;text-align:right;}
+.overall-b{font-family:var(--mono);font-size:.82rem;font-weight:700;display:inline-flex;align-items:center;gap:.3rem;}
+.gp{font-size:.6rem;padding:.08rem .32rem;border-radius:4px;}
+input[type=checkbox]{width:14px;height:14px;accent-color:var(--accent);cursor:pointer;}
+.no-res{padding:4rem 2rem;text-align:center;font-family:var(--mono);font-size:.8rem;color:var(--muted);}
 
-/* Overall badge */
-.overall-badge {
-  font-family: var(--mono); font-size: .85rem; font-weight: 700;
-  display: inline-flex; align-items: center; gap: .3rem;
-}
-.grade-pill {
-  font-size: .6rem; padding: .1rem .35rem; border-radius: 4px;
-  background: var(--accent-dim); line-height: 1.4;
-}
+/* Compare FAB */
+.cfab{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);z-index:150;
+  background:var(--accent);color:var(--bg);border:none;border-radius:999px;
+  padding:.8rem 1.75rem;cursor:pointer;font-family:var(--mono);font-size:.8rem;font-weight:700;
+  white-space:nowrap;box-shadow:0 8px 28px rgba(61,255,160,.3);
+  transition:transform .2s,box-shadow .2s,opacity .2s;opacity:0;pointer-events:none;
+  display:flex;align-items:center;gap:.55rem;}
+.cfab.vis{opacity:1;pointer-events:all;}
+.cfab:hover{transform:translateX(-50%) translateY(-2px);box-shadow:0 12px 36px rgba(61,255,160,.4);}
+.cfab-n{background:var(--bg);color:var(--accent);border-radius:50%;width:20px;height:20px;
+  display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;}
 
-/* Checkbox */
-input[type="checkbox"] {
-  width: 15px; height: 15px; accent-color: var(--accent);
-  cursor: pointer;
-}
-.no-results {
-  padding: 4rem 2rem; text-align: center;
-  font-family: var(--mono); font-size: .82rem; color: var(--muted);
-}
+/* Modal */
+.modal-ov{position:fixed;inset:0;z-index:300;background:rgba(6,8,15,.85);
+  backdrop-filter:blur(8px);display:flex;align-items:flex-start;justify-content:center;
+  overflow-y:auto;padding:2rem 1rem 3rem;opacity:0;pointer-events:none;transition:opacity .25s;}
+.modal-ov.open{opacity:1;pointer-events:all;}
+.modal-box{background:var(--surface);border:1px solid var(--border);border-radius:18px;
+  width:100%;max-width:1150px;overflow:hidden;
+  transform:translateY(20px);transition:transform .3s cubic-bezier(.4,0,.2,1);}
+.modal-ov.open .modal-box{transform:translateY(0);}
+.modal-hdr{padding:1.25rem 1.75rem 1rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;}
+.modal-title{font-family:var(--mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
+.modal-x{background:var(--surface2);border:1px solid var(--border);border-radius:7px;
+  width:30px;height:30px;color:var(--muted);cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;font-size:.9rem;}
+.modal-x:hover{color:var(--text);border-color:var(--text);}
+.modal-body{padding:1.75rem;overflow-x:auto;}
+.cmp-grid{display:grid;gap:.85rem;}
+.cmp-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.cmp-head{padding:1.1rem 1.1rem .7rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:flex-start;gap:.65rem;}
+.cmp-av{width:34px;height:34px;border-radius:7px;flex-shrink:0;}
+.cmp-rn{font-weight:700;font-size:.84rem;text-decoration:none;color:var(--text);
+  display:block;transition:color .2s;word-break:break-all;line-height:1.2;}
+.cmp-rn:hover{color:var(--accent);}
+.cmp-lang{font-family:var(--mono);font-size:.63rem;color:var(--muted);margin-top:.2rem;}
+.cmp-ov{margin-left:auto;flex-shrink:0;font-family:var(--mono);font-size:1.45rem;font-weight:700;line-height:1;}
+.cmp-body{padding:1.1rem;}
+.cpm{margin-bottom:.9rem;}
+.cpm:last-child{margin-bottom:0;}
+.cpm-h{display:flex;justify-content:space-between;margin-bottom:.28rem;}
+.cpm-l{font-size:.7rem;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+.cpm-v{font-size:.76rem;font-family:var(--mono);font-weight:700;}
+.cpm-bg{height:6px;background:var(--border);border-radius:999px;overflow:hidden;}
+.cpm-fill{height:100%;border-radius:999px;transition:width 1s cubic-bezier(.4,0,.2,1);}
+.csep{margin:1rem 0;border:none;border-top:1px solid var(--border);}
+.ckv{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid var(--border);font-size:.74rem;}
+.ckv:last-child{border-bottom:none;}
+.ckv-l{color:var(--muted);font-family:var(--mono);font-size:.68rem;}
+.ckv-v{font-family:var(--mono);font-size:.74rem;font-weight:700;}
+.wb{display:inline-block;font-family:var(--mono);font-size:.58rem;background:rgba(61,255,160,.1);
+  color:var(--accent);border-radius:3px;padding:.02rem .3rem;margin-left:.3rem;}
 
-/* ── COMPARE BUTTON (fixed) ──────────────── */
-.compare-fab {
-  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
-  z-index: 150;
-  background: var(--accent); color: var(--bg);
-  border: none; border-radius: 999px;
-  padding: .85rem 2rem; cursor: pointer;
-  font-family: var(--mono); font-size: .82rem; font-weight: 700;
-  letter-spacing: .04em; white-space: nowrap;
-  box-shadow: 0 8px 30px rgba(0,229,160,.35);
-  transition: transform .2s, box-shadow .2s, opacity .2s;
-  opacity: 0; pointer-events: none;
-  display: flex; align-items: center; gap: .6rem;
-}
-.compare-fab.visible { opacity: 1; pointer-events: all; }
-.compare-fab:hover   { transform: translateX(-50%) translateY(-2px); box-shadow: 0 12px 40px rgba(0,229,160,.45); }
-.compare-fab-count {
-  background: var(--bg); color: var(--accent);
-  border-radius: 50%; width: 22px; height: 22px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: .72rem; font-weight: 700;
-}
-
-/* ── COMPARISON MODAL ────────────────────── */
-.modal-overlay {
-  position: fixed; inset: 0; z-index: 300;
-  background: rgba(8,14,28,.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  display: flex; align-items: flex-start;
-  justify-content: center; overflow-y: auto;
-  padding: 2rem 1rem 3rem;
-  opacity: 0; pointer-events: none;
-  transition: opacity .25s;
-}
-.modal-overlay.open { opacity: 1; pointer-events: all; }
-.modal-box {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 20px; width: 100%; max-width: 1200px;
-  overflow: hidden;
-  transform: translateY(20px);
-  transition: transform .3s cubic-bezier(.4,0,.2,1);
-}
-.modal-overlay.open .modal-box { transform: translateY(0); }
-.modal-header {
-  padding: 1.5rem 2rem 1.25rem;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.modal-title {
-  font-family: var(--mono); font-size: .7rem;
-  letter-spacing: .18em; text-transform: uppercase; color: var(--accent);
-}
-.modal-close {
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 8px; width: 32px; height: 32px;
-  color: var(--muted); cursor: pointer; font-size: 1rem;
-  transition: color .2s, border-color .2s;
-  display: flex; align-items: center; justify-content: center;
-}
-.modal-close:hover { color: var(--text); border-color: var(--text); }
-.modal-body { padding: 2rem; overflow-x: auto; }
-.compare-grid {
-  display: grid; gap: 1rem;
-  /* set dynamically via JS */
-}
-.compare-card {
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 14px; overflow: hidden;
-}
-.compare-card-head {
-  padding: 1.25rem 1.25rem .75rem;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: flex-start; gap: .75rem;
-}
-.compare-avatar { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; }
-.compare-repo-name {
-  font-weight: 700; font-size: .88rem;
-  text-decoration: none; color: var(--text);
-  display: block; transition: color .2s;
-  line-height: 1.2; word-break: break-all;
-}
-.compare-repo-name:hover { color: var(--accent); }
-.compare-repo-lang { font-family: var(--mono); font-size: .65rem; color: var(--muted); margin-top: .2rem; }
-.compare-overall {
-  margin-left: auto; flex-shrink: 0;
-  font-family: var(--mono); font-size: 1.5rem; font-weight: 700;
-  line-height: 1;
-}
-.compare-body { padding: 1.25rem; }
-.compare-metric {
-  margin-bottom: 1rem;
-}
-.compare-metric:last-child { margin-bottom: 0; }
-.compare-metric-head {
-  display: flex; justify-content: space-between;
-  margin-bottom: .3rem;
-}
-.compare-metric-lbl {
-  font-size: .72rem; font-family: var(--mono); color: var(--muted);
-  text-transform: uppercase; letter-spacing: .08em;
-}
-.compare-metric-val {
-  font-size: .78rem; font-family: var(--mono); font-weight: 700;
-}
-.compare-bar-bg {
-  height: 7px; background: var(--border);
-  border-radius: 999px; overflow: hidden;
-}
-.compare-bar-fill {
-  height: 100%; border-radius: 999px;
-  transition: width 1s cubic-bezier(.4,0,.2,1);
-}
-.compare-sep {
-  margin: 1.25rem 0;
-  border: none; border-top: 1px solid var(--border);
-}
-.compare-kv {
-  display: flex; justify-content: space-between;
-  padding: .35rem 0; border-bottom: 1px solid var(--border);
-  font-size: .76rem;
-}
-.compare-kv:last-child { border-bottom: none; }
-.compare-kv-lbl { color: var(--muted); font-family: var(--mono); font-size: .7rem; }
-.compare-kv-val { font-family: var(--mono); font-size: .76rem; font-weight: 700; }
-.winner-badge {
-  display: inline-block; font-family: var(--mono); font-size: .6rem;
-  background: rgba(0,229,160,.12); color: var(--accent);
-  border-radius: 4px; padding: .05rem .35rem;
-  margin-left: .4rem; vertical-align: middle;
-}
-
-/* ── ANIMATIONS ──────────────────────────── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.anim { opacity: 0; animation: fadeUp .4s ease forwards; }
-.anim-1 { animation-delay: .05s; }
-.anim-2 { animation-delay: .10s; }
-.anim-3 { animation-delay: .15s; }
-.anim-4 { animation-delay: .20s; }
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.anim{opacity:0;animation:fadeUp .4s ease forwards;}
+.a1{animation-delay:.05s;}.a2{animation-delay:.10s;}.a3{animation-delay:.15s;}.a4{animation-delay:.20s;}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="site-nav">
-  <a href="index.html" class="nav-logo"><span>Repo</span><span>Scope</span></a>
+<nav>
+  <a class="nav-logo" href="index.html"><b>Repo</b><span>Scope</span></a>
   <div class="nav-links">
-    <a href="index.html"   class="nav-link">🔍 Analyzer</a>
-    <a href="analysis.html" class="nav-link active">📊 Top-100 Analyse</a>
+    <a class="nav-link" href="index.html">🔍 Analyzer</a>
+    <a class="nav-link active" href="analysis.html">📊 Top-100 Analyse</a>
   </div>
 </nav>
 
-<!-- HEADER -->
-<div class="page-header">
+<div class="page-hdr">
   <h1 class="page-title">Top-100 <span>Open-Source</span> Projekte</h1>
-  <p class="page-sub">Sortierbare Tabelle · Parametervergleich · Benchmark-Daten</p>
+  <p class="page-sub">CHAOSS 3-Säulen-Scoring · Zhao et al. (2021) · Sortierbar · Vergleichbar</p>
 </div>
 
-<!-- DEMO BANNER -->
 <div class="demo-banner" id="demoBanner" style="display:none">
-  <div class="demo-banner-inner">
-    ⚠ Demo-Daten — Führe <code>python collect_data.py</code> aus und pushe <code>top100_repos.json</code>
-    um echte, aktuelle Daten zu laden.
+  <div class="demo-inner">
+    ⚠ Demo-Daten (30 Repos) — Führe <code>python collect_data.py</code> aus und pushe
+    <code>top100_repos.json</code> für echte Top-100-Daten.
   </div>
 </div>
 
-<!-- STATS -->
 <div class="stats-row">
-  <div class="stat-card anim anim-1">
-    <div class="stat-card-icon">📦</div>
-    <div>
-      <div class="stat-card-val" id="statTotal">—</div>
-      <div class="stat-card-lbl">Repositories</div>
-    </div>
-  </div>
-  <div class="stat-card anim anim-2">
-    <div class="stat-card-icon">⭐</div>
-    <div>
-      <div class="stat-card-val" id="statAvgScore">—</div>
-      <div class="stat-card-lbl">Ø Gesamt-Score</div>
-    </div>
-  </div>
-  <div class="stat-card anim anim-3">
-    <div class="stat-card-icon">🏆</div>
-    <div>
-      <div class="stat-card-val" id="statTopScore">—</div>
-      <div class="stat-card-lbl">Höchster Score</div>
-    </div>
-  </div>
-  <div class="stat-card anim anim-4">
-    <div class="stat-card-icon">🌐</div>
-    <div>
-      <div class="stat-card-val" id="statTopLang">—</div>
-      <div class="stat-card-lbl">Häufigste Sprache</div>
-    </div>
-  </div>
+  <div class="sc anim a1"><div class="sc-icon">📦</div><div><div class="sc-val" id="stTotal">—</div><div class="sc-lbl">Repositories</div></div></div>
+  <div class="sc anim a2"><div class="sc-icon">⭐</div><div><div class="sc-val" id="stAvg">—</div><div class="sc-lbl">Ø Gesamt-Score</div></div></div>
+  <div class="sc anim a3"><div class="sc-icon">🏆</div><div><div class="sc-val" id="stTop">—</div><div class="sc-lbl">Höchster Score</div></div></div>
+  <div class="sc anim a4"><div class="sc-icon">🌐</div><div><div class="sc-val" id="stLang">—</div><div class="sc-lbl">Häufigste Sprache</div></div></div>
 </div>
 
-<!-- CONTROLS -->
-<div class="controls-row">
-  <input class="ctrl-input" type="text" id="searchInput"
-    placeholder="🔍  Repository suchen …" oninput="applyFilters()" />
-  <select class="ctrl-select" id="langFilter" onchange="applyFilters()">
-    <option value="">Alle Sprachen</option>
-  </select>
-  <select class="ctrl-select" id="sortSelect" onchange="applyFilters()">
+<div class="ctrl-row">
+  <input class="ctrl-in" type="text" id="searchIn" placeholder="🔍 Repository suchen …" oninput="applyFilters()">
+  <select class="ctrl-sel" id="langSel" onchange="applyFilters()"><option value="">Alle Sprachen</option></select>
+  <select class="ctrl-sel" id="sortSel" onchange="applyFilters()">
     <option value="rank-asc">Rang ↑</option>
     <option value="overall-desc">Gesamt-Score ↓</option>
-    <option value="overall-asc">Gesamt-Score ↑</option>
-    <option value="activity-desc">Aktivität ↓</option>
-    <option value="documentation-desc">Dokumentation ↓</option>
-    <option value="community-desc">Community ↓</option>
-    <option value="maintenance-desc">Wartung ↓</option>
+    <option value="p1-desc">⚡ Aktivität ↓</option>
+    <option value="p2-desc">🔧 Reaktionsfähigkeit ↓</option>
+    <option value="p3-desc">📡 Reichweite ↓</option>
     <option value="stars-desc">Stars ↓</option>
-    <option value="forks-desc">Forks ↓</option>
-    <option value="issues-asc">Offene Issues ↑</option>
+    <option value="bus_factor-desc">Bus-Faktor ↓</option>
+    <option value="issue_close_rate-desc">Issue-Schließrate ↓</option>
+    <option value="commit_freq-desc">Commits/30T ↓</option>
     <option value="name-asc">Name A–Z</option>
   </select>
-  <select class="ctrl-select" id="minScoreFilter" onchange="applyFilters()">
+  <select class="ctrl-sel" id="minSel" onchange="applyFilters()">
     <option value="0">Alle Scores</option>
     <option value="80">Score ≥ 80</option>
     <option value="70">Score ≥ 70</option>
     <option value="60">Score ≥ 60</option>
-    <option value="50">Score ≥ 50</option>
   </select>
-  <button class="btn-reset" onclick="resetFilters()">✕ Zurücksetzen</button>
-  <span class="ctrl-count" id="ctrlCount">— Repos</span>
+  <button class="btn-reset" onclick="resetFilters()">✕ Reset</button>
+  <span class="ctrl-count" id="ctrlCnt">—</span>
 </div>
 
-<!-- TABLE -->
-<div class="table-wrapper">
-  <div class="table-scroll">
+<div class="tbl-wrap">
+  <div class="tbl-scroll">
     <table>
-      <thead>
-        <tr>
-          <th><input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)"></th>
-          <th data-sort="rank">#</th>
-          <th data-sort="name" style="min-width:200px">Repository</th>
-          <th data-sort="language">Sprache</th>
-          <th data-sort="stars" style="text-align:right">⭐ Stars</th>
-          <th data-sort="forks" style="text-align:right">🍴 Forks</th>
-          <th data-sort="issues" style="text-align:right">🐛 Issues</th>
-          <th data-sort="contributors" style="text-align:right">👥 Contrib.</th>
-          <th data-sort="pushed">Letzter Push</th>
-          <th data-sort="license">Lizenz</th>
-          <th data-sort="activity"   class="score-cell">Aktivität</th>
-          <th data-sort="documentation" class="score-cell">Dokumentation</th>
-          <th data-sort="community"  class="score-cell">Community</th>
-          <th data-sort="maintenance" class="score-cell">Wartung</th>
-          <th data-sort="overall">Gesamt</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody">
-        <tr><td colspan="15" class="no-results">Lade Daten …</td></tr>
-      </tbody>
+      <thead><tr>
+        <th><input type="checkbox" id="selAll" onclick="toggleAll(this)"></th>
+        <th>#</th>
+        <th style="min-width:210px">Repository</th>
+        <th>Sprache</th>
+        <th style="text-align:right">⭐ Stars</th>
+        <th style="text-align:right">🍴 Forks</th>
+        <th style="text-align:right">🐛 Issues</th>
+        <th style="text-align:right">🚌 Bus</th>
+        <th style="text-align:right">📈 Commits/30T</th>
+        <th style="text-align:right">✅ Close%</th>
+        <th>Push</th>
+        <th class="sbar">⚡ Aktivität</th>
+        <th class="sbar">🔧 Reaktion</th>
+        <th class="sbar">📡 Reichweite</th>
+        <th>Gesamt</th>
+      </tr></thead>
+      <tbody id="tbody"><tr><td colspan="15" class="no-res">Lade Daten…</td></tr></tbody>
     </table>
   </div>
 </div>
 
-<!-- COMPARE FAB -->
-<button class="compare-fab" id="compareFab" onclick="openModal()">
-  Vergleichen
-  <span class="compare-fab-count" id="fabCount">0</span>
+<button class="cfab" id="cfab" onclick="openModal()">
+  Vergleichen <span class="cfab-n" id="cfabN">0</span>
 </button>
 
-<!-- COMPARISON MODAL -->
-<div class="modal-overlay" id="modal" onclick="closeModalOnOverlay(event)">
-  <div class="modal-box" id="modalBox">
-    <div class="modal-header">
+<div class="modal-ov" id="modal" onclick="closeOv(event)">
+  <div class="modal-box">
+    <div class="modal-hdr">
       <span class="modal-title">⚖ Repository-Vergleich</span>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <button class="modal-x" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
 
 <script>
-/* =========================================================
-   LANGUAGE COLORS
-   ========================================================= */
-const LANG_COLORS = {
-  JavaScript:  { bg:'rgba(247,223,30,.12)',  fg:'#f7df1e' },
-  TypeScript:  { bg:'rgba(49,120,198,.15)',  fg:'#4f90d9' },
-  Python:      { bg:'rgba(55,118,171,.15)',  fg:'#4fa8d9' },
-  'C++':       { bg:'rgba(243,75,125,.12)',  fg:'#f34b7d' },
-  C:           { bg:'rgba(85,85,85,.2)',     fg:'#a0a0a0' },
-  Go:          { bg:'rgba(0,173,216,.12)',   fg:'#00add8' },
-  Rust:        { bg:'rgba(206,66,43,.12)',   fg:'#ce422b' },
-  Java:        { bg:'rgba(176,114,25,.15)',  fg:'#e0952e' },
-  PHP:         { bg:'rgba(119,123,179,.15)', fg:'#9fa3d9' },
-  Ruby:        { bg:'rgba(112,21,22,.15)',   fg:'#d1414e' },
-  Shell:       { bg:'rgba(137,224,81,.12)',  fg:'#89e051' },
-  CSS:         { bg:'rgba(86,61,124,.15)',   fg:'#9d73d4' },
-  HTML:        { bg:'rgba(227,76,38,.12)',   fg:'#e34c26' },
-  Scala:       { bg:'rgba(194,45,64,.12)',   fg:'#e55575' },
-  Swift:       { bg:'rgba(240,81,56,.12)',   fg:'#f05138' },
-  Kotlin:      { bg:'rgba(169,123,255,.12)', fg:'#a97bff' },
-  Dart:        { bg:'rgba(0,180,171,.12)',   fg:'#00b4ab' },
-  default:     { bg:'rgba(100,116,139,.15)', fg:'#94a3b8' },
+/* ── Language colors ── */
+const LC = {
+  JavaScript:{bg:'rgba(247,223,30,.1)',fg:'#f7df1e'},TypeScript:{bg:'rgba(79,120,198,.15)',fg:'#4f90d9'},
+  Python:{bg:'rgba(55,118,171,.15)',fg:'#4fa8d9'},'C++':{bg:'rgba(243,75,125,.1)',fg:'#f34b7d'},
+  C:{bg:'rgba(85,85,85,.2)',fg:'#a0a0a0'},Go:{bg:'rgba(0,173,216,.1)',fg:'#00add8'},
+  Rust:{bg:'rgba(206,66,43,.1)',fg:'#ce422b'},Java:{bg:'rgba(176,114,25,.15)',fg:'#e0952e'},
+  PHP:{bg:'rgba(119,123,179,.15)',fg:'#9fa3d9'},Ruby:{bg:'rgba(112,21,22,.15)',fg:'#d1414e'},
+  Shell:{bg:'rgba(137,224,81,.1)',fg:'#89e051'},Scala:{bg:'rgba(194,45,64,.1)',fg:'#e55575'},
+  Swift:{bg:'rgba(240,81,56,.1)',fg:'#f05138'},Kotlin:{bg:'rgba(169,123,255,.1)',fg:'#a97bff'},
+  default:{bg:'rgba(100,116,139,.15)',fg:'#94a3b8'}
 };
-function langStyle(lang) {
-  const c = LANG_COLORS[lang] || LANG_COLORS.default;
-  return `background:${c.bg};color:${c.fg};border:1px solid ${c.fg}33`;
-}
+function lc(l){const c=LC[l]||LC.default;return `background:${c.bg};color:${c.fg};border:1px solid ${c.fg}33`;}
 
-/* =========================================================
-   SAMPLE DATA (30 repos — aktiv bis collect_data.py läuft)
-   ========================================================= */
-const SAMPLE_DATA = [
-  {rank:1,  full_name:"freeCodeCamp/freeCodeCamp", description:"freeCodeCamp.org's open-source codebase and curriculum", language:"TypeScript", stars:392000, forks:36300, open_issues:245,  contributor_count:4800, license:"BSD-3-Clause", topics:["education","javascript","react"], archived:false, pushed_at:"2024-12-01T10:00:00Z", scores:{overall:88,activity:92,documentation:86,community:97,maintenance:80}},
-  {rank:2,  full_name:"EbookFoundation/free-programming-books", description:"Freely available programming books", language:null, stars:336000, forks:61200, open_issues:120, contributor_count:2100, license:"CC-BY", topics:["books","education"], archived:false, pushed_at:"2024-11-28T10:00:00Z", scores:{overall:85,activity:78,documentation:92,community:96,maintenance:82}},
-  {rank:3,  full_name:"public-apis/public-apis", description:"A collective list of free APIs for use in software development", language:"Python", stars:319000, forks:34400, open_issues:520,  contributor_count:740,  license:"MIT", topics:["api","list","programming"], archived:false, pushed_at:"2024-11-20T10:00:00Z", scores:{overall:82,activity:70,documentation:90,community:96,maintenance:65}},
-  {rank:4,  full_name:"facebook/react", description:"The library for web and native user interfaces", language:"JavaScript", stars:228000, forks:47000, open_issues:780,  contributor_count:1650, license:"MIT", topics:["javascript","react","frontend"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:90,activity:95,documentation:88,community:95,maintenance:85}},
-  {rank:5,  full_name:"microsoft/vscode", description:"Visual Studio Code", language:"TypeScript", stars:164000, forks:29600, open_issues:6800, contributor_count:2700, license:"MIT", topics:["editor","typescript","vscode"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:86,activity:98,documentation:88,community:91,maintenance:70}},
-  {rank:6,  full_name:"vercel/next.js", description:"The React Framework for the Web", language:"JavaScript", stars:127000, forks:27000, open_issues:3200, contributor_count:3200, license:"MIT", topics:["nextjs","react","javascript"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:85,activity:98,documentation:84,community:89,maintenance:72}},
-  {rank:7,  full_name:"torvalds/linux", description:"Linux kernel source tree", language:"C", stars:181000, forks:54000, open_issues:0,    contributor_count:4900, license:"GPL-2.0", topics:["linux","kernel"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:80,activity:98,documentation:60,community:91,maintenance:72}},
-  {rank:8,  full_name:"ohmyzsh/ohmyzsh", description:"A delightful community-driven framework for managing your zsh configuration", language:"Shell", stars:172000, forks:26000, open_issues:380,  contributor_count:2100, license:"MIT", topics:["zsh","shell","terminal"], archived:false, pushed_at:"2024-12-01T10:00:00Z", scores:{overall:86,activity:85,documentation:88,community:92,maintenance:82}},
-  {rank:9,  full_name:"twbs/bootstrap", description:"The most popular HTML, CSS, and JS framework", language:"JavaScript", stars:170000, forks:78800, open_issues:460,  contributor_count:1340, license:"MIT", topics:["css","html","javascript"], archived:false, pushed_at:"2024-12-02T10:00:00Z", scores:{overall:88,activity:88,documentation:90,community:93,maintenance:84}},
-  {rank:10, full_name:"tensorflow/tensorflow", description:"An Open Source Machine Learning Framework for Everyone", language:"C++", stars:186000, forks:74300, open_issues:2100, contributor_count:3800, license:"Apache-2.0", topics:["machine-learning","deep-learning"], archived:false, pushed_at:"2024-12-04T10:00:00Z", scores:{overall:85,activity:94,documentation:84,community:92,maintenance:72}},
-  {rank:11, full_name:"kubernetes/kubernetes", description:"Production-Grade Container Scheduling and Management", language:"Go", stars:111000, forks:40000, open_issues:2500, contributor_count:4600, license:"Apache-2.0", topics:["kubernetes","containers","orchestration"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:87,activity:98,documentation:88,community:88,maintenance:76}},
-  {rank:12, full_name:"golang/go", description:"The Go programming language", language:"Go", stars:124000, forks:17700, open_issues:8700, contributor_count:3700, license:"BSD-3-Clause", topics:["go","programming-language"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:82,activity:97,documentation:86,community:87,maintenance:62}},
-  {rank:13, full_name:"nodejs/node", description:"Node.js JavaScript runtime", language:"JavaScript", stars:107000, forks:29300, open_issues:1500, contributor_count:3900, license:"MIT", topics:["nodejs","javascript","runtime"], archived:false, pushed_at:"2024-12-04T10:00:00Z", scores:{overall:87,activity:97,documentation:88,community:87,maintenance:78}},
-  {rank:14, full_name:"microsoft/TypeScript", description:"TypeScript is a superset of JavaScript that compiles to clean JavaScript", language:"TypeScript", stars:100000, forks:12500, open_issues:5600, contributor_count:1100, license:"Apache-2.0", topics:["typescript","javascript"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:84,activity:97,documentation:86,community:86,maintenance:68}},
-  {rank:15, full_name:"rust-lang/rust", description:"Empowering everyone to build reliable and efficient software", language:"Rust", stars:97000, forks:12600, open_issues:9800, contributor_count:4500, license:"MIT", topics:["rust","programming-language","systems"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:82,activity:98,documentation:90,community:85,maintenance:58}},
-  {rank:16, full_name:"angular/angular", description:"Deliver web apps with confidence", language:"TypeScript", stars:96000, forks:25400, open_issues:1400, contributor_count:1700, license:"MIT", topics:["angular","typescript","javascript"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:87,activity:97,documentation:88,community:85,maintenance:80}},
-  {rank:17, full_name:"django/django", description:"The Web framework for perfectionists with deadlines", language:"Python", stars:81000, forks:31900, open_issues:230,  contributor_count:2600, license:"BSD-3-Clause", topics:["python","django","web","framework"], archived:false, pushed_at:"2024-12-03T10:00:00Z", scores:{overall:87,activity:92,documentation:92,community:82,maintenance:86}},
-  {rank:18, full_name:"tailwindlabs/tailwindcss", description:"A utility-first CSS framework for rapid UI development", language:"CSS", stars:82000, forks:4100, open_issues:680,  contributor_count:290,  license:"MIT", topics:["css","tailwind","utility-first"], archived:false, pushed_at:"2024-12-04T10:00:00Z", scores:{overall:85,activity:92,documentation:88,community:84,maintenance:80}},
-  {rank:19, full_name:"tiangolo/fastapi", description:"FastAPI framework, high performance, easy to learn", language:"Python", stars:78000, forks:6600, open_issues:550,  contributor_count:660,  license:"MIT", topics:["fastapi","python","api","openapi"], archived:false, pushed_at:"2024-12-02T10:00:00Z", scores:{overall:85,activity:90,documentation:90,community:82,maintenance:80}},
-  {rank:20, full_name:"laravel/laravel", description:"A PHP Framework For Web Artisans", language:"PHP", stars:79000, forks:24000, open_issues:95,   contributor_count:740,  license:"MIT", topics:["laravel","php","framework","web"], archived:false, pushed_at:"2024-12-03T10:00:00Z", scores:{overall:86,activity:92,documentation:86,community:82,maintenance:88}},
-  {rank:21, full_name:"denoland/deno", description:"A modern runtime for JavaScript and TypeScript", language:"Rust", stars:94000, forks:5200, open_issues:1800, contributor_count:1100, license:"MIT", topics:["deno","javascript","typescript","runtime"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:84,activity:97,documentation:86,community:84,maintenance:74}},
-  {rank:22, full_name:"opencv/opencv", description:"Open Source Computer Vision Library", language:"C++", stars:78000, forks:55500, open_issues:2600, contributor_count:2400, license:"Apache-2.0", topics:["computer-vision","image-processing"], archived:false, pushed_at:"2024-12-04T10:00:00Z", scores:{overall:80,activity:90,documentation:82,community:84,maintenance:68}},
-  {rank:23, full_name:"bitcoin/bitcoin", description:"Bitcoin Core integration/staging tree", language:"C++", stars:78000, forks:36100, open_issues:680,  contributor_count:1100, license:"MIT", topics:["bitcoin","cryptocurrency","blockchain"], archived:false, pushed_at:"2024-12-04T10:00:00Z", scores:{overall:83,activity:94,documentation:86,community:83,maintenance:76}},
-  {rank:24, full_name:"elastic/elasticsearch", description:"Free and Open, Distributed, RESTful Search Engine", language:"Java", stars:70000, forks:25000, open_issues:4200, contributor_count:1900, license:"SSPL-1.0", topics:["elasticsearch","search","java"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:80,activity:96,documentation:84,community:78,maintenance:66}},
-  {rank:25, full_name:"ansible/ansible", description:"Radically simple IT automation", language:"Python", stars:62000, forks:37400, open_issues:840,  contributor_count:4900, license:"GPL-3.0", topics:["ansible","automation","devops","python"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:83,activity:95,documentation:88,community:77,maintenance:75}},
-  {rank:26, full_name:"redis/redis", description:"Redis is an in-memory database that persists on disk", language:"C", stars:66000, forks:23700, open_issues:2200, contributor_count:760,  license:"BSD-3-Clause", topics:["redis","database","cache","nosql"], archived:false, pushed_at:"2024-12-03T10:00:00Z", scores:{overall:79,activity:90,documentation:82,community:78,maintenance:68}},
-  {rank:27, full_name:"apache/spark", description:"Apache Spark - A unified analytics engine for large-scale data processing", language:"Scala", stars:39000, forks:28000, open_issues:240,  contributor_count:2000, license:"Apache-2.0", topics:["spark","bigdata","analytics","scala"], archived:false, pushed_at:"2024-12-05T10:00:00Z", scores:{overall:84,activity:96,documentation:88,community:76,maintenance:82}},
-  {rank:28, full_name:"pallets/flask", description:"The Python micro framework for building web applications", language:"Python", stars:68000, forks:16400, open_issues:5,    contributor_count:850,  license:"BSD-3-Clause", topics:["flask","python","web","framework"], archived:false, pushed_at:"2024-11-15T10:00:00Z", scores:{overall:82,activity:75,documentation:90,community:80,maintenance:88}},
-  {rank:29, full_name:"vuejs/core", description:"Vue 3 core monorepo", language:"TypeScript", stars:46000, forks:8200, open_issues:640,  contributor_count:430,  license:"MIT", topics:["vue","javascript","frontend"], archived:false, pushed_at:"2024-12-03T10:00:00Z", scores:{overall:87,activity:93,documentation:86,community:80,maintenance:86}},
-  {rank:30, full_name:"axios/axios", description:"Promise based HTTP client for the browser and node.js", language:"JavaScript", stars:105000, forks:10800, open_issues:340,  contributor_count:490,  license:"MIT", topics:["http","javascript","promise","ajax"], archived:false, pushed_at:"2024-11-10T10:00:00Z", scores:{overall:81,activity:72,documentation:88,community:86,maintenance:84}},
+/* ── Sample data — mirrors 3-pillar scoring ── */
+const SAMPLE = [
+  {rank:1, full_name:"freeCodeCamp/freeCodeCamp", language:"TypeScript", stars:392000, forks_count:36300, open_issues_count:245, pushed_at:"2024-12-01T10:00:00Z",
+   kpis:{commit_freq:112,bus_factor:4,contributor_count:680,days_since_commit:4,issue_close_rate:0.78,release_frequency:null,issue_close_time:8,issue_engagement:4.2,fork_ratio:0.093,doc_quality:.82,project_age:3900,stars:392000,open_issue_ratio:0.00063},
+   scores:{p1:88,p2:72,p3:94,overall:85}},
+  {rank:2, full_name:"facebook/react", language:"JavaScript", stars:228000, forks_count:47000, open_issues_count:780, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:95,bus_factor:6,contributor_count:1650,days_since_commit:1,issue_close_rate:0.39,release_frequency:42,issue_close_time:18,issue_engagement:5.1,fork_ratio:0.206,doc_quality:.78,project_age:4700,stars:228000,open_issue_ratio:0.00342},
+   scores:{p1:91,p2:75,p3:89,overall:86}},
+  {rank:3, full_name:"microsoft/vscode", language:"TypeScript", stars:164000, forks_count:29600, open_issues_count:6800, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:185,bus_factor:7,contributor_count:2700,days_since_commit:1,issue_close_rate:0.13,release_frequency:10,issue_close_time:45,issue_engagement:6.8,fork_ratio:0.180,doc_quality:.85,project_age:3300,stars:164000,open_issue_ratio:0.04146},
+   scores:{p1:94,p2:71,p3:86,overall:85}},
+  {rank:4, full_name:"tensorflow/tensorflow", language:"C++", stars:186000, forks_count:74300, open_issues_count:2100, pushed_at:"2024-12-04T10:00:00Z",
+   kpis:{commit_freq:78,bus_factor:3,contributor_count:3800,days_since_commit:2,issue_close_rate:0.05,release_frequency:32,issue_close_time:90,issue_engagement:2.1,fork_ratio:0.399,doc_quality:.88,project_age:4100,stars:186000,open_issue_ratio:0.01129},
+   scores:{p1:86,p2:55,p3:90,overall:79}},
+  {rank:5, full_name:"kubernetes/kubernetes", language:"Go", stars:111000, forks_count:40000, open_issues_count:2500, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:210,bus_factor:12,contributor_count:4600,days_since_commit:1,issue_close_rate:0.72,release_frequency:90,issue_close_time:30,issue_engagement:7.2,fork_ratio:0.360,doc_quality:.90,project_age:3900,stars:111000,open_issue_ratio:0.02252},
+   scores:{p1:97,p2:81,p3:85,overall:89}},
+  {rank:6, full_name:"torvalds/linux", language:"C", stars:181000, forks_count:54000, open_issues_count:0, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:420,bus_factor:18,contributor_count:4900,days_since_commit:1,issue_close_rate:null,release_frequency:null,issue_close_time:null,issue_engagement:null,fork_ratio:0.298,doc_quality:.55,project_age:12500,stars:181000,open_issue_ratio:0},
+   scores:{p1:100,p2:0,p3:88,overall:67}},
+  {rank:7, full_name:"golang/go", language:"Go", stars:124000, forks_count:17700, open_issues_count:8700, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:88,bus_factor:8,contributor_count:3700,days_since_commit:1,issue_close_rate:0.25,release_frequency:180,issue_close_time:60,issue_engagement:4.5,fork_ratio:0.143,doc_quality:.82,project_age:5600,stars:124000,open_issue_ratio:0.07016},
+   scores:{p1:92,p2:55,p3:83,overall:79}},
+  {rank:8, full_name:"vercel/next.js", language:"JavaScript", stars:127000, forks_count:27000, open_issues_count:3200, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:145,bus_factor:5,contributor_count:3200,days_since_commit:1,issue_close_rate:0.48,release_frequency:7,issue_close_time:12,issue_engagement:5.5,fork_ratio:0.213,doc_quality:.88,project_age:3100,stars:127000,open_issue_ratio:0.02520},
+   scores:{p1:92,p2:88,p3:85,overall:89}},
+  {rank:9, full_name:"django/django", language:"Python", stars:81000, forks_count:31900, open_issues_count:230, pushed_at:"2024-12-03T10:00:00Z",
+   kpis:{commit_freq:48,bus_factor:7,contributor_count:2600,days_since_commit:3,issue_close_rate:null,release_frequency:90,issue_close_time:null,issue_engagement:null,fork_ratio:0.394,doc_quality:.92,project_age:5800,stars:81000,open_issue_ratio:0.00284},
+   scores:{p1:83,p2:42,p3:85,overall:73}},
+  {rank:10, full_name:"rust-lang/rust", language:"Rust", stars:97000, forks_count:12600, open_issues_count:9800, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:168,bus_factor:9,contributor_count:4500,days_since_commit:1,issue_close_rate:0.34,release_frequency:42,issue_close_time:40,issue_engagement:6.2,fork_ratio:0.130,doc_quality:.90,project_age:5000,stars:97000,open_issue_ratio:0.10103},
+   scores:{p1:96,p2:72,p3:82,overall:85}},
+  {rank:11, full_name:"angular/angular", language:"TypeScript", stars:96000, forks_count:25400, open_issues_count:1400, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:95,bus_factor:6,contributor_count:1700,days_since_commit:1,issue_close_rate:0.55,release_frequency:14,issue_close_time:21,issue_engagement:4.1,fork_ratio:0.265,doc_quality:.85,project_age:4100,stars:96000,open_issue_ratio:0.01458},
+   scores:{p1:90,p2:84,p3:83,overall:86}},
+  {rank:12, full_name:"tailwindlabs/tailwindcss", language:"CSS", stars:82000, forks_count:4100, open_issues_count:680, pushed_at:"2024-12-04T10:00:00Z",
+   kpis:{commit_freq:35,bus_factor:3,contributor_count:290,days_since_commit:2,issue_close_rate:0.60,release_frequency:20,issue_close_time:10,issue_engagement:3.8,fork_ratio:0.050,doc_quality:.85,project_age:2700,stars:82000,open_issue_ratio:0.00829},
+   scores:{p1:75,p2:85,p3:78,overall:79}},
+  {rank:13, full_name:"tiangolo/fastapi", language:"Python", stars:78000, forks_count:6600, open_issues_count:550, pushed_at:"2024-12-02T10:00:00Z",
+   kpis:{commit_freq:22,bus_factor:2,contributor_count:660,days_since_commit:4,issue_close_rate:0.55,release_frequency:30,issue_close_time:15,issue_engagement:3.5,fork_ratio:0.085,doc_quality:.90,project_age:2400,stars:78000,open_issue_ratio:0.00705},
+   scores:{p1:74,p2:81,p3:78,overall:78}},
+  {rank:14, full_name:"microsoft/TypeScript", language:"TypeScript", stars:100000, forks_count:12500, open_issues_count:5600, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:68,bus_factor:5,contributor_count:1100,days_since_commit:1,issue_close_rate:0.40,release_frequency:60,issue_close_time:30,issue_engagement:5.0,fork_ratio:0.125,doc_quality:.82,project_age:4300,stars:100000,open_issue_ratio:0.05600},
+   scores:{p1:88,p2:66,p3:83,overall:80}},
+  {rank:15, full_name:"axios/axios", language:"JavaScript", stars:105000, forks_count:10800, open_issues_count:340, pushed_at:"2024-11-10T10:00:00Z",
+   kpis:{commit_freq:8,bus_factor:3,contributor_count:490,days_since_commit:27,issue_close_rate:0.62,release_frequency:90,issue_close_time:25,issue_engagement:3.2,fork_ratio:0.103,doc_quality:.80,project_age:4400,stars:105000,open_issue_ratio:0.00324},
+   scores:{p1:68,p2:68,p3:83,overall:73}},
+  {rank:16, full_name:"nodejs/node", language:"JavaScript", stars:107000, forks_count:29300, open_issues_count:1500, pushed_at:"2024-12-04T10:00:00Z",
+   kpis:{commit_freq:88,bus_factor:9,contributor_count:3900,days_since_commit:2,issue_close_rate:0.45,release_frequency:14,issue_close_time:20,issue_engagement:5.5,fork_ratio:0.274,doc_quality:.85,project_age:4600,stars:107000,open_issue_ratio:0.01402},
+   scores:{p1:94,p2:83,p3:85,overall:88}},
+  {rank:17, full_name:"denoland/deno", language:"Rust", stars:94000, forks_count:5200, open_issues_count:1800, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:135,bus_factor:6,contributor_count:1100,days_since_commit:1,issue_close_rate:0.68,release_frequency:14,issue_close_time:8,issue_engagement:4.0,fork_ratio:0.055,doc_quality:.82,project_age:2600,stars:94000,open_issue_ratio:0.01915},
+   scores:{p1:92,p2:88,p3:80,overall:87}},
+  {rank:18, full_name:"pallets/flask", language:"Python", stars:68000, forks_count:16400, open_issues_count:5, pushed_at:"2024-11-15T10:00:00Z",
+   kpis:{commit_freq:6,bus_factor:2,contributor_count:850,days_since_commit:21,issue_close_rate:0.99,release_frequency:180,issue_close_time:5,issue_engagement:2.8,fork_ratio:0.241,doc_quality:.85,project_age:5600,stars:68000,open_issue_ratio:0.00007},
+   scores:{p1:65,p2:72,p3:80,overall:72}},
+  {rank:19, full_name:"laravel/laravel", language:"PHP", stars:79000, forks_count:24000, open_issues_count:95, pushed_at:"2024-12-03T10:00:00Z",
+   kpis:{commit_freq:28,bus_factor:3,contributor_count:740,days_since_commit:3,issue_close_rate:0.85,release_frequency:30,issue_close_time:5,issue_engagement:2.5,fork_ratio:0.304,doc_quality:.80,project_age:4700,stars:79000,open_issue_ratio:0.00120},
+   scores:{p1:78,p2:88,p3:81,overall:82}},
+  {rank:20, full_name:"bitcoin/bitcoin", language:"C++", stars:78000, forks_count:36100, open_issues_count:680, pushed_at:"2024-12-04T10:00:00Z",
+   kpis:{commit_freq:45,bus_factor:6,contributor_count:1100,days_since_commit:2,issue_close_rate:0.38,release_frequency:120,issue_close_time:35,issue_engagement:3.0,fork_ratio:0.463,doc_quality:.78,project_age:5700,stars:78000,open_issue_ratio:0.00872},
+   scores:{p1:85,p2:58,p3:82,overall:76}},
+  {rank:21, full_name:"ohmyzsh/ohmyzsh", language:"Shell", stars:172000, forks_count:26000, open_issues_count:380, pushed_at:"2024-12-01T10:00:00Z",
+   kpis:{commit_freq:18,bus_factor:4,contributor_count:2100,days_since_commit:5,issue_close_rate:0.65,release_frequency:45,issue_close_time:20,issue_engagement:3.5,fork_ratio:0.151,doc_quality:.78,project_age:5400,stars:172000,open_issue_ratio:0.00221},
+   scores:{p1:80,p2:73,p3:88,overall:80}},
+  {rank:22, full_name:"twbs/bootstrap", language:"JavaScript", stars:170000, forks_count:78800, open_issues_count:460, pushed_at:"2024-12-02T10:00:00Z",
+   kpis:{commit_freq:32,bus_factor:5,contributor_count:1340,days_since_commit:4,issue_close_rate:0.72,release_frequency:90,issue_close_time:12,issue_engagement:4.8,fork_ratio:0.464,doc_quality:.88,project_age:5100,stars:170000,open_issue_ratio:0.00271},
+   scores:{p1:82,p2:72,p3:89,overall:81}},
+  {rank:23, full_name:"elastic/elasticsearch", language:"Java", stars:70000, forks_count:25000, open_issues_count:4200, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:155,bus_factor:8,contributor_count:1900,days_since_commit:1,issue_close_rate:0.35,release_frequency:28,issue_close_time:45,issue_engagement:5.5,fork_ratio:0.357,doc_quality:.84,project_age:5200,stars:70000,open_issue_ratio:0.06000},
+   scores:{p1:93,p2:73,p3:80,overall:83}},
+  {rank:24, full_name:"opencv/opencv", language:"C++", stars:78000, forks_count:55500, open_issues_count:2600, pushed_at:"2024-12-04T10:00:00Z",
+   kpis:{commit_freq:62,bus_factor:7,contributor_count:2400,days_since_commit:2,issue_close_rate:0.42,release_frequency:60,issue_close_time:30,issue_engagement:3.2,fork_ratio:0.712,doc_quality:.80,project_age:5600,stars:78000,open_issue_ratio:0.03333},
+   scores:{p1:87,p2:68,p3:83,overall:80}},
+  {rank:25, full_name:"ansible/ansible", language:"Python", stars:62000, forks_count:37400, open_issues_count:840, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:88,bus_factor:11,contributor_count:4900,days_since_commit:1,issue_close_rate:0.68,release_frequency:45,issue_close_time:25,issue_engagement:4.0,fork_ratio:0.603,doc_quality:.88,project_age:4900,stars:62000,open_issue_ratio:0.01355},
+   scores:{p1:96,p2:80,p3:81,overall:87}},
+  {rank:26, full_name:"redis/redis", language:"C", stars:66000, forks_count:23700, open_issues_count:2200, pushed_at:"2024-12-03T10:00:00Z",
+   kpis:{commit_freq:38,bus_factor:4,contributor_count:760,days_since_commit:3,issue_close_rate:0.30,release_frequency:120,issue_close_time:60,issue_engagement:3.0,fork_ratio:0.359,doc_quality:.75,project_age:5600,stars:66000,open_issue_ratio:0.03333},
+   scores:{p1:81,p2:51,p3:79,overall:72}},
+  {rank:27, full_name:"apache/spark", language:"Scala", stars:39000, forks_count:28000, open_issues_count:240, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:68,bus_factor:9,contributor_count:2000,days_since_commit:1,issue_close_rate:0.88,release_frequency:90,issue_close_time:20,issue_engagement:3.5,fork_ratio:0.718,doc_quality:.85,project_age:5000,stars:39000,open_issue_ratio:0.00615},
+   scores:{p1:89,p2:78,p3:76,overall:82}},
+  {rank:28, full_name:"vuejs/core", language:"TypeScript", stars:46000, forks_count:8200, open_issues_count:640, pushed_at:"2024-12-03T10:00:00Z",
+   kpis:{commit_freq:38,bus_factor:3,contributor_count:430,days_since_commit:3,issue_close_rate:0.55,release_frequency:21,issue_close_time:10,issue_engagement:4.2,fork_ratio:0.178,doc_quality:.82,project_age:3600,stars:46000,open_issue_ratio:0.01391},
+   scores:{p1:80,p2:83,p3:75,overall:80}},
+  {rank:29, full_name:"pytorch/pytorch", language:"Python", stars:84000, forks_count:23000, open_issues_count:14000, pushed_at:"2024-12-05T10:00:00Z",
+   kpis:{commit_freq:188,bus_factor:22,contributor_count:4500,days_since_commit:1,issue_close_rate:0.07,release_frequency:60,issue_close_time:90,issue_engagement:4.5,fork_ratio:0.274,doc_quality:.88,project_age:3300,stars:84000,open_issue_ratio:0.16667},
+   scores:{p1:99,p2:48,p3:82,overall:78}},
+  {rank:30, full_name:"laravel/framework", language:"PHP", stars:32000, forks_count:10700, open_issues_count:20, pushed_at:"2024-12-04T10:00:00Z",
+   kpis:{commit_freq:42,bus_factor:4,contributor_count:620,days_since_commit:2,issue_close_rate:0.92,release_frequency:14,issue_close_time:3,issue_engagement:2.2,fork_ratio:0.334,doc_quality:.75,project_age:4600,stars:32000,open_issue_ratio:0.000625},
+   scores:{p1:83,p2:92,p3:71,overall:83}},
 ];
 
-/* =========================================================
-   STATE
-   ========================================================= */
-let allData      = [];
-let filteredData = [];
-let selected     = new Set();  // full_names
-let usingDemo    = false;
+/* ── State ── */
+let allData=[], filtered=[], selected=new Set();
 
-/* =========================================================
-   DATA LOADING
-   ========================================================= */
 async function loadData() {
   try {
-    const res = await fetch('top100_repos.json');
-    if (!res.ok) throw new Error('not found');
-    const json = await res.json();
-    allData   = json;
-    usingDemo = false;
-  } catch (_) {
-    allData   = SAMPLE_DATA;
-    usingDemo = true;
-    document.getElementById('demoBanner').style.display = '';
+    const r = await fetch('top100_repos.json');
+    if (!r.ok) throw new Error();
+    allData = await r.json();
+  } catch(_) {
+    allData = SAMPLE;
+    document.getElementById('demoBanner').style.display='';
   }
   initFilters();
   renderStats();
   applyFilters();
 }
 
-/* =========================================================
-   FILTERS / SORT
-   ========================================================= */
 function initFilters() {
-  const langs = [...new Set(allData.map(r => r.language).filter(Boolean))].sort();
-  const sel   = document.getElementById('langFilter');
-  langs.forEach(l => {
-    const opt  = document.createElement('option');
-    opt.value  = l; opt.textContent = l;
-    sel.appendChild(opt);
-  });
+  const langs = [...new Set(allData.map(r=>r.language).filter(Boolean))].sort();
+  const sel = document.getElementById('langSel');
+  langs.forEach(l=>{ const o=document.createElement('option'); o.value=o.textContent=l; sel.appendChild(o); });
+}
+
+function renderStats() {
+  const n = allData.length;
+  const avg = Math.round(allData.reduce((s,r)=>s+r.scores.overall,0)/n);
+  const top = Math.max(...allData.map(r=>r.scores.overall));
+  const lc = {};
+  allData.forEach(r=>{ if(r.language) lc[r.language]=(lc[r.language]||0)+1; });
+  const topL = Object.entries(lc).sort(([,a],[,b])=>b-a)[0]?.[0]||'—';
+  document.getElementById('stTotal').textContent = n;
+  document.getElementById('stAvg').textContent   = avg;
+  document.getElementById('stTop').textContent   = top;
+  document.getElementById('stLang').textContent  = topL;
 }
 
 function applyFilters() {
-  const q        = document.getElementById('searchInput').value.trim().toLowerCase();
-  const lang     = document.getElementById('langFilter').value;
-  const [sortKey, sortDir] = document.getElementById('sortSelect').value.split('-');
-  const minScore = parseInt(document.getElementById('minScoreFilter').value || '0');
+  const q   = document.getElementById('searchIn').value.trim().toLowerCase();
+  const lng = document.getElementById('langSel').value;
+  const [sk,sd] = document.getElementById('sortSel').value.split('-');
+  const min = +document.getElementById('minSel').value||0;
 
-  filteredData = allData.filter(r => {
-    if (q && !r.full_name.toLowerCase().includes(q) && !(r.description || '').toLowerCase().includes(q)) return false;
-    if (lang && r.language !== lang) return false;
-    if (r.scores.overall < minScore) return false;
+  filtered = allData.filter(r=>{
+    if (q && !r.full_name.toLowerCase().includes(q) && !(r.description||'').toLowerCase().includes(q)) return false;
+    if (lng && r.language!==lng) return false;
+    if (r.scores.overall<min) return false;
     return true;
   });
 
-  // Sort
-  filteredData.sort((a, b) => {
-    let va, vb;
-    switch (sortKey) {
-      case 'rank':          va = a.rank; vb = b.rank; break;
-      case 'overall':       va = a.scores.overall; vb = b.scores.overall; break;
-      case 'activity':      va = a.scores.activity; vb = b.scores.activity; break;
-      case 'documentation': va = a.scores.documentation; vb = b.scores.documentation; break;
-      case 'community':     va = a.scores.community; vb = b.scores.community; break;
-      case 'maintenance':   va = a.scores.maintenance; vb = b.scores.maintenance; break;
-      case 'stars':         va = a.stars; vb = b.stars; break;
-      case 'forks':         va = a.forks; vb = b.forks; break;
-      case 'issues':        va = a.open_issues; vb = b.open_issues; break;
-      case 'contributors':  va = a.contributor_count || 0; vb = b.contributor_count || 0; break;
-      case 'pushed':        va = new Date(a.pushed_at); vb = new Date(b.pushed_at); break;
-      case 'name':          va = a.full_name.toLowerCase(); vb = b.full_name.toLowerCase(); break;
-      default:              va = a.rank; vb = b.rank;
+  filtered.sort((a,b)=>{
+    let va,vb;
+    switch(sk){
+      case 'rank':           va=a.rank;                       vb=b.rank; break;
+      case 'overall':        va=a.scores.overall;             vb=b.scores.overall; break;
+      case 'p1':             va=a.scores.p1;                  vb=b.scores.p1; break;
+      case 'p2':             va=a.scores.p2;                  vb=b.scores.p2; break;
+      case 'p3':             va=a.scores.p3;                  vb=b.scores.p3; break;
+      case 'stars':          va=a.kpis?.stars||a.stars||0;    vb=b.kpis?.stars||b.stars||0; break;
+      case 'bus_factor':     va=a.kpis?.bus_factor||0;        vb=b.kpis?.bus_factor||0; break;
+      case 'issue_close_rate':va=a.kpis?.issue_close_rate||0; vb=b.kpis?.issue_close_rate||0; break;
+      case 'commit_freq':    va=a.kpis?.commit_freq||0;       vb=b.kpis?.commit_freq||0; break;
+      case 'name':           va=a.full_name.toLowerCase();    vb=b.full_name.toLowerCase(); break;
+      default:               va=a.rank; vb=b.rank;
     }
-    if (va < vb) return sortDir === 'asc' ? -1 : 1;
-    if (va > vb) return sortDir === 'asc' ? 1 : -1;
+    if(va<vb) return sd==='asc'?-1:1;
+    if(va>vb) return sd==='asc'?1:-1;
     return 0;
   });
 
   renderTable();
-  document.getElementById('ctrlCount').textContent =
-    `${filteredData.length} von ${allData.length} Repos`;
+  document.getElementById('ctrlCnt').textContent = `${filtered.length} / ${allData.length} Repos`;
 }
 
-function resetFilters() {
-  document.getElementById('searchInput').value  = '';
-  document.getElementById('langFilter').value   = '';
-  document.getElementById('sortSelect').value   = 'rank-asc';
-  document.getElementById('minScoreFilter').value = '0';
+function resetFilters(){
+  document.getElementById('searchIn').value='';
+  document.getElementById('langSel').value='';
+  document.getElementById('sortSel').value='rank-asc';
+  document.getElementById('minSel').value='0';
   applyFilters();
 }
 
-/* =========================================================
-   HELPERS
-   ========================================================= */
-function fmt(n) {
-  if (!n && n !== 0) return '—';
-  if (n >= 1e6) return (n/1e6).toFixed(1)+'M';
-  if (n >= 1e3) return (n/1e3).toFixed(1)+'K';
-  return String(n);
-}
-function scoreColor(s) {
-  return s >= 70 ? '#00e5a0' : s >= 45 ? '#fbbf24' : '#ff4d6d';
-}
-function grade(s) {
-  return s>=90?'A+':s>=80?'A':s>=70?'B+':s>=60?'B':s>=50?'C':s>=40?'D':'F';
-}
-function agoShort(dateStr) {
-  const d = Math.floor((Date.now() - new Date(dateStr)) / 864e5);
-  if (d === 0) return 'Heute';
-  if (d < 2)   return 'Gestern';
-  if (d < 30)  return d+'T';
-  if (d < 365) return Math.round(d/30)+'M';
-  return Math.round(d/365)+'J';
-}
-function agoColor(dateStr) {
-  const d = Math.floor((Date.now() - new Date(dateStr)) / 864e5);
-  return d < 30 ? '#00e5a0' : d < 180 ? '#fbbf24' : '#ff4d6d';
-}
-function miniBar(score) {
-  const col = scoreColor(score);
-  return `<div class="mini-bar-wrap">
-    <div class="mini-bar-bg">
-      <div class="mini-bar-fill" style="width:${score}%;background:${col}"></div>
-    </div>
-    <span class="mini-bar-num" style="color:${col}">${score}</span>
-  </div>`;
-}
+function fmt(n){if(!n&&n!==0)return'—';if(n>=1e6)return(n/1e6).toFixed(1)+'M';if(n>=1e3)return(n/1e3).toFixed(1)+'K';return String(n);}
+function sc(s){return s>=70?'#3dffa0':s>=45?'#f5c842':'#f75f6c';}
+function gr(s){return s>=90?'A+':s>=80?'A':s>=70?'B+':s>=60?'B':s>=50?'C':s>=40?'D':'F';}
+function agoS(d){const days=Math.floor((Date.now()-new Date(d))/864e5);
+  if(days===0)return'Heute';if(days<2)return'Gestern';if(days<30)return days+'T';if(days<365)return Math.round(days/30)+'M';return Math.round(days/365)+'J';}
+function agoC(d){const days=Math.floor((Date.now()-new Date(d))/864e5);return days<30?'#3dffa0':days<180?'#f5c842':'#f75f6c';}
+function mbar(score){const c=sc(score);return `<div class="sbar-w"><div class="sbar-bg"><div class="sbar-fill" style="width:${score}%;background:${c}"></div></div><span class="sbar-n" style="color:${c}">${score}</span></div>`;}
 
-/* =========================================================
-   RENDER STATS
-   ========================================================= */
-function renderStats() {
-  const n     = allData.length;
-  const avg   = Math.round(allData.reduce((a,r) => a + r.scores.overall, 0) / n);
-  const top   = Math.max(...allData.map(r => r.scores.overall));
-  const langs = {};
-  allData.forEach(r => { if (r.language) langs[r.language] = (langs[r.language]||0)+1; });
-  const topLang = Object.entries(langs).sort(([,a],[,b]) => b-a)[0]?.[0] || '—';
+const PCOLS = {p1:'#3dffa0',p2:'#5b9cf6',p3:'#f5c842'};
 
-  document.getElementById('statTotal').textContent    = n;
-  document.getElementById('statAvgScore').textContent  = avg;
-  document.getElementById('statTopScore').textContent  = top;
-  document.getElementById('statTopLang').textContent   = topLang;
-}
-
-/* =========================================================
-   RENDER TABLE
-   ========================================================= */
-function renderTable() {
-  const tbody = document.getElementById('tableBody');
-
-  if (filteredData.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="15" class="no-results">Keine Repositories für diese Filter gefunden.</td></tr>`;
+function renderTable(){
+  const tbody=document.getElementById('tbody');
+  if(!filtered.length){
+    tbody.innerHTML=`<tr><td colspan="15" class="no-res">Keine Repos für diese Filter.</td></tr>`;
     return;
   }
-
-  tbody.innerHTML = filteredData.map(r => {
-    const isSelected = selected.has(r.full_name);
-    const [owner]    = r.full_name.split('/');
-    const avatarUrl  = `https://github.com/${owner}.png?size=40`;
-    const lang       = r.language || '—';
-    const langHtml   = r.language
-      ? `<span class="lang-badge" style="${langStyle(r.language)}">${r.language}</span>`
-      : '<span style="color:var(--muted);font-family:var(--mono);font-size:.7rem">—</span>';
-
-    return `
-    <tr class="${isSelected ? 'selected' : ''}" onclick="handleRowClick(event, '${r.full_name.replace(/'/g,"\\'")}')">
-      <td><input type="checkbox" class="row-check"
-        ${isSelected ? 'checked' : ''}
-        onclick="toggleSelect(event,'${r.full_name.replace(/'/g,"\\'")}')"></td>
+  tbody.innerHTML=filtered.map(r=>{
+    const isSel=selected.has(r.full_name);
+    const [owner]=r.full_name.split('/');
+    const lang=r.language||'—';
+    const stars=r.kpis?.stars??r.stars??0;
+    const forks=r.kpis?.forks_count??r.forks_count??0;
+    const issues=r.kpis?.open_issues_count??r.open_issues_count??0;
+    const bus=r.kpis?.bus_factor;
+    const commits=r.kpis?.commit_freq;
+    const closeRate=r.kpis?.issue_close_rate;
+    const pushed=r.pushed_at;
+    return `<tr class="${isSel?'sel':''}" onclick="rowClick(event,'${r.full_name.replace(/'/g,"\\'")}')">
+      <td><input type="checkbox" ${isSel?'checked':''} onclick="toggleSel(event,'${r.full_name.replace(/'/g,"\\'")}')"></td>
       <td class="td-rank">${r.rank}</td>
-      <td class="td-repo">
-        <a class="repo-name" href="https://github.com/${r.full_name}"
-          target="_blank" rel="noopener"
-          onclick="event.stopPropagation()">${r.full_name}</a>
-        <span class="repo-tiny">${(r.description||'').slice(0,60)}${(r.description||'').length>60?'…':''}</span>
-      </td>
-      <td>${langHtml}</td>
-      <td class="td-num" style="color:var(--accent)">${fmt(r.stars)}</td>
-      <td class="td-num">${fmt(r.forks)}</td>
-      <td class="td-num">${fmt(r.open_issues)}</td>
-      <td class="td-num">${r.contributor_count ? fmt(r.contributor_count) : '—'}</td>
-      <td class="td-date" style="color:${agoColor(r.pushed_at)}">${agoShort(r.pushed_at)}</td>
-      <td class="td-license">${r.license||'—'}</td>
-      <td class="score-cell">${miniBar(r.scores.activity)}</td>
-      <td class="score-cell">${miniBar(r.scores.documentation)}</td>
-      <td class="score-cell">${miniBar(r.scores.community)}</td>
-      <td class="score-cell">${miniBar(r.scores.maintenance)}</td>
       <td>
-        <span class="overall-badge" style="color:${scoreColor(r.scores.overall)}">
-          ${r.scores.overall}
-          <span class="grade-pill" style="color:${scoreColor(r.scores.overall)}">${grade(r.scores.overall)}</span>
+        <a class="rn" href="https://github.com/${r.full_name}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${r.full_name}</a>
+        <span class="rd">${(r.description||'').slice(0,55)}${(r.description||'').length>55?'…':''}</span>
+      </td>
+      <td>${r.language?`<span class="lang-b" style="${lc(r.language)}">${r.language}</span>`:'<span style="color:var(--muted);font-size:.7rem">—</span>'}</td>
+      <td class="tn" style="color:var(--accent)">${fmt(stars)}</td>
+      <td class="tn">${fmt(forks)}</td>
+      <td class="tn">${fmt(issues)}</td>
+      <td class="tn" style="color:${bus>=5?'#3dffa0':bus>=2?'#f5c842':'#f75f6c'}">${bus??'—'}</td>
+      <td class="tn">${commits??'—'}</td>
+      <td class="tn" style="color:${closeRate!=null?(closeRate>=.4?'#3dffa0':closeRate>=.2?'#f5c842':'#f75f6c'):'var(--muted)'}">
+        ${closeRate!=null?(closeRate*100).toFixed(0)+'%':'—'}</td>
+      <td class="td-date" style="color:${agoC(pushed)}">${agoS(pushed)}</td>
+      <td class="sbar">${mbar(r.scores.p1)}</td>
+      <td class="sbar">${mbar(r.scores.p2)}</td>
+      <td class="sbar">${mbar(r.scores.p3)}</td>
+      <td>
+        <span class="overall-b" style="color:${sc(r.scores.overall)}">${r.scores.overall}
+          <span class="gp" style="background:rgba(61,255,160,.1);color:${sc(r.scores.overall)}">${gr(r.scores.overall)}</span>
         </span>
       </td>
     </tr>`;
   }).join('');
 }
 
-/* =========================================================
-   SELECTION
-   ========================================================= */
-function handleRowClick(e, fullName) {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'A') return;
-  toggleSelect(e, fullName);
-}
-
-function toggleSelect(e, fullName) {
+function rowClick(e,fn){ if(e.target.tagName==='INPUT'||e.target.tagName==='A') return; toggleSel(e,fn); }
+function toggleSel(e,fn){
   e.stopPropagation();
-  if (selected.has(fullName)) {
-    selected.delete(fullName);
-  } else {
-    if (selected.size >= 5) {
-      alert('Maximal 5 Repositories gleichzeitig vergleichen.');
-      e.target.checked = false;
-      return;
-    }
-    selected.add(fullName);
+  if(selected.has(fn)){ selected.delete(fn); } else {
+    if(selected.size>=5){ alert('Max. 5 Repos gleichzeitig.'); if(e.target.tagName==='INPUT') e.target.checked=false; return; }
+    selected.add(fn);
   }
-  updateSelection();
-  renderTable();
+  updateSel(); renderTable();
+}
+function toggleAll(cb){
+  if(cb.checked) filtered.slice(0,5).forEach(r=>selected.add(r.full_name));
+  else filtered.forEach(r=>selected.delete(r.full_name));
+  updateSel(); renderTable();
+}
+function updateSel(){
+  const n=selected.size;
+  const fab=document.getElementById('cfab');
+  document.getElementById('cfabN').textContent=n;
+  fab.classList.toggle('vis',n>=2);
 }
 
-function toggleSelectAll(cb) {
-  if (cb.checked) {
-    filteredData.slice(0, 5).forEach(r => selected.add(r.full_name));
-  } else {
-    filteredData.forEach(r => selected.delete(r.full_name));
-  }
-  updateSelection();
-  renderTable();
-}
-
-function updateSelection() {
-  const n   = selected.size;
-  const fab = document.getElementById('compareFab');
-  document.getElementById('fabCount').textContent = n;
-  fab.classList.toggle('visible', n >= 2);
-}
-
-/* =========================================================
-   COMPARISON MODAL
-   ========================================================= */
-function openModal() {
-  const repos = allData.filter(r => selected.has(r.full_name));
-  if (repos.length < 2) return;
+function openModal(){
+  const repos=allData.filter(r=>selected.has(r.full_name));
+  if(repos.length<2) return;
   renderModal(repos);
   document.getElementById('modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function closeModalOnOverlay(e) {
-  if (e.target === document.getElementById('modal')) closeModal();
-}
+function closeModal(){ document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; }
+function closeOv(e){ if(e.target===document.getElementById('modal')) closeModal(); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
-function renderModal(repos) {
-  const body = document.getElementById('modalBody');
-  const n    = repos.length;
-
-  // Find best per dimension
-  const best = {};
-  ['activity','documentation','community','maintenance','overall','stars','forks'].forEach(k => {
-    const vals = repos.map(r => k === 'stars' ? r.stars : k === 'forks' ? r.forks : r.scores[k]);
-    best[k] = Math.max(...vals);
+function renderModal(repos){
+  const n=repos.length;
+  const best={};
+  ['p1','p2','p3','overall','stars'].forEach(k=>{
+    best[k]=Math.max(...repos.map(r=>k==='stars'?(r.kpis?.stars??0):r.scores[k]));
   });
 
-  document.getElementById('modalBox').querySelector('.compare-grid')?.remove();
-  const grid = document.createElement('div');
-  grid.className = 'compare-grid';
-  grid.style.gridTemplateColumns = `repeat(${n}, minmax(200px, 1fr))`;
+  const grid=document.createElement('div');
+  grid.className='cmp-grid';
+  grid.style.gridTemplateColumns=`repeat(${n},minmax(200px,1fr))`;
 
-  repos.forEach(r => {
-    const [owner] = r.full_name.split('/');
-    const dims = [
-      { k:'activity',      lbl:'Aktivität' },
-      { k:'documentation', lbl:'Dokumentation' },
-      { k:'community',     lbl:'Community' },
-      { k:'maintenance',   lbl:'Wartung' },
-    ];
-    const card = document.createElement('div');
-    card.className = 'compare-card';
-    card.innerHTML = `
-      <div class="compare-card-head">
-        <img class="compare-avatar" src="https://github.com/${owner}.png?size=72" alt="${owner}" loading="lazy">
+  repos.forEach(r=>{
+    const [owner]=r.full_name.split('/');
+    const stars=r.kpis?.stars??r.stars??0;
+    const kpis=r.kpis||{};
+    const card=document.createElement('div');
+    card.className='cmp-card';
+    card.innerHTML=`
+      <div class="cmp-head">
+        <img class="cmp-av" src="https://github.com/${owner}.png?size=68" alt="${owner}" loading="lazy">
         <div style="flex:1;min-width:0">
-          <a class="compare-repo-name" href="https://github.com/${r.full_name}" target="_blank" rel="noopener">
-            ${r.full_name}
-          </a>
-          <div class="compare-repo-lang">
-            ${r.language ? `<span class="lang-badge" style="${langStyle(r.language)}">${r.language}</span>` : ''}
-            ${r.license ? `<span style="font-family:var(--mono);font-size:.65rem;color:var(--muted);margin-left:.4rem">${r.license}</span>` : ''}
-          </div>
+          <a class="cmp-rn" href="https://github.com/${r.full_name}" target="_blank">${r.full_name}</a>
+          <div class="cmp-lang">${r.language||'—'} · ${r.license||'—'}</div>
         </div>
-        <div class="compare-overall" style="color:${scoreColor(r.scores.overall)}">
-          ${r.scores.overall}
-          ${r.scores.overall === best.overall ? '<br><span style="font-size:.55rem;color:var(--accent);letter-spacing:.05em">BEST</span>' : ''}
+        <div class="cmp-ov" style="color:${sc(r.scores.overall)}">
+          ${r.scores.overall}${r.scores.overall===best.overall?'<br><span style="font-size:.52rem;color:var(--accent);letter-spacing:.05em">BEST</span>':''}
         </div>
       </div>
-      <div class="compare-body">
-        ${dims.map(d => `
-        <div class="compare-metric">
-          <div class="compare-metric-head">
-            <span class="compare-metric-lbl">${d.lbl}</span>
-            <span class="compare-metric-val" style="color:${scoreColor(r.scores[d.k])}">
-              ${r.scores[d.k]}
-              ${r.scores[d.k] === best[d.k] ? '<span class="winner-badge">best</span>' : ''}
-            </span>
+      <div class="cmp-body">
+        ${[{k:'p1',l:'⚡ Aktivität',c:'#3dffa0'},{k:'p2',l:'🔧 Reaktion',c:'#5b9cf6'},{k:'p3',l:'📡 Reichweite',c:'#f5c842'}].map(d=>`
+        <div class="cpm">
+          <div class="cpm-h">
+            <span class="cpm-l">${d.l}</span>
+            <span class="cpm-v" style="color:${sc(r.scores[d.k])}">${r.scores[d.k]}${r.scores[d.k]===best[d.k]?'<span class="wb">best</span>':''}</span>
           </div>
-          <div class="compare-bar-bg">
-            <div class="compare-bar-fill" style="width:${r.scores[d.k]}%;background:${scoreColor(r.scores[d.k])}"></div>
-          </div>
+          <div class="cpm-bg"><div class="cpm-fill" style="width:${r.scores[d.k]}%;background:${d.c}"></div></div>
         </div>`).join('')}
-
-        <hr class="compare-sep">
-
-        <div class="compare-kv">
-          <span class="compare-kv-lbl">⭐ Stars</span>
-          <span class="compare-kv-val" style="color:${r.stars === best.stars ? 'var(--accent)' : 'var(--text)'}">
-            ${fmt(r.stars)}${r.stars === best.stars ? '<span class="winner-badge">best</span>' : ''}
-          </span>
-        </div>
-        <div class="compare-kv">
-          <span class="compare-kv-lbl">🍴 Forks</span>
-          <span class="compare-kv-val">${fmt(r.forks)}</span>
-        </div>
-        <div class="compare-kv">
-          <span class="compare-kv-lbl">🐛 Offene Issues</span>
-          <span class="compare-kv-val">${fmt(r.open_issues)}</span>
-        </div>
-        <div class="compare-kv">
-          <span class="compare-kv-lbl">👥 Contributors</span>
-          <span class="compare-kv-val">${r.contributor_count ? fmt(r.contributor_count) : '—'}</span>
-        </div>
-        <div class="compare-kv">
-          <span class="compare-kv-lbl">📅 Letzter Push</span>
-          <span class="compare-kv-val" style="color:${agoColor(r.pushed_at)}">${agoShort(r.pushed_at)}</span>
-        </div>
-        <div class="compare-kv">
-          <span class="compare-kv-lbl">🔒 Lizenz</span>
-          <span class="compare-kv-val">${r.license || '—'}</span>
-        </div>
-        ${(r.topics||[]).length > 0 ? `
-        <div class="compare-kv" style="align-items:flex-start">
-          <span class="compare-kv-lbl">🏷️ Topics</span>
-          <span style="text-align:right">
-            ${(r.topics||[]).slice(0,4).map(t =>
-              `<span style="display:inline-block;font-family:var(--mono);font-size:.6rem;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:.1rem .35rem;margin:.1rem">${t}</span>`
-            ).join('')}
-          </span>
-        </div>` : ''}
-      </div>
-    `;
+        <hr class="csep">
+        <div class="ckv"><span class="ckv-l">⭐ Stars</span><span class="ckv-v" style="color:${stars===best.stars?'var(--accent)':'var(--text)'}">${fmt(stars)}${stars===best.stars?'<span class="wb">best</span>':''}</span></div>
+        <div class="ckv"><span class="ckv-l">🚌 Bus-Faktor</span><span class="ckv-v">${kpis.bus_factor??'—'}</span></div>
+        <div class="ckv"><span class="ckv-l">📈 Commits/30T</span><span class="ckv-v">${kpis.commit_freq??'—'}</span></div>
+        <div class="ckv"><span class="ckv-l">✅ Issue-Schließrate</span><span class="ckv-v">${kpis.issue_close_rate!=null?(kpis.issue_close_rate*100).toFixed(0)+'%':'—'}</span></div>
+        <div class="ckv"><span class="ckv-l">🚀 Release Ø-Tage</span><span class="ckv-v">${kpis.release_frequency!=null?kpis.release_frequency.toFixed(0)+' T':'—'}</span></div>
+        <div class="ckv"><span class="ckv-l">📄 Doku-Score</span><span class="ckv-v">${kpis.doc_quality!=null?(kpis.doc_quality*100).toFixed(0)+'%':'—'}</span></div>
+        <div class="ckv"><span class="ckv-l">📅 Letzter Push</span><span class="ckv-v" style="color:${agoC(r.pushed_at)}">${agoS(r.pushed_at)}</span></div>
+      </div>`;
     grid.appendChild(card);
   });
 
-  body.innerHTML = '';
+  const body=document.getElementById('modalBody');
+  body.innerHTML='';
   body.appendChild(grid);
 }
 
-// Escape key closes modal
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
-
-/* =========================================================
-   INIT
-   ========================================================= */
 loadData();
 </script>
 </body>
