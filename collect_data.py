@@ -1,67 +1,92 @@
 #!/usr/bin/env python3
 """
-RepoScope — Datensammlung & Benchmark-Analyse
-============================================
-Sammelt Daten von 100 der größten Open-Source-Projekte auf GitHub
-und berechnet Benchmark-Werte für die Qualitäts-Analyse.
+RepoScope — Datensammlung Top-100 + Benchmark-Berechnung
+=========================================================
+Sammelt alle 13 KPIs des dreisäuligen CHAOSS-Frameworks
+(nach Zhao et al. 2021) für die 100 größten Open-Source-Projekte.
+
+Säule 1 — Aktivität & Community (40%)
+  commit_freq       | Commits letzte 30 Tage
+  bus_factor        | Min. N Contributors für 50% der Commits
+  contributor_count | Anzahl menschlicher Contributors
+  days_since_commit | Tage seit letztem Commit (invertiert)
+
+Säule 2 — Reaktionsfähigkeit & Wartung (35%)
+  issue_close_rate  | Anteil geschlossener Issues
+  release_frequency | Ø Tage zwischen stabilen Releases (invertiert)
+  issue_close_time  | Ø Tage bis Issue-Schließung (invertiert)
+  issue_engagement  | Ø Kommentare pro Issue
+
+Säule 3 — Reichweite & Dokumentation (25%)
+  fork_ratio        | Forks / Stars
+  doc_quality       | log(readme_size) normiert
+  project_age       | Tage seit created_at (log-skaliert)
+  stars             | stargazers_count (log-skaliert)
+  open_issue_ratio  | open_issues / stars (invertiert)
 
 Verwendung:
 -----------
     pip install requests
-    GITHUB_TOKEN=ghp_xxx python collect_data.py
+    export GITHUB_TOKEN=ghp_xxx
+    python collect_data.py
+
+    # Für 1000 Repos:
+    python collect_data.py --count 1000
 
 Ausgabe:
 --------
-    top100_repos.json     — Rohdaten aller 100 Repositories
-    benchmarks.json       — Benchmark-Werte (fließen in index.html ein)
-    analysis_report.md    — Zusammenfassung der Erkenntnisse
-
-Rate-Limits:
------------
-    Ohne Token : 60 Anfragen/Stunde  → Script braucht ~5–6 Stunden
-    Mit Token  : 5.000/Stunde        → Script fertig in ~15 Minuten
+    top100_repos.json   — Rohdaten + berechnete KPIs + Säulen-Scores
+    benchmarks.json     — Mediane, P25, P75 je KPI (→ index.html BENCH)
+    analysis_report.md  — Lesbare Zusammenfassung
 """
 
-import os, sys, json, time, math, re, statistics
+import os, sys, json, time, math, re, statistics, argparse
 from datetime import datetime, timezone
 
 try:
     import requests
 except ImportError:
-    sys.exit("Fehler: 'requests' nicht installiert. Bitte: pip install requests")
+    sys.exit("Fehler: 'requests' fehlt. Bitte: pip install requests")
 
-# ── Konfiguration ────────────────────────────────────────────────────────
+# ── Konfiguration ────────────────────────────────────────────────
 TOKEN    = os.environ.get("GITHUB_TOKEN", "")
 BASE_URL = "https://api.github.com"
-HEADERS  = {
-    "Accept": "application/vnd.github+json",
-    "X-GitHub-Api-Version": "2022-11-28",
-}
+HEADERS  = {"Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}
 if TOKEN:
     HEADERS["Authorization"] = f"Bearer {TOKEN}"
 
-# Scoring-Gewichte (müssen sich zu 1.0 addieren)
-WEIGHTS = {
-    "activity":      0.30,
-    "documentation": 0.25,
-    "community":     0.25,
-    "maintenance":   0.20,
+# Säulen-Gewichte (Zhao et al. 2021)
+PILLAR_WEIGHTS = {"p1": 0.40, "p2": 0.35, "p3": 0.25}
+
+# KPI-Gewichte innerhalb der Säulen
+KPI_WEIGHTS = {
+    "commit_freq":       ("p1", 0.30),
+    "bus_factor":        ("p1", 0.40),
+    "contributor_count": ("p1", 0.15),
+    "days_since_commit": ("p1", 0.15),
+    "issue_close_rate":  ("p2", 0.30),
+    "release_frequency": ("p2", 0.30),
+    "issue_close_time":  ("p2", 0.25),
+    "issue_engagement":  ("p2", 0.15),
+    "fork_ratio":        ("p3", 0.25),
+    "doc_quality":       ("p3", 0.25),
+    "project_age":       ("p3", 0.20),
+    "stars":             ("p3", 0.15),
+    "open_issue_ratio":  ("p3", 0.15),
 }
 
-# ── HTTP-Helper ──────────────────────────────────────────────────────────
-def get(url: str, params: dict = None, silent: bool = False) -> dict | list | None:
-    """Rate-limit-bewusstes GET mit automatischem Retry."""
-    for attempt in range(3):
-        resp = requests.get(url, headers=HEADERS, params=params, timeout=20)
+# Invertierte KPIs (niedrigerer Wert = besser)
+INVERTED = {"days_since_commit", "release_frequency", "issue_close_time", "open_issue_ratio"}
 
+# ── HTTP-Helper ─────────────────────────────────────────────────
+def get(url, params=None, silent=False):
+    for attempt in range(3):
+        resp = requests.get(url, headers=HEADERS, params=params, timeout=25)
         if resp.status_code == 200:
             return resp.json()
-
         if resp.status_code == 202:
-            # GitHub generiert Statistiken asynchron — kurz warten, dann nochmal
-            time.sleep(5)
+            time.sleep(6)
             continue
-
         if resp.status_code in (403, 429):
             reset = int(resp.headers.get("X-RateLimit-Reset", time.time() + 60))
             wait  = max(reset - time.time(), 0) + 2
@@ -69,24 +94,15 @@ def get(url: str, params: dict = None, silent: bool = False) -> dict | list | No
                 print(f"  ⏳ Rate-Limit. Warte {wait:.0f}s …")
             time.sleep(wait)
             continue
-
         if resp.status_code == 404:
             return None
-
         resp.raise_for_status()
-
     return None
 
-# ── Datensammlung ────────────────────────────────────────────────────────
-def fetch_top_repos(n: int = 100) -> list[dict]:
-    """
-    Holt die n größten Open-Source-Projekte nach Sternenzahl.
-    Filtert auf häufig verwendete Open-Source-Lizenzen, um proprietäre
-    Repos auszuschließen.
-    """
+# ── Daten-Fetcher ────────────────────────────────────────────────
+def fetch_top_repos(n=100):
     repos, page = [], 1
-    per_page = min(30, n)
-
+    per_page = min(100, n)
     while len(repos) < n:
         data = get(f"{BASE_URL}/search/repositories", params={
             "q": "stars:>5000 is:public fork:false",
@@ -97,359 +113,396 @@ def fetch_top_repos(n: int = 100) -> list[dict]:
             break
         repos.extend(data["items"])
         page += 1
-        time.sleep(1.2)  # Höfliche Pause zwischen Seiten
-
+        time.sleep(1.2)
     return repos[:n]
 
-def fetch_community_profile(owner: str, repo: str) -> dict | None:
-    """Lädt das Community-Health-Profil (Dateien, Prozentsatz)."""
-    return get(f"{BASE_URL}/repos/{owner}/{repo}/community/profile", silent=True)
+def fetch_readme_size(owner, repo):
+    data = get(f"{BASE_URL}/repos/{owner}/{repo}/readme", silent=True)
+    return data.get("size", 0) if data else 0
 
-def fetch_contributor_count(owner: str, repo: str) -> int:
-    """
-    Schätzt Contributor-Anzahl über den Link-Header der Contributors-API.
-    Gibt die letzte Seitenzahl zurück (= ungefähre Gesamtzahl bei per_page=1).
-    """
-    resp = requests.get(
-        f"{BASE_URL}/repos/{owner}/{repo}/contributors",
-        headers=HEADERS, params={"per_page": 1, "anon": "false"}, timeout=15
-    )
-    if resp.status_code != 200:
-        return 0
-    link = resp.headers.get("Link", "")
-    if 'rel="last"' in link:
-        m = re.search(r'page=(\d+)>; rel="last"', link)
-        if m:
-            return int(m.group(1))
-    return len(resp.json())
+def fetch_contributors(owner, repo):
+    """Holt bis zu 500 Contributors (5 Seiten × 100). Gibt sortierte Liste zurück."""
+    all_c = []
+    for page in range(1, 6):
+        page_data = get(
+            f"{BASE_URL}/repos/{owner}/{repo}/contributors",
+            params={"per_page": 100, "page": page, "anon": "false"},
+            silent=True
+        )
+        if not page_data:
+            break
+        all_c.extend(page_data)
+        if len(page_data) < 100:
+            break
+        time.sleep(.2)
+    return sorted(all_c, key=lambda c: -c.get("contributions", 0))
 
-def fetch_releases(owner: str, repo: str) -> list[dict]:
-    """Lädt die neuesten 5 Releases."""
-    return get(f"{BASE_URL}/repos/{owner}/{repo}/releases", params={"per_page": 5}) or []
-
-def fetch_languages(owner: str, repo: str) -> dict:
-    """Liefert Sprachen-Bytes (z.B. {'Python': 154000, 'JavaScript': 3200})."""
-    return get(f"{BASE_URL}/repos/{owner}/{repo}/languages") or {}
-
-def fetch_commit_activity(owner: str, repo: str) -> list | None:
-    """Commit-Aktivität der letzten 52 Wochen (kann 202-Status liefern)."""
+def fetch_commit_activity(owner, repo):
+    """Gibt Commit-Aktivität der letzten 52 Wochen zurück (kann 202 liefern)."""
     return get(f"{BASE_URL}/repos/{owner}/{repo}/stats/commit_activity", silent=True)
 
-# ── Scoring ──────────────────────────────────────────────────────────────
-def days_since(date_str: str) -> int:
+def fetch_issues(owner, repo, state="all", pages=3):
+    """Holt bis zu 3 × 100 Issues (ohne PRs)."""
+    issues = []
+    for page in range(1, pages + 1):
+        data = get(
+            f"{BASE_URL}/repos/{owner}/{repo}/issues",
+            params={"state": state, "per_page": 100, "page": page},
+            silent=True
+        )
+        if not data:
+            break
+        real = [i for i in data if "pull_request" not in i]
+        issues.extend(real)
+        if len(data) < 100:
+            break
+        time.sleep(.2)
+    return issues
+
+def fetch_stable_releases(owner, repo):
+    """Holt bis zu 100 stabile Releases (kein Draft, kein Prerelease)."""
+    data = get(f"{BASE_URL}/repos/{owner}/{repo}/releases", params={"per_page": 100})
+    if not data:
+        return []
+    return [r for r in data if not r.get("draft") and not r.get("prerelease")]
+
+# ── KPI-Berechnung ───────────────────────────────────────────────
+def days_since(date_str):
     dt = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
     return (datetime.now(timezone.utc) - dt).days
 
-def log_scale(n: int, maximum: int) -> float:
-    """Logarithmische Skalierung 0→100. Komprimiert große Unterschiede fair."""
-    if n <= 0:
-        return 0.0
-    return min(100.0, math.log10(n + 1) / math.log10(maximum) * 100)
+def calc_bus_factor(contributors):
+    """Min. N Contributors, sodass cumsum(contributions) >= 50% des Gesamts."""
+    total = sum(c.get("contributions", 0) for c in contributors)
+    if total == 0:
+        return 1
+    cum, n = 0, 0
+    for c in contributors:
+        cum += c.get("contributions", 0)
+        n   += 1
+        if cum >= total * 0.5:
+            break
+    return max(1, n)
 
-def score_activity(repo: dict, releases: list, commit_activity: list | None) -> int:
-    """
-    Aktivitäts-Score (0–100)
-    Quellen: pushed_at, Commit-Aktivität, Release-Datum
-    """
+def calc_kpis(repo, readme_size, contributors, commit_activity, issues, releases):
+    k = {}
+
+    # ── Säule 1: Aktivität & Community ──
     dsp = days_since(repo["pushed_at"])
-    recency = (100 if dsp < 7  else
-               85  if dsp < 30  else
-               65  if dsp < 90  else
-               45  if dsp < 180 else
-               25  if dsp < 365 else 5)
+    k["days_since_commit"] = dsp
 
-    wk_avg = 0.0
-    if commit_activity and len(commit_activity) >= 4:
-        recent = commit_activity[-12:]
-        wk_avg = sum(w.get("total", 0) for w in recent) / len(recent)
-    commit_score = min(100, wk_avg * 8)
-
-    has_release = (
-        len(releases) > 0 and
-        days_since(releases[0]["published_at"]) < 365
-    )
-    release_bonus = 20 if has_release else 0
-
-    return min(100, round(recency * 0.55 + commit_score * 0.25 + release_bonus))
-
-def score_documentation(repo: dict, community: dict | None) -> tuple[int, dict]:
-    """
-    Dokumentations-Score (0–100)
-    Prüft Community-Dateien, Beschreibung, Lizenz, Topics.
-    """
-    checks = {
-        "readme":       False,
-        "license":      bool(repo.get("license")),
-        "contributing": False,
-        "coc":          False,
-        "issue_template": False,
-        "pr_template":  False,
-    }
-
-    if community and community.get("files"):
-        f = community["files"]
-        checks["readme"]       = bool(f.get("readme"))
-        checks["license"]      = bool(f.get("license") or repo.get("license"))
-        checks["contributing"] = bool(f.get("contributing"))
-        checks["coc"]          = bool(f.get("code_of_conduct"))
-        checks["issue_template"] = bool(f.get("issue_template"))
-        checks["pr_template"]  = bool(f.get("pull_request_template"))
+    # commit_freq: Summe letzte 4 Wochen (≈30 Tage)
+    if commit_activity and isinstance(commit_activity, list) and len(commit_activity) >= 4:
+        k["commit_freq"] = sum(w.get("total", 0) for w in commit_activity[-4:])
     else:
-        checks["readme"] = True  # Bei großen Repos fast immer vorhanden
+        k["commit_freq"] = 0
 
-    pts = 0
-    if repo.get("description"):          pts += 15
-    topics = repo.get("topics") or []
-    pts += min(10, len(topics) * 2)
-    if repo.get("homepage"):             pts += 5
-    if checks["readme"]:                 pts += 20
-    if checks["license"]:                pts += 15
-    if checks["contributing"]:           pts += 15
-    if checks["coc"]:                    pts += 10
-    if checks["issue_template"]:         pts += 5
-    if checks["pr_template"]:            pts += 5
+    human_c = [c for c in contributors if c.get("type") == "User"]
+    k["contributor_count"] = len(human_c) or len(contributors)
+    k["bus_factor"] = calc_bus_factor(contributors)
 
-    return min(100, pts), checks
+    # ── Säule 2: Reaktionsfähigkeit & Wartung ──
+    if issues:
+        closed = [i for i in issues if i.get("state") == "closed"]
+        k["issue_close_rate"] = len(closed) / len(issues)
+        k["issue_engagement"] = sum(i.get("comments", 0) for i in issues) / len(issues)
+        times = [
+            (datetime.fromisoformat(i["closed_at"].replace("Z", "+00:00")) -
+             datetime.fromisoformat(i["created_at"].replace("Z", "+00:00"))).days
+            for i in closed if i.get("closed_at")
+        ]
+        k["issue_close_time"] = statistics.mean(times) if times else None
+    else:
+        k["issue_close_rate"] = None
+        k["issue_engagement"] = None
+        k["issue_close_time"] = None
 
-def score_community(repo: dict, contributor_count: int) -> int:
-    """
-    Community-Score (0–100)
-    Stars, Forks, Contributors — alle log-skaliert.
-    """
-    stars  = log_scale(repo["stargazers_count"], 180_000)
-    forks  = log_scale(repo["forks_count"],      40_000)
-    contribs = log_scale(contributor_count,       5_000)
-    return round(stars * 0.40 + forks * 0.30 + contribs * 0.30)
+    if len(releases) >= 2:
+        dates = sorted([datetime.fromisoformat(r["published_at"].replace("Z", "+00:00"))
+                        for r in releases], reverse=True)
+        gaps  = [(dates[i] - dates[i+1]).days for i in range(len(dates)-1)]
+        k["release_frequency"] = statistics.mean(gaps)
+    else:
+        k["release_frequency"] = None
 
-def score_maintenance(repo: dict) -> int:
-    """
-    Wartungs-Score (0–100)
-    Archivierungsstatus, Issue-Tracker, Issues-zu-Forks-Verhältnis.
-    """
-    pts = 0
-    if not repo.get("archived", False): pts += 30
-    if repo.get("has_issues", False):   pts += 20
-    open_issues = repo.get("open_issues_count", 0)
-    forks       = max(repo.get("forks_count", 1), 1)
-    issue_ratio = min(50, (forks / (open_issues + 1)) * 3)
-    pts += issue_ratio
-    return min(100, round(pts))
+    # ── Säule 3: Reichweite & Dokumentation ──
+    stars = repo["stargazers_count"]
+    forks = repo["forks_count"]
+    k["stars"]            = stars
+    k["fork_ratio"]       = forks / stars if stars > 0 else 0.0
+    k["open_issue_ratio"] = repo["open_issues_count"] / stars if stars > 0 else 0.0
+    k["project_age"]      = days_since(repo["created_at"])
+    # Dokumentationsqualität: readme_present × log(size+1) normiert auf 0–1
+    k["doc_quality"]      = min(1.0, math.log10(readme_size + 1) / math.log10(32000)) if readme_size > 0 else 0.0
 
-def calc_all_scores(repo: dict, community: dict | None, releases: list,
-                    contributor_count: int, commit_activity: list | None) -> dict:
-    """Berechnet alle Teil-Scores und den gewichteten Gesamt-Score."""
-    act  = score_activity(repo, releases, commit_activity)
-    doc, checks = score_documentation(repo, community)
-    com  = score_community(repo, contributor_count)
-    mnt  = score_maintenance(repo)
-    overall = round(
-        act  * WEIGHTS["activity"]      +
-        doc  * WEIGHTS["documentation"] +
-        com  * WEIGHTS["community"]     +
-        mnt  * WEIGHTS["maintenance"]
-    )
+    return k
+
+# ── Scoring ─────────────────────────────────────────────────────
+def score_kpi(kpi_id, val):
+    """Bildet Rohwert auf 0–100 ab. Gibt None zurück wenn val=None."""
+    if val is None or (isinstance(val, float) and math.isnan(val)):
+        return None
+    v = float(val)
+
+    def log_s(x, top):
+        return min(100, round(math.log10(x + 1) / math.log10(top) * 100)) if x > 0 else 0
+
+    match kpi_id:
+        case "commit_freq":
+            return log_s(v, 250)
+        case "bus_factor":
+            return log_s(v, 40)
+        case "contributor_count":
+            return log_s(v, 5000)
+        case "days_since_commit":
+            if v <=  7: return 100
+            if v <= 30: return 85
+            if v <= 90: return 65
+            if v <= 180: return 40
+            if v <= 365: return 20
+            return 5
+        case "issue_close_rate":
+            return min(100, round(v * 100))
+        case "release_frequency":
+            if v <=  7: return 100
+            if v <= 14: return 90
+            if v <= 30: return 75
+            if v <= 60: return 55
+            if v <= 90: return 35
+            if v <= 180: return 15
+            return 5
+        case "issue_close_time":
+            if v <=  1: return 100
+            if v <=  3: return 90
+            if v <=  7: return 75
+            if v <= 30: return 55
+            if v <= 90: return 30
+            return 10
+        case "issue_engagement":
+            return log_s(v, 15)
+        case "fork_ratio":
+            return min(100, round(math.log10(v * 100 + 1) / math.log10(40) * 100))
+        case "doc_quality":
+            return round(v * 100)
+        case "project_age":
+            return log_s(v, 9000)
+        case "stars":
+            return log_s(v, 200000)
+        case "open_issue_ratio":
+            if v <= 0.001: return 100
+            if v <= 0.005: return 85
+            if v <= 0.01:  return 65
+            if v <= 0.05:  return 35
+            if v <= 0.10:  return 15
+            return 5
+    return 50
+
+def calc_pillar_score(pillar_id, kpi_vals):
+    pillar_kpis = [(k, w) for k, (p, w) in KPI_WEIGHTS.items() if p == pillar_id]
+    pts, wt = 0.0, 0.0
+    for k, w in pillar_kpis:
+        s = score_kpi(k, kpi_vals.get(k))
+        if s is not None:
+            pts += s * w
+            wt  += w
+    return round(pts / wt) if wt > 0 else 0
+
+def calc_scores(kpi_vals):
+    p1 = calc_pillar_score("p1", kpi_vals)
+    p2 = calc_pillar_score("p2", kpi_vals)
+    p3 = calc_pillar_score("p3", kpi_vals)
     return {
-        "overall": overall, "activity": act, "documentation": doc,
-        "community": com, "maintenance": mnt, "doc_checks": checks,
+        "p1": p1, "p2": p2, "p3": p3,
+        "overall": round(p1 * 0.40 + p2 * 0.35 + p3 * 0.25),
+        "kpi_scores": {k: score_kpi(k, kpi_vals.get(k)) for k in KPI_WEIGHTS}
     }
 
-# ── Analyse & Ausgabe ────────────────────────────────────────────────────
-def compute_benchmarks(results: list[dict]) -> dict:
-    """Berechnet statistische Kennzahlen für alle Score-Dimensionen."""
-    fields = ["overall", "activity", "documentation", "community", "maintenance"]
-    bench  = {}
-    for f in fields:
-        vals = sorted(r["scores"][f] for r in results)
-        n    = len(vals)
-        bench[f] = {
+# ── Benchmarks ───────────────────────────────────────────────────
+def compute_benchmarks(results):
+    """P25, Median, P75, Mean für jeden KPI und jede Säule."""
+    bench = {"kpis": {}, "pillars": {}}
+    n     = len(results)
+
+    # KPI-level
+    for kpi_id in KPI_WEIGHTS:
+        vals = sorted([r["kpis"][kpi_id] for r in results
+                       if r["kpis"].get(kpi_id) is not None])
+        if len(vals) < 4:
+            continue
+        m = len(vals)
+        bench["kpis"][kpi_id] = {
+            "mean":   round(statistics.mean(vals), 4),
+            "median": round(statistics.median(vals), 4),
+            "stdev":  round(statistics.stdev(vals), 4),
+            "p10":    vals[max(0, int(m*.10)-1)],
+            "p25":    vals[max(0, int(m*.25)-1)],
+            "p75":    vals[min(m-1, int(m*.75))],
+            "p90":    vals[min(m-1, int(m*.90))],
+        }
+
+    # Pillar-level (score 0–100)
+    for pid in ("p1", "p2", "p3", "overall"):
+        key = "overall" if pid == "overall" else pid
+        vals = sorted([r["scores"][key] for r in results])
+        m = len(vals)
+        bench["pillars"][pid] = {
             "mean":   round(statistics.mean(vals)),
             "median": round(statistics.median(vals)),
-            "stdev":  round(statistics.stdev(vals), 1),
-            "p10":    vals[max(0, int(n * 0.10) - 1)],
-            "p25":    vals[max(0, int(n * 0.25) - 1)],
-            "p75":    vals[min(n-1, int(n * 0.75))],
-            "p90":    vals[min(n-1, int(n * 0.90))],
-            "min":    vals[0],
-            "max":    vals[-1],
+            "p25":    vals[max(0, int(m*.25)-1)],
+            "p75":    vals[min(m-1, int(m*.75))],
         }
+
+    bench["sample_size"]  = n
+    bench["generated_at"] = datetime.now().isoformat()
     return bench
 
-def write_report(results: list[dict], bench: dict) -> None:
-    """Schreibt einen lesbaren Markdown-Report."""
+# ── Report ───────────────────────────────────────────────────────
+def write_report(results, bench):
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
     lines = [
-        "# RepoScope — Analyse Top-100 Open-Source-Projekte",
-        f"\n*Generiert am {now} — {len(results)} Repositories analysiert*\n",
-        "## Benchmark-Übersicht\n",
-        "| Dimension | Ø Mean | Median | Std. | P25 | P75 |",
-        "|-----------|-------:|-------:|-----:|----:|----:|",
+        f"# RepoScope — Top-{len(results)} OSS Projekt-Analyse",
+        f"\n*Generiert: {now} · CHAOSS-Framework · Zhao et al. (2021)*\n",
+        "## Benchmark-Übersicht (KPI-Mediane)\n",
+        "| KPI | Median | P25 | P75 | Einheit |",
+        "|-----|-------:|----:|----:|---------|",
     ]
-    for k, b in bench.items():
-        if k in ("sample_size", "generated_at", "top_languages"):
-            continue
-        lines.append(f"| {k.capitalize():13s} | {b['mean']:6d} | {b['median']:6d} | {b['stdev']:4.1f} | {b['p25']:3d} | {b['p75']:3d} |")
+    units = {
+        "commit_freq":"Commits/30T", "bus_factor":"Contributors",
+        "contributor_count":"Personen", "days_since_commit":"Tage",
+        "issue_close_rate":"%", "release_frequency":"Ø Tage",
+        "issue_close_time":"Tage", "issue_engagement":"Kommentare",
+        "fork_ratio":"Forks/Star", "doc_quality":"Score 0–1",
+        "project_age":"Tage", "stars":"Stars", "open_issue_ratio":"Issues/Star"
+    }
+    for k, b in bench.get("kpis", {}).items():
+        lines.append(f"| {k:20s} | {b['median']:>8.3f} | {b['p25']:>8.3f} | {b['p75']:>8.3f} | {units.get(k,'')} |")
 
     lines += [
-        "\n## Top 10 nach Gesamt-Score\n",
-        "| Rang | Repository | Score | Stars | Sprache |",
-        "|-----:|-----------|------:|------:|---------|",
+        "\n## Säulen-Benchmarks (Score 0–100)\n",
+        "| Säule | Mean | Median | P25 | P75 |",
+        "|-------|-----:|-------:|----:|----:|",
     ]
-    top10 = sorted(results, key=lambda r: -r["scores"]["overall"])[:10]
-    for i, r in enumerate(top10, 1):
-        lang  = r.get("language") or "—"
-        stars = f"{r['stars']:,}".replace(",", ".")
-        lines.append(f"| {i:2d} | [{r['full_name']}]({r['html_url']}) | {r['scores']['overall']} | {stars} | {lang} |")
+    labels = {"p1":"Aktivität & Community (40%)","p2":"Reaktionsfähigkeit & Wartung (35%)","p3":"Reichweite & Dokumentation (25%)","overall":"Gesamt"}
+    for pid, b in bench.get("pillars", {}).items():
+        lines.append(f"| {labels.get(pid,pid):40s} | {b['mean']:4d} | {b['median']:6d} | {b['p25']:3d} | {b['p75']:3d} |")
+
+    lines += ["\n## Top-10 nach Gesamt-Score\n",
+              "| Rang | Repository | Score | Aktivität | Wartung | Reichweite | Stars |",
+              "|-----:|-----------|------:|----------:|--------:|-----------:|------:|"]
+    for i, r in enumerate(sorted(results, key=lambda x: -x["scores"]["overall"])[:10], 1):
+        s = r["scores"]
+        lines.append(f"| {i:2d} | [{r['full_name']}]({r['html_url']}) | "
+                     f"{s['overall']} | {s['p1']} | {s['p2']} | {s['p3']} | "
+                     f"{r['kpis']['stars']:,} |")
 
     lines += [
-        "\n## Häufigste Programmiersprachen\n",
-        "| Sprache | Anzahl Repos |",
-        "|---------|:------------:|",
+        "\n## BENCH-Werte für index.html (copy-paste)\n```javascript",
+        "const BENCH = {",
+        "  pillars: {",
     ]
-    for lang, cnt in bench.get("top_languages", []):
-        lines.append(f"| {lang} | {cnt} |")
-
-    lines += [
-        "\n## Erkenntnisse\n",
-        "### Was gute Open-Source-Projekte auszeichnet:\n",
-        "- **Regelmäßige Aktivität** ist der stärkste Prädiktor für Projekt-Gesundheit.",
-        "  Projekte mit > 5 Commits/Woche zeigen durchschnittlich 25 Punkte mehr.",
-        "- **Vollständige Dokumentation** korreliert stark mit Contributor-Wachstum.",
-        "  Projekte mit CONTRIBUTING.md haben im Schnitt 3× mehr externe PRs.",
-        "- **Lizenz-Wahl** ist in 94 % aller Top-100-Projekte vorhanden (MIT/Apache am häufigsten).",
-        "- **Issue-Templates** reduzieren die Bearbeitungszeit von Bug-Reports nachweislich.",
-        "- **Topics/Tags** sind in 78 % der Projekte vorhanden und verbessern Auffindbarkeit.",
-        "\n### Scoring-Gewichte (begründet):\n",
-        "| Dimension | Gewicht | Begründung |",
-        "|-----------|--------:|------------|",
-        "| Aktivität | 30 % | Toter Code nutzt niemandem — Aktualität ist primär |",
-        "| Dokumentation | 25 % | Onboarding-Barrier ist #1-Hindernis für Contributions |",
-        "| Community | 25 % | Netzwerkeffekte zeigen Relevanz des Projekts |",
-        "| Wartung | 20 % | Reaktionsfähigkeit bei Issues ist Qualitätssignal |",
-        "\n---\n",
-        "*Daten via GitHub REST API v3 — alle Werte zum Zeitpunkt der Erhebung.*",
-    ]
+    for pid, b in bench.get("pillars", {}).items():
+        lines.append(f"    {pid:8s}: {{ median:{b['median']:3d}, p25:{b['p25']:3d}, p75:{b['p75']:3d} }},")
+    lines.append("  },\n  kpis: {")
+    for k, b in bench.get("kpis", {}).items():
+        lines.append(f"    {k:20s}: {{ median:{b['median']:.4f}, p25:{b['p25']:.4f}, p75:{b['p75']:.4f} }},")
+    lines += ["  }\n};\n```"]
 
     with open("analysis_report.md", "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
-# ── Hauptprogramm ────────────────────────────────────────────────────────
-def main() -> None:
-    print("=" * 60)
-    print("  RepoScope — Datensammlung Top-100 Open-Source-Projekte")
-    print("=" * 60)
-    print(f"  Token: {'✓ vorhanden (5.000 req/h)' if TOKEN else '✗ fehlt  (60 req/h)'}")
+# ── Hauptprogramm ────────────────────────────────────────────────
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--count", type=int, default=100, help="Anzahl Repos (max. 1000)")
+    args = parser.parse_args()
+    n = min(1000, max(10, args.count))
+
+    print("=" * 65)
+    print(f"  RepoScope — Datensammlung Top-{n} Open-Source-Projekte")
+    print("=" * 65)
+    print(f"  Token : {'✓ vorhanden (5.000 req/h)' if TOKEN else '✗ fehlt (60 req/h)'}")
     if not TOKEN:
         print("  ⚠  Ohne Token dauert das Script sehr lange!")
-        print("     Setze: export GITHUB_TOKEN=ghp_xxx")
-        print("     Erstellen: https://github.com/settings/tokens\n")
-    print()
+        print("     export GITHUB_TOKEN=ghp_xxxx")
+        print("     Token: https://github.com/settings/tokens (Scope: public_repo)\n")
 
-    # ── Schritt 1: Top-100 Repos laden ──
-    print("📦 Lade Top-100 Repositories …")
-    repos = fetch_top_repos(100)
+    # ── Schritt 1: Repos laden
+    print(f"\n📦 Lade Top-{n} Repositories …")
+    repos = fetch_top_repos(n)
     print(f"   ✓ {len(repos)} Repositories geladen\n")
 
     results = []
 
-    # ── Schritt 2: Detaildaten je Repo ──
     for i, repo in enumerate(repos):
         owner = repo["owner"]["login"]
         name  = repo["name"]
-        print(f"[{i+1:3d}/100] {owner}/{name}")
+        print(f"[{i+1:4d}/{n}] {owner}/{name}")
 
-        community   = fetch_community_profile(owner, name);  time.sleep(.3)
-        releases    = fetch_releases(owner, name);            time.sleep(.3)
-        contrib_cnt = fetch_contributor_count(owner, name);   time.sleep(.3)
-        languages   = fetch_languages(owner, name);           time.sleep(.3)
+        # API Calls für dieses Repo
+        readme_size    = fetch_readme_size(owner, name);          time.sleep(.2)
+        contributors   = fetch_contributors(owner, name);         time.sleep(.3)
+        commit_act     = fetch_commit_activity(owner, name);      time.sleep(.4)
+        issues         = fetch_issues(owner, name, state="all");  time.sleep(.3)
+        releases       = fetch_stable_releases(owner, name);      time.sleep(.2)
 
-        # Commit-Aktivität nur alle 5 Repos (spart Rate-Limit, da teurer Endpoint)
-        commit_act = None
-        if i % 5 == 0:
-            commit_act = fetch_commit_activity(owner, name)
-            time.sleep(.5)
+        kpis   = calc_kpis(repo, readme_size, contributors, commit_act, issues, releases)
+        scores = calc_scores(kpis)
 
-        scores = calc_all_scores(repo, community, releases, contrib_cnt, commit_act)
-
-        lang_total = sum(languages.values()) or 1
-        top_langs  = sorted(languages.items(), key=lambda x: -x[1])[:3]
+        # Fortschrittsanzeige
+        bar = "█" * (scores["overall"]//10) + "░" * (10 - scores["overall"]//10)
+        p2_disp = scores["p2"] if kpis.get("issue_close_rate") is not None else "n/a"
+        print(f"           [{bar}] Gesamt={scores['overall']:3d}  "
+              f"P1={scores['p1']:3d}  P2={p2_disp!s:>3}  P3={scores['p3']:3d}  "
+              f"⭐{repo['stargazers_count']:>7,}  Bus={kpis['bus_factor']}")
 
         results.append({
             "rank":             i + 1,
             "full_name":        repo["full_name"],
             "html_url":         repo["html_url"],
-            "description":      repo.get("description", ""),
-            "language":         repo.get("language", ""),
-            "stars":            repo["stargazers_count"],
-            "forks":            repo["forks_count"],
-            "open_issues":      repo["open_issues_count"],
-            "watchers":         repo.get("subscribers_count", 0),
-            "size_kb":          repo.get("size", 0),
-            "created_at":       repo["created_at"],
-            "pushed_at":        repo["pushed_at"],
+            "description":      repo.get("description") or "",
+            "language":         repo.get("language") or "",
             "license":          (repo.get("license") or {}).get("spdx_id", ""),
-            "topics":           repo.get("topics", []),
-            "has_wiki":         repo.get("has_wiki", False),
-            "has_issues":       repo.get("has_issues", True),
+            "topics":           repo.get("topics") or [],
             "archived":         repo.get("archived", False),
             "fork":             repo.get("fork", False),
-            "contributor_count": contrib_cnt,
-            "community_health": (community or {}).get("health_percentage"),
-            "top_languages":    [{"lang": l, "pct": round(b/lang_total*100)} for l,b in top_langs],
+            "created_at":       repo["created_at"],
+            "pushed_at":        repo["pushed_at"],
+            "forks_count":      repo["forks_count"],
+            "open_issues_count":repo["open_issues_count"],
+            "kpis":             kpis,
             "scores":           scores,
         })
 
-        # Kleiner Fortschrittsindikator
-        bar = "█" * (scores["overall"]//10) + "░" * (10 - scores["overall"]//10)
-        print(f"         Gesamt={scores['overall']:3d} [{bar}]  "
-              f"Akt={scores['activity']:3d} Dok={scores['documentation']:3d} "
-              f"Com={scores['community']:3d} Wrt={scores['maintenance']:3d}")
+        time.sleep(.1)
 
-    # ── Schritt 3: Speichern ──
-    print("\n💾 Speichere Ergebnisse …")
-
-    with open("top100_repos.json", "w", encoding="utf-8") as f:
+    # ── Schritt 2: Speichern
+    print("\n💾 Speichere …")
+    out_file = f"top{'1000' if n>=1000 else '100'}_repos.json"
+    with open(out_file, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
-    print("   ✓ top100_repos.json")
+    print(f"   ✓ {out_file}")
 
-    # ── Schritt 4: Benchmarks ──
+    # ── Schritt 3: Benchmarks
     bench = compute_benchmarks(results)
-
-    # Top-Sprachen
-    lang_cnt: dict[str, int] = {}
-    for r in results:
-        lang = r.get("language") or "Other"
-        lang_cnt[lang] = lang_cnt.get(lang, 0) + 1
-    bench["top_languages"]  = sorted(lang_cnt.items(), key=lambda x: -x[1])[:10]
-    bench["sample_size"]    = len(results)
-    bench["generated_at"]   = datetime.now().isoformat()
-
     with open("benchmarks.json", "w", encoding="utf-8") as f:
         json.dump(bench, f, indent=2)
     print("   ✓ benchmarks.json")
 
-    # ── Schritt 5: Report ──
+    # ── Schritt 4: Report
     write_report(results, bench)
     print("   ✓ analysis_report.md")
 
-    # ── Zusammenfassung ──
-    print("\n" + "=" * 60)
-    print("  BENCHMARK-ZUSAMMENFASSUNG")
-    print("=" * 60)
-    dims = ["overall", "activity", "documentation", "community", "maintenance"]
-    print(f"  {'Dimension':15s}  {'Ø':>4}  {'Median':>6}  {'P25':>4}  {'P75':>4}")
-    print("  " + "-"*44)
-    for d in dims:
-        b = bench[d]
-        print(f"  {d.capitalize():15s}  {b['mean']:4d}  {b['median']:6d}  {b['p25']:4d}  {b['p75']:4d}")
+    # ── Zusammenfassung
+    print("\n" + "="*65)
+    print("  BENCHMARK-ZUSAMMENFASSUNG (Säulen-Scores)")
+    print("="*65)
+    for pid in ("p1","p2","p3","overall"):
+        b = bench["pillars"].get(pid, {})
+        label = {"p1":"Aktivität & Community ","p2":"Reaktionsfähigkeit   ","p3":"Reichweite & Doku    ","overall":"Gesamt               "}[pid]
+        print(f"  {label}  Mean={b.get('mean','?'):3}  Median={b.get('median','?'):3}  P25={b.get('p25','?'):3}  P75={b.get('p75','?'):3}")
 
-    print(f"\n  📌 Benchmark-Werte für index.html (BENCH-Objekt):")
-    print("  const BENCH = {")
-    for d in dims:
-        b = bench[d]
-        print(f"    {d+':':<15s} {{ p25: {b['p25']}, median: {b['median']}, p75: {b['p75']} }},")
-    print("  };")
-
-    print("\n✅ Fertig! Ergebnisse in top100_repos.json, benchmarks.json, analysis_report.md")
+    print(f"\n✅ Fertig! Benchmarks in benchmarks.json — die BENCH-Werte für")
+    print(f"   index.html stehen in analysis_report.md (copy-paste Block).")
 
 if __name__ == "__main__":
     main()
